@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>课程后台登录</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/signin.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <form action="/api/v1/login" method="post" class="form-signin">
+        <h2 class="form-signin-heading">登录课程后台</h2>
+        <label for="name" class="sr-only">用户名</label>
+        <input name="name" id="name" class="form-control" placeholder="用户名" required autofocus>
+        <label for="password" class="sr-only">密码</label>
+        <input name="password" type="password" id="password" class="form-control" placeholder="密码" required>
+          <!--
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        -->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+</div>
+</body>
+</html>
