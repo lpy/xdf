@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from model import Collection, db
 
 
@@ -15,6 +16,7 @@ class Assignment(Collection):
         _id = '_id'
         name = 'name'
         questionList = 'questionList'
+        createTime = 'createTime'
 
     class Analysis(object):
         totalScore = 'total'
@@ -25,5 +27,6 @@ class Assignment(Collection):
     def new_assignment(name):
         return Assignment.insert({
             Assignment.Field.name: name,
-            Assignment.Field.questionList: []
+            Assignment.Field.questionList: [],
+            Assignment.Field.createTime: datetime.now()
         })

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from model import Collection, db
 
 
@@ -24,6 +25,7 @@ class Question(Collection):
         audio = 'audio'
         content = 'content'
         optionList = 'optionList'
+        createTime = 'createTime'
 
     class Analysis(object):
         accuracy = 'accuracy'
@@ -33,10 +35,10 @@ class Question(Collection):
                      answer, answer_content, audio):
         return Question.insert({
             Question.Field.assignmentId: assignment_id,
-            Question.Field.accuracy: 0.0,
             Question.Field.content: content,
             Question.Field.optionList: option_list,
             Question.Field.answer: answer,
             Question.Field.answerContent: answer_content,
-            Question.Field.audio: audio
+            Question.Field.audio: audio,
+            Question.Field.createTime: datetime.now()
         })

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from model import Collection, db
 
 
@@ -19,6 +20,7 @@ class Answer(Collection):
         assignmentId = 'assignmentId'
         score = 'score'
         studentId = 'studentId'
+        createTime = 'createTime'
 
     @staticmethod
     def new_answer(assignment_id, student_id, answer_list, score):
@@ -26,5 +28,6 @@ class Answer(Collection):
             Answer.Field.answerList: answer_list,
             Answer.Field.assignmentId: assignment_id,
             Answer.Field.studentId: student_id,
-            Answer.Field.score: score
+            Answer.Field.score: score,
+            Answer.Field.createTime: datetime.now()
         })

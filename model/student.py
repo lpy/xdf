@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from model import Collection, db
 
 
@@ -17,16 +18,20 @@ class Student(Collection):
         _id = '_id'
         answerList = 'answerList'
         assignmentList = 'assignmentList'
+        lessonId = 'lessonId'
         name = 'name'
         studentId = 'studentId'
+        createTime = 'createTime'
 
     collection.ensure_index(Field.studentId, sparse=True, unique=True)
 
     @staticmethod
-    def new_student(name, student_id):
+    def new_student(name, student_id, lesson_id):
         return Student.insert({
             Student.Field.answerList: [],
             Student.Field.assignmentList: [],
+            Student.Field.lessonId: lesson_id,
             Student.Field.name: name,
-            Student.Field.studentId: student_id
+            Student.Field.studentId: student_id,
+            Student.Field.createTime: datetime.now()
         })

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from bson import ObjectId
+from datetime import datetime
 from model import Collection, db
-from time import time
 import hashlib
 
 
@@ -19,6 +18,7 @@ class User(Collection):
         _id = '_id'
         name = 'name'
         password = 'password'
+        createTime = 'createTIme'
 
     @staticmethod
     def get_hashed_password(password):
@@ -32,5 +32,6 @@ class User(Collection):
         hash_password = User.get_hashed_password(password)
         return User.insert({
             User.Field.name: name,
-            User.Field.password: hash_password
+            User.Field.password: hash_password,
+            User.Field.createTime: datetime.now()
         })

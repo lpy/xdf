@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from model import Collection, db
 
 class Lesson(Collection):
@@ -14,10 +15,12 @@ class Lesson(Collection):
         _id = '_id'
         name = 'name'
         studentList = 'studentList'
+        createTime = 'createTime'
 
     @staticmethod
     def new_lesson(name):
         return Lesson.insert({
             Lesson.Field.name: name,
-            Lesson.Field.studentList: []
+            Lesson.Field.studentList: [],
+            Lesson.Field.createTime: datetime.now()
         })
