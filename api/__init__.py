@@ -48,5 +48,6 @@ class GlobalError:
 import answer
 import assignment
 import dashboard
+import lesson
 import question
 import student

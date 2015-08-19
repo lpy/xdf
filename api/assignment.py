@@ -3,9 +3,21 @@ from api import api
 from flask import jsonify, request
 from model.answer import Answer
 from model.assignment import Assignment
+from model.question import Question
 from model.student import Student
 from util.assignment import check_answer, fetch_assignment
 import json
+
+
+@api.route('/v1/assignments', methods=['GET'])
+def fetch_all_assignments():
+    assignment_lists = Assignment.find({}, [
+        Assignment.Field._id
+    ], sort=[(Assignment.Field.createTime, 1)])
+    assignments = []
+    for assignment in assignment_lists:
+        assignments.append(fetch_assignment(assignment[Assignment.Field._id]))
+    return jsonify(stat=0, assignments=assignments)
 
 
 @api.route('/v1/assignment', methods=['POST'])
@@ -14,7 +26,7 @@ def new_assignment():
 ## 创建新作业
 
     '''
-    name = request.form.get('name', '')
+    name = request.get_json().get('name', '')
     assignment_id = Assignment.new_assignment(name)
 
     return jsonify(stat=0, assignmentId=assignment_id)
@@ -54,7 +66,7 @@ def answer_assignment(assignment_id):
 Parameters:
 
 * `studentId` (string, required) - 作答的学生ID
-* `answerList` (string, required) - JSON 序列化后的列表，每一项均为整数
+* `answerList` (string, required) - JSON 序列化后的列表，每一项均为整数，不作答为 -1
 
 Return:
 
@@ -87,4 +99,21 @@ Return:
 
 @api.route('/v1/assignment/<assignment_id>', methods=['DELETE'])
 def delete_assignment(assignment_id):
+    assignment = Assignment.get({
+        Assignment.Field._id: assignment_id
+    }, [
+        Assignment.Field.questionList
+    ])
+    for question_id in assignment.data.get(Assignment.Field.questionList):
+        Question.remove({
+            Question.Field._id: question_id
+        })
+    Assignment.remove({
+        Assignment.Field._id: assignment_id
+    })
+    return jsonify(stat=0,)
+
+
+@api.route('/v1/assignment/release', methods=['POST'])
+def release_assignment():
     pass

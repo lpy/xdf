@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from api import api
 from model.user import User
-from flask import jsonify, request, render_template
+from flask import jsonify, request, render_template, redirect, url_for
 
 
 @api.route('/v1/login', methods=['POST'])
@@ -14,7 +14,8 @@ def login():
         User.Field.password: hash_password
     })
     if user:
-        return render_template('dashboard.html', userId=user.data.get(User.Field._id))
+        #return render_template('dashboard.html', userId=user.data.get(User.Field._id))
+        return redirect('/dashboard/dashboard.html')
     else:
         return jsonify(stat=1,), 401
 
