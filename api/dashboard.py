@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from api import api
 from model.user import User
-from flask import jsonify, request, render_template, redirect, url_for
+from model.user_token import UserToken
+from flask import jsonify, request, render_template, redirect
+from flask.ext.login import login_user, make_secure_token
+from uuid import uuid4
 
 
 @api.route('/v1/login', methods=['POST'])
@@ -13,8 +16,13 @@ def login():
         User.Field.name: name,
         User.Field.password: hash_password
     })
+    token = unicode(make_secure_token(user.data[User.Field._id],
+                                      user.data[User.Field.password],
+                                      uuid4().hex))
+    UserToken.update_token(user.data[User.Field._id], token)
     if user:
         #return render_template('dashboard.html', userId=user.data.get(User.Field._id))
+        login_user(user)
         return redirect('/dashboard/dashboard.html')
     else:
         return jsonify(stat=1,), 401

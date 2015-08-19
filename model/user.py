@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from flask.ext.login import make_secure_token, UserMixin
 from model import Collection, db
+from model.user_token import UserToken
+from uuid import uuid4
 import hashlib
 
 
-class User(Collection):
+class User(Collection, UserMixin):
     '''
 #### Dashboard 用户
 * `_id` (ObjectId) - 用户 ID
@@ -19,6 +22,20 @@ class User(Collection):
         name = 'name'
         password = 'password'
         createTime = 'createTIme'
+
+    def get_id(self):
+        """
+        Override UserMixin get_id methods, because there is no
+        `id` field in User object
+        """
+        return unicode(self.data[User.Field._id])
+
+    def get_auth_token(self):
+        token = unicode(make_secure_token(self.data[User.Field._id],
+                                          self.data[User.Field.password],
+                                          uuid4().hex))
+        UserToken.update_token(self.data[User.Field._id], token)
+        return token
 
     @staticmethod
     def get_hashed_password(password):
