@@ -12,9 +12,11 @@ def make_model_page(fd, model):
 
 wiki_api = {
     'API-Answer': [
+        api.answer.get_answer
     ],
     'API-Assignment': [
-
+        api.assignment.get_assignment,
+        api.assignment.answer_assignment
     ],
     'API-Dashboard': [
 
@@ -40,6 +42,7 @@ with open('api.wiki', 'w') as f:
     for page_name, func_list in wiki_api.items():
         f.write('## ' + page_name)
         make_api_page(f, func_list)
+        f.write('\n')
 
 # Generate wiki pages for models.
 with open('model.wiki', 'w') as f:

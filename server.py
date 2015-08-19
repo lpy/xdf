@@ -5,7 +5,7 @@ from gevent import monkey
 from api import api
 from base64 import b64encode
 from config import DEBUG
-from flask import Flask
+from flask import Flask, render_template, redirect
 from gevent.wsgi import WSGIServer
 from uuid import uuid4
 
@@ -20,6 +20,14 @@ app.register_blueprint(api, url_prefix='/api')
 @app.route('/')
 def index():
     return ''
+
+@app.route('/login')
+def redirect_to_login():
+    return redirect('/api/login');
+
+@app.route('/dashboard/<path>')
+def serve_dashboard(path):
+    return render_template('/{}'.format(path))
 
 
 if DEBUG:
