@@ -1,0 +1,121 @@
+<div>
+    <h1>{{assignment.name}}</h1>
+    <p class="lead">问题列表</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>问题内容</th>
+            <th>选项内容</th>
+            <th>正确答案</th>
+            <th>答案解析</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="question in assignment.questionList" ng-init="counter = $index;" id="{{question._id}}">
+            <td>{{counter + 1}}</td>
+            <td>{{question.content}}</td>
+            <td><select class="selectpicker" data-style="btn-info">
+                <option ng-repeat="option in question.optionList track by $index" ng-init="cnt = $index">{{cnt | numberToCharacter}}. {{option}}</option>
+            </select></td>
+            <td>{{question.answer | numberToCharacter}}</td>
+            <td>{{question.answerContent}}</td>
+            <td>
+                <!--<button class="btn btn-sm btn-primary updateQuestionButton" data-toggle="modal" data-target="#problemUpdateModal" data-content="{{question.content}}" data-optionList="{{question.optionList}}" data-answer="{{question.answer}}" data-answerContent="{{question.answerContent}}">修改</button>-->
+                <button class="btn btn-sm btn-danger" ng-click="deleteQuestion(question._id)">删除题目</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p><a class="btn btn-lg btn-primary" role="button" data-toggle="modal" data-target="#problemModal">添加问题</a></p>
+    <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="problemModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="problemModalLabel">添加问题到 {{lesson.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>问题内容</h4>
+                    <textarea rows="5" cols="100%" placeholder="请填写问题内容" ng-model="add.content"></textarea>
+                    <h4>选项列表</h4>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>选项内容</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="option in optionList track by $index" ng-init="counter = $index;">
+                            <td>{{counter | numberToCharacter}}</td>
+                            <td>{{option}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <textarea rows="5" cols="100%" placeholder="请填写选项" ng-model="add.optionContent"></textarea>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="addOption()">添加新选项</button>
+                    <select class="selectpicker" data-style="btn-info" ng-model="add.answer">
+                        <option value="">请指定正确答案</option>
+                        <option ng-repeat="option in optionList track by $index" ng-init="oc = $index;" value="{{oc}}">{{ oc | numberToCharacter }}</option>
+                    </select>
+                    <h4>答案解析</h4>
+                    <textarea rows="5" cols="100%" placeholder="请填写标准答案解析" ng-model="add.answerContent"></textarea>
+                    <h4>音频文件</h4>
+                    <input type="file">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addQuestion()">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="modal fade" id="problemUpdateModal" tabindex="-1" role="dialog" aria-labelledby="problemUpdateModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="problemUpdateModalLabel">添加问题到 {{lesson.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="updateQuestionForm">
+                        <p>问题内容</p>
+                        <textarea rows="5" cols="100%" placeholder="请填写问题内容" ng-model="add.content"></textarea>
+                        <p>选项</p>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>选项内容</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="option in optionList track by $index" ng-init="counter = $index;">
+                                <td>{{counter | numberToCharacter}}</td>
+                                <td>{{option}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <textarea rows="5" cols="100%" placeholder="请填写选项" ng-model="add.optionContent"></textarea>
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="addOption()">添加新选项</button>
+                        <select class="selectpicker" data-style="btn-info" ng-model="add.answer">
+                            <option value="">请指定正确答案</option>
+                            <option ng-repeat="option in optionList track by $index" ng-init="oc = $index;" value="{{oc}}">{{ oc | numberToCharacter }}</option>
+                        </select>
+                        <p>答案解析</p>
+                        <textarea rows="5" cols="100%" placeholder="请填写标准答案解析" ng-model="add.answerContent"></textarea>
+                        <input type="file">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateQuestion()">更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+</div>

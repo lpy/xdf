@@ -1,0 +1,44 @@
+<div>
+    <h1>{{lesson.name}}</h1>
+    <p class="lead">学生列表 人数: {{lesson.studentList.length}}</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>学生姓名</th>
+            <th>学生ID</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="student in lesson.studentList" ng-init="counter = $index;">
+            <td>{{student.name}}</td>
+            <td>{{student.studentId}}</td>
+            <td>
+                <button class="btn btn-sm btn-danger" ng-click="deleteStudent(student._id)">删除学生</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p><a class="btn btn btn-primary" role="button" data-toggle="modal" data-target="#studentModal">添加学生</a></p>
+    <p><a class="btn btn btn-danger" role="button" ng-click="deleteLesson()">删除本班级</a></p>
+    <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="studentModalLabel">添加学生到 {{lesson.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="newLessonForm">
+                        <input type="text" ng-model="add.studentId" placeholder="请填写学生唯一ID">
+                        <input type="text" ng-model="add.studentName" placeholder="请填写学生姓名">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addStudent()">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
