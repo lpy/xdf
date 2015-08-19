@@ -6,6 +6,9 @@ from api import api
 from base64 import b64encode
 from config import DEBUG
 from flask import Flask, render_template, redirect
+from flask.ext.login import LoginManager, login_required
+from model.user import User
+from model.user_token import UserToken
 from gevent.wsgi import WSGIServer
 from uuid import uuid4
 
@@ -15,6 +18,30 @@ app.secret_key = b64encode(uuid4().hex)
 app.debug = DEBUG
 app.register_blueprint(api, url_prefix='/api')
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = '/api/login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get({
+        User.Field._id: user_id
+    })
+
+
+@login_manager.token_loader
+def load_token(token):
+    token = UserToken.get({
+        UserToken.Field._id: token
+    })
+
+    if token:
+        return User.get({
+            User.Field._id: token.data.get(UserToken.Field.userId)
+        })
+    else:
+        return None
+
 
 # For health test
 @app.route('/')
@@ -23,9 +50,11 @@ def index():
 
 @app.route('/login')
 def redirect_to_login():
-    return redirect('/api/login');
+    return redirect('/api/login')
+
 
 @app.route('/dashboard/<path>')
+@login_required
 def serve_dashboard(path):
     return render_template('/{}'.format(path))
 
