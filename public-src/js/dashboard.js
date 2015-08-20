@@ -70,7 +70,7 @@ dashboardApp
 
     $scope.refreshData();
   }])
-  .controller("AddController", ['$scope', '$http', function($scope, $http) {
+  .controller("AddController", ['$scope', '$http', '$window', function($scope, $http, $window) {
 
     $scope.release = {
       links: []
@@ -80,7 +80,9 @@ dashboardApp
         $http.post(host + router.lesson, {
             name: $scope.add.lessonName
         }).then(function() {
+          $window.location.href = "#";
           $scope.refreshData();
+          $route.reload();
         });
     };
 
@@ -88,7 +90,9 @@ dashboardApp
         $http.post(host + router.assignment, {
             name: $scope.add.assignmentName
         }).then(function() {
-            $scope.refreshData();
+          $window.location.href = "#";
+          $scope.refreshData();
+          $route.reload();
         });
     };
 

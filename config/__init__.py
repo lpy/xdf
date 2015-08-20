@@ -19,4 +19,4 @@ DEBUG_PORT = 5001
 NONDEBUG_IP = 'localhost'
 NONDEBUG_PORT = 5001
 
-RELEASE_LINK = 'http://127.0.0.1:5001/api/v1/assignment'
+RELEASE_LINK = 'http://198.58.117.134'

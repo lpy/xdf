@@ -137,6 +137,6 @@ def release_assignment_to_lesson(assignment_id):
     ])
     release_links = []
     for student_id in lesson.data.get(Lesson.Field.studentList):
-        link = '%s/%s?studentId=%s' % (RELEASE_LINK, assignment_id, student_id)
+        link = '%s?studentId=%s&assignmentId=%s' % (RELEASE_LINK, student_id, assignment_id)
         release_links.append(link)
     return jsonify(stat=0, links=release_links)
