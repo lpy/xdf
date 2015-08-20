@@ -18,6 +18,10 @@ $(document).ready(function () {
     });
 });
 
+$(function() {
+
+});
+
 $(document).on("click", ".updateQuestionButton", function () {
   var content = $(this).data('content');
   var optionList = $(this).data('optionList');

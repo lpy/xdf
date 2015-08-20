@@ -72,6 +72,10 @@ dashboardApp
   }])
   .controller("AddController", ['$scope', '$http', function($scope, $http) {
 
+    $scope.release = {
+      links: []
+    };
+
     $scope.addLesson = function() {
         $http.post(host + router.lesson, {
             name: $scope.add.lessonName
@@ -87,15 +91,23 @@ dashboardApp
             $scope.refreshData();
         });
     };
+
+    $scope.releaseAssignment = function() {
+      $http.post(host + router.assignment + '/' + $scope.release.assignmentId + '/release', {
+        lessonId: $scope.release.lessonId
+      }).then(function(data) {
+        $scope.release.links = data.data.links
+      });
+    };
   }])
   .controller("AssignmentDetailController", ["$scope", "$routeParams", "$http", "$route", function($scope, $routeParams, $http, $route) {
 
     $scope.assignmentId = $routeParams.assignment_id;
     $scope.optionList = [];
 
-    $http.get(host + router.assignment + "/" + $scope.assignmentId)
+    $http.get(host + router.assignment + "/" + $scope.assignmentId + '?studentId=admin')
       .success(function(data) {
-        console.log(data.assignment);
+        console.log(data);
         $scope.assignment = data.assignment;
       });
 
@@ -184,3 +196,10 @@ dashboardApp
       return String.fromCharCode(65 + num);
     }
   });
+
+dashboardApp
+  .directive('bsPopover', function() {
+    return function(scope, element, attrs) {
+      $(element).popover();
+    };
+});

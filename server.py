@@ -53,6 +53,12 @@ def redirect_to_login():
     return redirect('/api/login')
 
 
+@app.route('/dashboard', methods=['GET'])
+@login_required
+def redirect_to_dashboard():
+    return render_template('/dashboard.html')
+
+
 @app.route('/dashboard/<path>')
 @login_required
 def serve_dashboard(path):

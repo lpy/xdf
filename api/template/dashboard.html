@@ -86,7 +86,7 @@
         </div>
 
         <div class="modal fade" id="releaseModal" tabindex="-1" role="dialog" aria-labelledby="releaseModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -101,24 +101,36 @@
                               <option value="">选择班级</option>
                               <option ng-repeat="lesson_id in lessonIDs" value="{{lesson_id}}">{{lessons[lesson_id].name}}</option>
                           </select>
-                        {{release.assignmentId}}
-                        {{release.lessonId}}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>作业链接</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="link in release.links track by $index" ng-init="counter = $index;">
+                                <td>{{counter + 1}}</td>
+                                <td>{{link}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addStudent()">发布</button>
+                        <button type="button" class="btn btn-primary" ng-click="releaseAssignment()">发布</button>
                     </div>
                 </div>
            </div>
         </div>
     </div>
     <!-- Modal -->
-    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" style="display:{{display.assignment}}" id="sidebar">
+    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" style="display:{{display.assignment}}" id="sidebar1">
         <div class="list-group">
             <a href="#/assignment/{{assignment_id}}" class="list-group-item" ng-repeat="assignment_id in assignmentIDs">{{ assignments[assignment_id].name }}</a>
         </div>
     </div>
-    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" style="display:{{display.lesson}}"id="sidebar">
+    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" style="display:{{display.lesson}}"id="sidebar2">
         <div class="list-group">
             <a ng-repeat="lesson_id in lessonIDs" href="#/lesson/{{lesson_id}}" class="list-group-item">{{ lessons[lesson_id].name }}</a>
         </div>

@@ -19,7 +19,7 @@
             <td><select class="selectpicker" data-style="btn-info">
                 <option ng-repeat="option in question.optionList track by $index" ng-init="cnt = $index">{{cnt | numberToCharacter}}. {{option}}</option>
             </select></td>
-            <td>{{question.answer | numberToCharacter}}</td>
+            <td><a tabindex="0" type="button" class="btn btn-sm btn-danger" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="正确答案" data-content="{{question.answer | numberToCharacter}}" bs-popover>显示正确答案</a></td>
             <td>{{question.answerContent}}</td>
             <td>
                 <!--<button class="btn btn-sm btn-primary updateQuestionButton" data-toggle="modal" data-target="#problemUpdateModal" data-content="{{question.content}}" data-optionList="{{question.optionList}}" data-answer="{{question.answer}}" data-answerContent="{{question.answerContent}}">修改</button>-->
@@ -118,4 +118,5 @@
         </div>
     </div>
     -->
+
 </div>
