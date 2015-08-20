@@ -1,0 +1,278 @@
+@emerald: #00a99d;
+@green: #8cc63f;
+@pink: #f98ca6;
+@red: #f15a24;
+@gray: #b3b3b3;
+@gray-light:#f8f8f8;
+html {
+	width: 100%;
+	height: 100%;
+}
+body{
+	padding: 0;
+	margin: 0;
+	width:100%;
+	height: 100%;
+	background: white;
+}
+.emerald{
+	color: @emerald;
+}
+.welcomePage{
+	background: @emerald;
+}
+.welcome{
+	width: 187px;
+	/*margin:200px auto 10px auto;*/
+	margin: 0 auto 10px auto;
+	padding-top: 200px;
+	img{
+		width: 100%;
+	}
+	h2{
+		text-align: center;
+		color: white;
+	}
+}
+.quizBtn{
+	width: 169px;
+	display: block;
+	margin: 200px auto 0 auto;
+	padding-bottom: 200px;
+}
+.logo{
+	width: 115px;
+	display: block;
+	position: absolute;
+	bottom: 47px;
+	left: 50%;
+	margin-left: -57px;
+
+}
+
+/*quiz*/
+.appBar{
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/*height: 6.6%;*/
+	height: 44px;
+	line-height: 44px;
+	background: @emerald;
+	.appBarBtn{
+		float: left;
+		width: 44px;
+		height: 44px;
+		text-align: center;
+		img{
+			height: 30px;
+			vertical-align: middle;
+		}
+	}
+	.appBarTitle{
+		height: 44px;
+		width: 100%;
+		h3{
+			margin: 0;
+			text-align: center;
+			color:white;
+		}
+	}
+	.appBarIndicator{
+		float: right;
+		width: 44px;
+		height: 44px;
+		color: white;
+		text-align: center;
+		font-size: 13px;
+		line-height: 44px;
+	}
+}
+.content{
+	width: 100%;
+	top: 44px;
+	left: 0px;
+    bottom: 49px;
+    position: absolute;
+    overflow: auto;
+    .questionBox{
+    	padding-top: 20px;
+    	p{
+    		margin: 0 20px;
+    	}
+    	.serial{
+    		color: @emerald;
+    	}
+    	.selections{
+    		list-style: none;
+    		padding: 0;
+    		li{
+    			padding: 5px 20px;
+    			height: 53px;
+    			line-height: 53px;
+    			overflow: hidden;
+    			margin: 10px 0;
+    			.letter{
+    				border-radius: 50%;
+    				background: @gray;
+    				height: 53px;
+    				width: 53px;
+    				float: left;
+    				text-align: center;
+    				line-height: 53px;
+    				color: white;
+    				font-size: 20px;
+    				font-weight: bold;
+    				margin-right: 15px;
+    			}
+    		}
+    		li.active{
+    			background: #e5e5e5;
+    			.letter{
+    				background: @emerald;
+    			}
+    			
+    		}
+    	}
+    }
+    .answerExplanation{
+    	padding: 20px;
+    	background: @gray-light;
+    	overflow: hidden;
+    	word-wrap: break-word;
+    	color: #4d4d4d;
+    	.answerPlayer{
+
+    		width: 100%;
+    		overflow: hidden;
+    		line-height: 40px;
+    		img{
+    			height: 40px;
+    			/*width: 90%;*/
+    			float: left;
+    		}
+    		span{
+    			float: left;
+
+    		}
+    	}
+
+    }
+}
+.actionBar{
+	width: 100%;
+	height: 49px;
+	position: absolute;
+	bottom: 0px;
+	background: @emerald;
+	.pre{
+		float: left;
+		height: 29px;
+		margin: 10px;
+	}
+	.next{
+		float: right;
+		height: 29px;
+		margin: 10px;
+	}
+	.tryAgain{
+		height: 39px;
+
+		display: block;
+		margin: 5px auto;
+	}
+	.handInBtn{
+		height: 39px;
+
+		display: block;
+		margin: 5px auto;
+	}
+}
+
+/*result*/
+.resultPage{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.scoreBox{
+	width: 100%;
+	background: @pink;
+	overflow: hidden;
+	padding-bottom: 10px;
+	.scoreCircle {
+		position: relative;
+		width: 157px;
+		height: 157px;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 157px;
+		margin: 36px auto 15px auto;
+		background:rgba(255,255,255,0.3);
+		
+		color:white;
+		#total{
+			font-size: 15px;
+			position: absolute;
+			bottom: 30px;
+			right: 30px;
+			line-height: 15px;
+		}
+		#score{
+			font-size: 70px;
+		}
+	}
+	.emotion{
+		width: 145px;
+		height: 54px;
+		margin: 0 auto;
+		img{
+			width: 100%;
+		}
+	}
+	.shareBtn{
+		width: 128px;
+		height: 39px;
+		margin: 0 auto;
+		img{
+			width: 100%
+		}
+	}
+}
+.answerSheet{
+	p{
+		margin-left:3%;
+	}
+	.qustionNum{
+		width: 14%;
+		
+		padding-bottom: 14%;
+		margin: 3%;
+		float: left;
+		text-align: center;
+		position: relative;
+		div{
+/*			width: 100%;
+			height: 100%;
+			margin-left: -50%;
+			margin-top: -50%;*/
+			width: 44px;
+			height: 44px;
+			top: 50%;
+			left: 50%;
+			margin-left: -22px;
+			margin-top: -22px;
+			background: @emerald;
+			position: absolute;
+			
+			text-align: center;
+			
+			line-height: 44px;
+			
+			border-radius: 50%;
+			color: white;
+		}
+
+	}
+}
