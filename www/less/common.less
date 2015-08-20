@@ -18,9 +18,14 @@ body{
 .emerald{
 	color: @emerald;
 }
+.welcomePage{
+	background: @emerald;
+}
 .welcome{
 	width: 187px;
-	margin:200px auto 10px auto;
+	/*margin:200px auto 10px auto;*/
+	margin: 0 auto 10px auto;
+	padding-top: 200px;
 	img{
 		width: 100%;
 	}
@@ -32,7 +37,8 @@ body{
 .quizBtn{
 	width: 169px;
 	display: block;
-	margin: 200px auto;
+	margin: 200px auto 0 auto;
+	padding-bottom: 200px;
 }
 .logo{
 	width: 115px;
@@ -58,6 +64,11 @@ body{
 		float: left;
 		width: 44px;
 		height: 44px;
+		text-align: center;
+		img{
+			height: 30px;
+			vertical-align: middle;
+		}
 	}
 	.appBarTitle{
 		height: 44px;
@@ -165,15 +176,32 @@ body{
 		height: 29px;
 		margin: 10px;
 	}
+	.tryAgain{
+		height: 39px;
+
+		display: block;
+		margin: 5px auto;
+	}
+	.handInBtn{
+		height: 39px;
+
+		display: block;
+		margin: 5px auto;
+	}
 }
 
 /*result*/
+.resultPage{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
 .scoreBox{
 	width: 100%;
 	background: @pink;
 	overflow: hidden;
 	padding-bottom: 10px;
-	.score {
+	.scoreCircle {
 		position: relative;
 		width: 157px;
 		height: 157px;
@@ -182,14 +210,17 @@ body{
 		line-height: 157px;
 		margin: 36px auto 15px auto;
 		background:rgba(255,255,255,0.3);
-		font-size: 70px;
+		
 		color:white;
-		span{
+		#total{
 			font-size: 15px;
 			position: absolute;
 			bottom: 30px;
 			right: 30px;
 			line-height: 15px;
+		}
+		#score{
+			font-size: 70px;
 		}
 	}
 	.emotion{

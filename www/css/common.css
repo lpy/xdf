@@ -154,6 +154,11 @@ body {
   height: 29px;
   margin: 10px;
 }
+.actionBar .tryAgain {
+  height: 39px;
+  display: block;
+  margin: 5px auto;
+}
 /*result*/
 .scoreBox {
   width: 100%;

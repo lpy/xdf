@@ -12,10 +12,21 @@ module.exports = function(grunt) {
         dest: 'build/<%= pkg.name %>.min.js'
       }
     },
+    react: {
+      react: {
+          files: {
+            expand: true,
+            cwd: 'src/',//输入文件夹
+            src: ['**/*.jsx'],//所有jsx文件
+            dest: 'build/',//输出文件夹
+            ext: '.js'
+          }
+        },
+    },
     browserify: {
       dist: {
         files: {
-          'build/welcome.js': 'src/welcome.js',
+          'build/bundle.js': 'build/main.js',
         }
       }
     },
@@ -31,6 +42,10 @@ module.exports = function(grunt) {
         files: ['less/*.less'],
         tasks: ['less']
       },
+      react: {
+        files: ['src/**/*.jsx'],
+        tasks: ['react','browserify']
+      },
       browserify:{
         files: ['src/*.js'],
         tasks: ['browserify']
@@ -45,6 +60,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-react');
   // 默认被执行的任务列表。
   grunt.registerTask('default', ['watch']);
 
