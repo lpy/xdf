@@ -20,3 +20,6 @@ NONDEBUG_IP = 'localhost'
 NONDEBUG_PORT = 5001
 
 RELEASE_LINK = 'http://198.58.117.134'
+
+UPLOAD_AUDIO_DIRECTORY = '/Users/lpy/workspace/01project/xdf/audios'
+ALLOWED_EXTENSIONS = set(['m4a', 'mp3'])
