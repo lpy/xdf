@@ -126,6 +126,12 @@ body{
     				font-weight: bold;
     				margin-right: 15px;
     			}
+    			.letter.wrong{
+    				background: @red;
+    			}
+    			.letter.correct{
+    				background: @emerald;
+    			}
     		}
     		li.active{
     			background: #e5e5e5;
@@ -147,6 +153,9 @@ body{
     		width: 100%;
     		overflow: hidden;
     		line-height: 40px;
+    		audio{
+    			display: none;
+    		}
     		img{
     			height: 40px;
     			/*width: 90%;*/
@@ -244,7 +253,7 @@ body{
 	p{
 		margin-left:3%;
 	}
-	.qustionNum{
+	.questionNum{
 		width: 14%;
 		
 		padding-bottom: 14%;
@@ -274,5 +283,11 @@ body{
 			color: white;
 		}
 
+	}
+	.questionNum.wrong{
+		div{
+			background: @red;
+		}
+		
 	}
 }

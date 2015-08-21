@@ -1,13 +1,30 @@
 var React = require('react');
+var Router = require('react-router');   
+var StateMixin = Router.State;  
 
 var Result = React.createClass({
 
-	getDefaultProps: function() {
+	mixins: [StateMixin],
 
+	getInitialState: function() {
+		var answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
+			questionList = JSON.parse(localStorage.getItem('assignment')).questionList;
+		
 		return {
-			answers: [true,false,true,true,true,false,true,true,true,false]
+			answers: answerSheet.map(function(ans,i){
+				return ans === questionList[i].answer;
+			}) //正确情况
 		};
+	},
+	// getDefaultProps: function() {
 
+	// 	return {
+	// 		answers: [true,false,true,true,true,false,true,true,true,false]
+	// 	};
+
+	// },
+	componentDidMount: function() {
+		
 	},
 	render: function() {
 
@@ -26,7 +43,7 @@ var Result = React.createClass({
 				<div className="content">
 					<div className="scoreBox">
 						<div className="scoreCircle">
-							<span id="score">90</span>
+							<span id="score">{parseInt(this.getParams().score)}</span>
 							<span id="total">/100</span>
 						</div>
 						<div className="emotion">
@@ -40,10 +57,12 @@ var Result = React.createClass({
 						<p>答题卡</p>
 						<p className="emerald">查看答案解析请点题号哦～</p>
 						{
-							this.props.answers.map(function(ans,index){
+							this.state.answers.map(function(ans,index){
 								return (
 									<a href={"#/explanation/" + index}>
-										<div className="qustionNum"><div>{index + 1}</div></div> 
+										<div className={ans?"questionNum":"questionNum wrong"}>
+											<div>{index + 1}</div>
+										</div> 
 									</a>
 									);
 							})

@@ -5,8 +5,17 @@ var StateMixin = ReactRouter.State;
 var Explanation = React.createClass({
 	
 	mixins: [StateMixin],
+	getInitialState: function() {
+		return {
+			assignment: JSON.parse(localStorage.getItem('assignment'))
+		};
+	},
 	render: function() {
-		var index = parseInt(this.getParams().index);
+		var index = parseInt(this.getParams().index),
+			assignment = this.state.assignment,
+			questionNum = this.state.assignment.questionList.length, //问题总数
+			question = assignment.questionList[index],
+			answerSheet = JSON.parse(localStorage.getItem('answerSheet'));
 		return (
 			<div>
 				<nav className="appBar">
@@ -16,10 +25,10 @@ var Explanation = React.createClass({
 						</a>
 					</div>
 					<div className="appBarIndicator">
-						<span>{index + 1}/10</span>
+						<span>{index + 1}/{questionNum}</span>
 					</div>
 					<div className="appBarTitle">
-						<h3>日语第一课作业</h3>
+						<h3>{assignment.name}</h3>
 					</div>
 				</nav>
 				<div className="content">
@@ -27,26 +36,38 @@ var Explanation = React.createClass({
 
 						<p className="question">
 							<span className="serial">{index + 1}.</span>
-							丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽に挑戦できそう。キャベツの甘みが出たスープも魅力的
+							{question.content}
 						</p>
 						<ul className="selections">
-							<li>
-								<div className="letter">A</div>
-								とキャベツ
-							</li>
-							<li>
-								<div className="letter">B</div>
-								とキャベツ
-							</li>
-							<li>
-								<div className="letter">C</div>
-								とキャベツ
-							</li>
-							<li className="active">
-								<div className="letter ">D</div>
-								とキャベツ
-							</li>
+							{
+								question.optionList.map(function(option,i){
+									if(i === question.answer) {
+										return (
+											<li>
+												<div className="letter correct">{['A','B','C','D'][i]}</div>
+												{option}
+											</li>
+											);
+									}else if(i === answerSheet[index] && i !== question.answer) {
+										return (
+											<li>
+												<div className="letter wrong">{['A','B','C','D'][i]}</div>
+												{option}
+											</li>
+											);
+									}else {
+										return (
+											<li>
+												<div className="letter">{['A','B','C','D'][i]}</div>
+												{option}
+											</li>
+											);
+									}
+									
+								})
+							}
 						</ul>
+
 					</div>
 					<div className="answerExplanation">
 						<p className="correctness">恭喜你答对啦</p>
@@ -54,8 +75,14 @@ var Explanation = React.createClass({
 						<div className="answerPlayer">
 							<img src="images/answerPlayer.png"/>
 							<span>13''</span>
+							{/*答案解析音频*/}
+							<audio controls="controls" height="100" width="100">
+							  <source src={question.audio} type="audio/mp3" />
+							  <source src={question.audio} type="audio/ogg" />
+							<embed height="100" width="100" src={question.audio} />
+							</audio>
 						</div>
-						<p>blablablablablalablablablablalablablablablalablablablabla</p>
+						<p>{question.answerContent}</p>
 					</div>
 				</div>
 				<div className="actionBar">
@@ -69,7 +96,7 @@ var Explanation = React.createClass({
 						""
 					}	
 					{
-						index!==9?
+						index!==questionNum-1?
 						<a href={"#/explanation/" + ( index + 1)}>
 							<img src="images/next.png" className="next"/>
 						</a>
