@@ -18,9 +18,11 @@ app.secret_key = b64encode(uuid4().hex)
 app.debug = DEBUG
 app.register_blueprint(api, url_prefix='/api')
 
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = '/api/login'
+
 
 @login_manager.user_loader
 def load_user(user_id):

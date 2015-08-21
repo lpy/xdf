@@ -3,6 +3,7 @@
 var dashboardApp = angular.module('Dashboard', ['ngRoute']);
 var host = "http://127.0.0.1:5001/api";
 var router = {
+  audio: '/v1/audio',
   allAssignment: '/v1/assignments',
   allLesson: '/v1/lessons',
   lesson: '/v1/lesson',
@@ -10,6 +11,50 @@ var router = {
   student: '/v1/student',
   question: '/v1/question'
 };
+
+
+dashboardApp
+  .directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}])
+  .directive('bsPopover', function() {
+    return function(scope, element) {
+      $(element).popover();
+    };
+});
+
+dashboardApp
+  .service('audioUpload', ['$http', function ($http) {
+  this.uploadAudioToUrl = function(file, assignment_id, id, uploadUrl){
+    var fd = new FormData();
+    fd.append('file', file);
+    fd.append('assignmentId', assignment_id);
+    fd.append('id', id);
+    console.log(fd);
+    $http
+      .post(uploadUrl, fd, {
+      transformRequest: angular.identity,
+      headers: {'Content-Type': undefined}
+    })
+      .success(function(){
+
+      })
+      .error(function(){
+      });
+    }
+}]);
 
 
 dashboardApp
@@ -104,7 +149,7 @@ dashboardApp
       });
     };
   }])
-  .controller("AssignmentDetailController", ["$scope", "$routeParams", "$http", "$route", function($scope, $routeParams, $http, $route) {
+  .controller("AssignmentDetailController", ["$scope", "$routeParams", "$http", "$route", "audioUpload", function($scope, $routeParams, $http, $route, audioUpload) {
 
     $scope.assignmentId = $routeParams.assignment_id;
     $scope.optionList = [];
@@ -139,6 +184,16 @@ dashboardApp
         .success(function() {
           $route.reload();
         })
+    };
+
+    $scope.uploadAudio = function() {
+      var file = $scope.audio;
+      var id = 1;
+      if ($scope.assignment.questionList) {
+        id = $scope.assignment.questionList.length + 1;
+      }
+      var uploadUrl = host + router.audio;
+      audioUpload.uploadAudioToUrl(file, $scope.assignmentId, id, uploadUrl);
     };
 
   }])
@@ -200,10 +255,3 @@ dashboardApp
       return String.fromCharCode(65 + num);
     }
   });
-
-dashboardApp
-  .directive('bsPopover', function() {
-    return function(scope, element, attrs) {
-      $(element).popover();
-    };
-});

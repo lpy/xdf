@@ -1,4 +1,6 @@
-from flask import Blueprint, jsonify
+from config import UPLOAD_AUDIO_DIRECTORY, ALLOWED_EXTENSIONS
+from flask import Blueprint, jsonify, request
+
 
 api = Blueprint('api', __name__, template_folder='template')
 
@@ -28,6 +30,22 @@ def github_push():
     import os, subprocess
     subprocess.Popen('git pull', cwd=os.getcwd(), shell=True)
     return 'ok'
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+@api.route('/v1/audio', methods=['POST'])
+def upload_file():
+    import os
+    assignment_id = request.form.get('assignmentId')
+    id = request.form.get('id')
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = assignment_id + '_' + id + '.' + file.filename.rsplit('.', 1)[1]
+        file.save(os.path.join(UPLOAD_AUDIO_DIRECTORY, filename))
+        return jsonify(stat=1)
 
 
 # Define error code
