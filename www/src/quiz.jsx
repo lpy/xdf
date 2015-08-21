@@ -4,6 +4,7 @@ var StateMixin = ReactRouter.State;
 var $ = require('jquery');
 var getQuery = require('./getQuery.js');
 
+React.initializeTouchEvents(true);
 var Selection = React.createClass({
 	chooseThis: function() {
 		this.props.answerQuestion(this.props.i);

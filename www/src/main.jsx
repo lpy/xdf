@@ -14,6 +14,7 @@ var DefaultRoute = Router.DefaultRoute;
 var StateMixin = Router.State;  
 
 
+React.initializeTouchEvents(true);
 
 var query = getQuery(window.location.href);
 var studentId = query.s,
@@ -72,7 +73,7 @@ var assignment = {
       answer: 3,
       answerContent: "答案解析",
       assignmentId: "123",
-      audio: "test.mp3",
+      audio: "come.mp3",
       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
       optionList: [
         "ツをおいしく食べ",

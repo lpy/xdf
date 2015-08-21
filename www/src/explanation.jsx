@@ -5,17 +5,49 @@ var StateMixin = ReactRouter.State;
 var React = require('react');
 
 var AnswerPlayer = React.createClass({
-
+	
+	getInitialState: function() {
+		return {
+			duration: "0'0''" 
+		};
+	},
+	setDuration: function() {
+		//显示音频长度
+		var secs = React.findDOMNode(this.refs.audio).duration,
+			duration = Math.floor(secs/60) + "'" + Math.round(secs % 60) + "''";
+		this.setState({
+			duration: duration
+		});
+	},
+	componentDidMount: function() {
+		React.findDOMNode(this.refs.audio).oncanplay = this.setDuration.bind(this);
+	},
 	togglePlay: function() {
+
 		var audio = React.findDOMNode(this.refs.audio);
+		console.log(audio.paused);
 		audio.paused? audio.play():audio.pause();
+	},
+	componentWillReceiveProps: function(nextProps) {
+		// console.log('pause')
+		// this.forceUpdate();
+		// React.findDOMNode(this.refs.audio).oncanplay = this.setDuration.bind(this);
+		var audio = React.findDOMNode(this.refs.audio).pause();
+
+		
+	},
+	componentDidUpdate: function(prevProps, prevState) {
+		console.log(prevProps.url,this.props.url)
+		if(prevProps.url != this.props.url) {
+			React.findDOMNode(this.refs.audio).load();
+		}
 	},
 	render: function() {
 		var url = this.props.url;
 		return (
 			<div className="answerPlayer">
 				<img src="images/answerPlayer.png" onClick = {this.togglePlay}/>
-				<span>13''</span>
+				<span>{this.state.duration}</span>
 				{/*答案解析音频*/}
 				<audio controls="controls" height="100" width="100" ref="audio">
 				  <source src={url} type="audio/mp3" />
