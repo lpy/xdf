@@ -2,6 +2,32 @@ var React = require('react');
 var ReactRouter = require('react-router');
 var StateMixin = ReactRouter.State;  
 
+var React = require('react');
+
+var AnswerPlayer = React.createClass({
+
+	togglePlay: function() {
+		var audio = React.findDOMNode(this.refs.audio);
+		audio.paused? audio.play():audio.pause();
+	},
+	render: function() {
+		var url = this.props.url;
+		return (
+			<div className="answerPlayer">
+				<img src="images/answerPlayer.png" onClick = {this.togglePlay}/>
+				<span>13''</span>
+				{/*答案解析音频*/}
+				<audio controls="controls" height="100" width="100" ref="audio">
+				  <source src={url} type="audio/mp3" />
+				  <source src={url} type="audio/ogg" />
+				<embed height="100" width="100" src={url} />
+				</audio>
+			</div>
+		);
+	}
+
+});
+
 var Explanation = React.createClass({
 	
 	mixins: [StateMixin],
@@ -72,16 +98,7 @@ var Explanation = React.createClass({
 					<div className="answerExplanation">
 						<p className="correctness">恭喜你答对啦</p>
 						<p>答案解析</p>
-						<div className="answerPlayer">
-							<img src="images/answerPlayer.png"/>
-							<span>13''</span>
-							{/*答案解析音频*/}
-							<audio controls="controls" height="100" width="100">
-							  <source src={question.audio} type="audio/mp3" />
-							  <source src={question.audio} type="audio/ogg" />
-							<embed height="100" width="100" src={question.audio} />
-							</audio>
-						</div>
+						<AnswerPlayer url={question.audio}/>
 						<p>{question.answerContent}</p>
 					</div>
 				</div>
