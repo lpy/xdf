@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a90aba826253b35a2855"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4492c5e170556e462a88"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8007,30 +8007,13 @@
 	var studentId = query.s,
 	    assignmentId = query.a;
 
+	localStorage.setItem("assignment","");
+	localStorage.setItem("answerSheet","");
 	function init(callback) {
 
 	    $.get(
 	      "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
 	      function(data) {
-	        // var assignment = {
-	        //   name:"作业名",
-	        //   questionNum: 10,
-	        //   questionList: [
-	        //     {
-	        //       answer: 1,
-	        //       answerContent: "答案解析",
-	        //       assignmentId: "123",
-	        //       audio: "",
-	        //       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
-	        //       optionList: [
-	        //         "ツをおいしく食べ",
-	        //         "ツをおいしく食べ",
-	        //         "ツをおいしく食べ",
-	        //         "ツをおいしく食べ"
-	        //       ]
-	        //     }
-	        //   ]
-	        // };
 	        var assignment = data.assigment;//作业数据
 	        var answerSheet = assignment.questionList.map(function(){
 	          return -1;
@@ -38629,7 +38612,7 @@
 			};
 		},
 		handIn: function() {
-			window.location.href = "#/result/" + 78; //redirect to the result page
+			// window.location.href = "#/result/" + 78; //redirect to the result page
 			//handin the answersheet and show the score
 			var query = getQuery(window.location.href);
 			var studentId = query.s,
@@ -38642,7 +38625,7 @@
 					answerList: JSON.parse(localStorage.getItem('answerSheet'))
 				},
 				"function":function(res) {
-					window.location.href = "#/result/" + res.data.score; //redirect to the result page
+					window.location.href = "#/result/" + res.score; //redirect to the result page
 				},
 				"function":function(error) {
 					alert('获取结果失败,请重试')

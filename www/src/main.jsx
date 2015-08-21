@@ -20,30 +20,13 @@ var query = getQuery(window.location.href);
 var studentId = query.s,
     assignmentId = query.a;
 
+localStorage.setItem("assignment","");
+localStorage.setItem("answerSheet","");
 function init(callback) {
 
     $.get(
       "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
       function(data) {
-        // var assignment = {
-        //   name:"作业名",
-        //   questionNum: 10,
-        //   questionList: [
-        //     {
-        //       answer: 1,
-        //       answerContent: "答案解析",
-        //       assignmentId: "123",
-        //       audio: "",
-        //       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
-        //       optionList: [
-        //         "ツをおいしく食べ",
-        //         "ツをおいしく食べ",
-        //         "ツをおいしく食べ",
-        //         "ツをおいしく食べ"
-        //       ]
-        //     }
-        //   ]
-        // };
         var assignment = data.assigment;//作业数据
         var answerSheet = assignment.questionList.map(function(){
           return -1;
