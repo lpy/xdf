@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d74a7846e138a1fc00c4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a90aba826253b35a2855"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8102,16 +8102,16 @@
 	  )
 	);
 	//将匹配的路由渲染到 DOM 中
-	Router.run(routes, Router.HashLocation, function(Root){  
-	  React.render(React.createElement(Root, null), document.body);
-	});
-
-	// init(function(){
-	//   // 将匹配的路由渲染到 DOM 中
-	//   Router.run(routes, Router.HashLocation, function(Root){  
-	//     React.render(<Root />, document.body);
-	//   });
+	// Router.run(routes, Router.HashLocation, function(Root){  
+	//   React.render(<Root />, document.body);
 	// });
+
+	init(function(){
+	  // 将匹配的路由渲染到 DOM 中
+	  Router.run(routes, Router.HashLocation, function(Root){  
+	    React.render(React.createElement(Root, null), document.body);
+	  });
+	});
 
 	module.exports = App;
 

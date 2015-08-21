@@ -115,15 +115,15 @@ var routes = (
   </Route>
 );
 //将匹配的路由渲染到 DOM 中
-Router.run(routes, Router.HashLocation, function(Root){  
-  React.render(<Root />, document.body);
-});
-
-// init(function(){
-//   // 将匹配的路由渲染到 DOM 中
-//   Router.run(routes, Router.HashLocation, function(Root){  
-//     React.render(<Root />, document.body);
-//   });
+// Router.run(routes, Router.HashLocation, function(Root){  
+//   React.render(<Root />, document.body);
 // });
+
+init(function(){
+  // 将匹配的路由渲染到 DOM 中
+  Router.run(routes, Router.HashLocation, function(Root){  
+    React.render(<Root />, document.body);
+  });
+});
 
 module.exports = App;
