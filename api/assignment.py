@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from api import api
+from config import RELEASE_LINK
 from flask import jsonify, request
 from model.answer import Answer
 from model.assignment import Assignment
+from model.lesson import Lesson
 from model.question import Question
 from model.student import Student
 from util.assignment import check_answer, fetch_assignment
@@ -52,8 +54,33 @@ Return:
         * `content` (string) - 问题内容
         * `optionList` (list of string) - 答案选项列表
     '''
+    student_id = request.args.get('studentId', '')
+    if not student_id:
+        return jsonify(stat=1, )
     assignment = fetch_assignment(assignment_id)
-    return jsonify(stat=0, assignment=assignment)
+    return jsonify(stat=0, assignment=assignment, studentId=student_id)
+
+
+@api.route('/v1/assignment/<assignment_id>', methods=['DELETE'])
+def delete_assignment(assignment_id):
+    assignment = Assignment.get({
+        Assignment.Field._id: assignment_id
+    }, [
+        Assignment.Field.questionList
+    ])
+    for question_id in assignment.data.get(Assignment.Field.questionList):
+        Question.remove({
+            Question.Field._id: question_id
+        })
+    Assignment.remove({
+        Assignment.Field._id: assignment_id
+    })
+    return jsonify(stat=0,)
+
+
+@api.route('/v1/assignment/release', methods=['POST'])
+def release_assignment():
+    pass
 
 
 @api.route('/v1/assignment/<assignment_id>/answer', methods=['POST'])
@@ -97,23 +124,19 @@ Return:
     return jsonify(stat=0, score=score, answerId=answer_id)
 
 
-@api.route('/v1/assignment/<assignment_id>', methods=['DELETE'])
-def delete_assignment(assignment_id):
-    assignment = Assignment.get({
-        Assignment.Field._id: assignment_id
+@api.route('/v1/assignment/<assignment_id>/release', methods=['POST'])
+def release_assignment_to_lesson(assignment_id):
+    '''
+    '''
+    json_data = request.get_json()
+    lesson_id = json_data.get('lessonId')
+    lesson = Lesson.get({
+        Lesson.Field._id: lesson_id
     }, [
-        Assignment.Field.questionList
+        Lesson.Field.studentList
     ])
-    for question_id in assignment.data.get(Assignment.Field.questionList):
-        Question.remove({
-            Question.Field._id: question_id
-        })
-    Assignment.remove({
-        Assignment.Field._id: assignment_id
-    })
-    return jsonify(stat=0,)
-
-
-@api.route('/v1/assignment/release', methods=['POST'])
-def release_assignment():
-    pass
+    release_links = []
+    for student_id in lesson.data.get(Lesson.Field.studentList):
+        link = '%s?studentId=%s&assignmentId=%s' % (RELEASE_LINK, student_id, assignment_id)
+        release_links.append(link)
+    return jsonify(stat=0, links=release_links)
