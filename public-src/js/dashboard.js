@@ -114,7 +114,7 @@ dashboardApp
 
     $scope.refreshData();
   }])
-  .controller("AddController", ['$scope', '$http', '$window', function($scope, $http, $window) {
+  .controller("AddController", ['$scope', '$http', '$route', '$window', function($scope, $http, $route, $window) {
 
     $scope.release = {
       links: []
