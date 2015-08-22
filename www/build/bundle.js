@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "cac70eeff5fb75c6e6c5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f77e43bb3f8f0f79e943"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -598,79 +598,79 @@
 	  )
 	);
 
-	var assignment = {
-	  name:"日语第一课作业",
-	  questionNum: 10,
-	  questionList: [
-	    {
-	      answer: 1,
-	      answerContent: "答案解析",
-	      assignmentId: "123",
-	      audio: "test.mp3",
-	      content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
-	      optionList: [
-	        "ツをおいしく食べ",
-	        "ツをおいしく食べ",
-	        "ツをおいしく食べ",
-	        "ツをおいしく食べ"
-	      ]
-	    },
-	    {
-	      answer: 3,
-	      answerContent: "答案解析",
-	      assignmentId: "123",
-	      audio: "come.mp3",
-	      content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
-	      optionList: [
-	        "ツをおいしく食べ",
-	        "ツをおいしく食べ",
-	        "ツをおいしく食べ",
-	        "ツをおいしく食べ"
-	      ]
-	    }
-	  ]
-	}; //作业数据
-	var answerSheet = assignment.questionList.map(function(){
-	  return -1;
-	}); //用户答题
-	localStorage.setItem("assignment",JSON.stringify(assignment));
-	localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
-	// 将匹配的路由渲染到 DOM 中
-	Router.run(routes, Router.HashLocation, function(Root){  
-	  React.render(React.createElement(Root, null), document.body);
-	});
-
-	// var query = getQuery(window.location.href);
-	// var studentId = query.s,
-	//     assignmentId = query.a;
-
-	// localStorage.setItem("assignment","");
-	// localStorage.setItem("answerSheet","");
-	// function init(callback) {
-	//     console.log('init');
-	//     $.ajax({
-	//       url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
-	//       success: function(data) {
-	//         console.log(data);
-	//         var assignment = data.assignment;//作业数据
-	//         var answerSheet = assignment.questionList.map(function(){
-	//           return -1;
-	//         }); //用户答题
-	//         localStorage.setItem("assignment",JSON.stringify(assignment));
-	//         localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
-	//         callback();
-	//       }
-	//     })
-
-	// }
-
-	// init(function(){
-
-	//   // 将匹配的路由渲染到 DOM 中
-	//   Router.run(routes, Router.HashLocation, function(Root){  
-	//     React.render(<Root />, document.body);
-	//   });
+	// var assignment = {
+	//   name:"日语第一课作业",
+	//   questionNum: 10,
+	//   questionList: [
+	//     {
+	//       answer: 1,
+	//       answerContent: "答案解析",
+	//       assignmentId: "123",
+	//       audio: "test.mp3",
+	//       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
+	//       optionList: [
+	//         "ツをおいしく食べ",
+	//         "ツをおいしく食べ",
+	//         "ツをおいしく食べ",
+	//         "ツをおいしく食べ"
+	//       ]
+	//     },
+	//     {
+	//       answer: 3,
+	//       answerContent: "答案解析",
+	//       assignmentId: "123",
+	//       audio: "come.mp3",
+	//       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
+	//       optionList: [
+	//         "ツをおいしく食べ",
+	//         "ツをおいしく食べ",
+	//         "ツをおいしく食べ",
+	//         "ツをおいしく食べ"
+	//       ]
+	//     }
+	//   ]
+	// }; //作业数据
+	// var answerSheet = assignment.questionList.map(function(){
+	//   return -1;
+	// }); //用户答题
+	// localStorage.setItem("assignment",JSON.stringify(assignment));
+	// localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+	// // 将匹配的路由渲染到 DOM 中
+	// Router.run(routes, Router.HashLocation, function(Root){  
+	//   React.render(<Root />, document.body);
 	// });
+
+	var query = getQuery(window.location.href);
+	var studentId = query.s,
+	    assignmentId = query.a;
+
+	localStorage.setItem("assignment","");
+	localStorage.setItem("answerSheet","");
+	function init(callback) {
+	    console.log('init');
+	    $.ajax({
+	      url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+	      success: function(data) {
+	        console.log(data);
+	        var assignment = data.assignment;//作业数据
+	        var answerSheet = assignment.questionList.map(function(){
+	          return -1;
+	        }); //用户答题
+	        localStorage.setItem("assignment",JSON.stringify(assignment));
+	        localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+	        callback();
+	      }
+	    })
+
+	}
+
+	init(function(){
+
+	  // 将匹配的路由渲染到 DOM 中
+	  Router.run(routes, Router.HashLocation, function(Root){  
+	    React.render(React.createElement(Root, null), document.body);
+	  });
+	});
 
 	module.exports = App;
 
@@ -31210,9 +31210,10 @@
 			var query = getQuery(window.location.href);
 			var studentId = query.s,
 			    assignmentId = query.a;
-			    console.log("handIn");
+			    console.log('assignmentId',assignmentId);
 			$.ajax({
-				url: apiHost + "/api/v1/assignment/<assignment_id>/answer".replace(/\<\w+\>/,assignmentId),
+				url: apiHost + "/api/v1/assignment/<assignment_id>/answer?studentId=".replace(/\<\w+\>/,assignmentId) + studentId,
+				// url: apiHost + "/api/v1/assignment/answer",
 				type: "POST",
 				data: {
 					studentId: studentId,
@@ -34435,7 +34436,13 @@
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(3), RootInstanceProvider = __webpack_require__(11), ReactMount = __webpack_require__(13), React = __webpack_require__(67); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } (function () {
 
 	module.exports = function getQuery (url) {
-	  var str = url.substring(url.lastIndexOf('?') + 1),
+	  var end;
+	  if(url.indexOf('#') != -1) {
+	  	end = url.indexOf('#');
+	  }else {
+	  	end = url.length;
+	  } //without hash
+	  var str = url.substring(url.lastIndexOf('?') + 1, end),
 	      arr = str.split('&'),
 	      query = {};
 	  arr.forEach(function(item){

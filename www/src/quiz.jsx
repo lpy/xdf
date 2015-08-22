@@ -38,9 +38,10 @@ var Quiz = React.createClass({
 		var query = getQuery(window.location.href);
 		var studentId = query.s,
 		    assignmentId = query.a;
-		    console.log("handIn");
+		    console.log('assignmentId',assignmentId);
 		$.ajax({
-			url: apiHost + "/api/v1/assignment/<assignment_id>/answer".replace(/\<\w+\>/,assignmentId),
+			url: apiHost + "/api/v1/assignment/<assignment_id>/answer?studentId=".replace(/\<\w+\>/,assignmentId) + studentId,
+			// url: apiHost + "/api/v1/assignment/answer",
 			type: "POST",
 			data: {
 				studentId: studentId,
