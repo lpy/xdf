@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3d342809632133fb33c8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "cac70eeff5fb75c6e6c5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31210,8 +31210,9 @@
 			var query = getQuery(window.location.href);
 			var studentId = query.s,
 			    assignmentId = query.a;
+			    console.log("handIn");
 			$.ajax({
-				url: apiHost + "/api/v1/assignment/<assignment_id>/answer?studentId=".replace(/\<\w+\>/,assignmentId) + studentId,
+				url: apiHost + "/api/v1/assignment/<assignment_id>/answer".replace(/\<\w+\>/,assignmentId),
 				type: "POST",
 				data: {
 					studentId: studentId,
