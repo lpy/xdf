@@ -16,30 +16,29 @@ var StateMixin = Router.State;
 
 React.initializeTouchEvents(true);
 
-var query = getQuery(window.location.href);
-var studentId = query.s,
-    assignmentId = query.a;
 
-localStorage.setItem("assignment","");
-localStorage.setItem("answerSheet","");
-function init(callback) {
 
-    $.get(
-      "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
-      function(data) {
-        var assignment = data.assigment;//作业数据
-        var answerSheet = assignment.questionList.map(function(){
-          return -1;
-        }); //用户答题
-        localStorage.setItem("assignment",JSON.stringify(assignment));
-        localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
-        callback();
-      },
-      function(error) {
-        alert("获取数据失败");
-      }
-      );
-}
+
+var App = React.createClass({
+
+	render: function() {
+		return (
+			<RouteHandler />
+		);
+	}
+
+});
+// 定义页面上的路由
+var routes = (  
+  <Route handler={App}>
+    <Route name="welcome" handler={Welcome} />
+    <Route name="quiz" path="/quiz/:index" handler={Quiz} />
+    <Route name="result" path="/result/:score" handler={Result}/>
+    <Route name="explanation" path="/explanation/:index" handler={Explanation}/>
+    <DefaultRoute handler={Welcome} />
+  </Route>
+);
+
 // var assignment = {
 //   name:"日语第一课作业",
 //   questionNum: 10,
@@ -77,32 +76,38 @@ function init(callback) {
 // }); //用户答题
 // localStorage.setItem("assignment",JSON.stringify(assignment));
 // localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
-
-var App = React.createClass({
-
-	render: function() {
-		return (
-			<RouteHandler />
-		);
-	}
-
-});
-// 定义页面上的路由
-var routes = (  
-  <Route handler={App}>
-    <Route name="welcome" handler={Welcome} />
-    <Route name="quiz" path="/quiz/:index" handler={Quiz} />
-    <Route name="result" path="/result/:score" handler={Result}/>
-    <Route name="explanation" path="/explanation/:index" handler={Explanation}/>
-    <DefaultRoute handler={Welcome} />
-  </Route>
-);
-//将匹配的路由渲染到 DOM 中
+// // 将匹配的路由渲染到 DOM 中
 // Router.run(routes, Router.HashLocation, function(Root){  
 //   React.render(<Root />, document.body);
 // });
 
+var query = getQuery(window.location.href);
+var studentId = query.s,
+    assignmentId = query.a;
+
+localStorage.setItem("assignment","");
+localStorage.setItem("answerSheet","");
+function init(callback) {
+    console.log(studentId,assignmentId);
+    $.get(
+      ":5001/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+      function(data) {
+        var assignment = data.assigment;//作业数据
+        var answerSheet = assignment.questionList.map(function(){
+          return -1;
+        }); //用户答题
+        localStorage.setItem("assignment",JSON.stringify(assignment));
+        localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+        callback();
+      },
+      function(error) {
+        alert("获取数据失败");
+      }
+      );
+}
+
 init(function(){
+
   // 将匹配的路由渲染到 DOM 中
   Router.run(routes, Router.HashLocation, function(Root){  
     React.render(<Root />, document.body);
