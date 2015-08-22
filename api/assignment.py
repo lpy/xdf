@@ -110,7 +110,7 @@ Return:
     student = Student.get({
         Student.Field._id: student_id
     }, [
-        Student.Field.answerList
+        Student.Field.assignmentList
     ])
     if assignment_id in student.data.get(Student.Field.assignmentList):
         pass
