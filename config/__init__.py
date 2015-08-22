@@ -21,10 +21,9 @@ NONDEBUG_PORT = 5001
 
 RELEASE_LINK = 'http://198.58.117.134'
 
-UPLOAD_AUDIO_DIRECTORY = '/Users/lpy/workspace/01project/xdf/audios'
+UPLOAD_AUDIO_DIRECTORY = '/root/audios'
 EXCEL_DIRECTORY = 'temp/'
 ALLOWED_EXTENSIONS = set(['m4a', 'mp3'])
-
 
 DEFAULT_EXPIRE = 4838400
 

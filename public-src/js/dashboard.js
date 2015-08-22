@@ -1,7 +1,7 @@
 "use strict";
 
 var dashboardApp = angular.module('Dashboard', ['ngRoute']);
-var host = "http://127.0.0.1:5001/api";
+var host = "http://198.58.117.134:5001/api";
 var router = {
   audio: '/v1/audio',
   allAssignment: '/v1/assignments',
