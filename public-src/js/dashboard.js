@@ -43,17 +43,14 @@ dashboardApp
     fd.append('file', file);
     fd.append('assignmentId', assignment_id);
     fd.append('id', id);
-    console.log(fd);
-    $http
+    return $http
       .post(uploadUrl, fd, {
-      transformRequest: angular.identity,
-      headers: {'Content-Type': undefined}
-    })
-      .success(function(data) {
-        alert("上传成功！");
-        $scope.audio = data.data.link;
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
       })
-      .error(function() {
+      .then(function(data) {
+        alert("上传成功");
+        return data;
       });
     }
 }]);
@@ -117,7 +114,7 @@ dashboardApp
 
     $scope.refreshData();
   }])
-  .controller("AddController", ['$scope', '$http', '$window', function($scope, $http, $window) {
+  .controller("AddController", ['$scope', '$http', '$route', '$window', function($scope, $http, $route, $window) {
 
     $scope.release = {
       links: []
@@ -165,7 +162,7 @@ dashboardApp
 
     $scope.assignmentId = $routeParams.assignment_id;
     $scope.optionList = [];
-    $scope.audio = "";
+    $scope.audioUrl = "";
 
     $http.get(apiHost + router.assignment + "/" + $scope.assignmentId + '?studentId=admin')
       .success(function(data) {
@@ -179,16 +176,14 @@ dashboardApp
     };
 
     $scope.addQuestion = function() {
-      console.log($scope.audio);
       $http.post(apiHost + router.question, {
         assignmentId: $scope.assignmentId,
         content: $scope.add.content,
         optionList: JSON.stringify($scope.optionList),
         answer: $scope.add.answer,
         answerContent: $scope.add.answerContent,
-        audio: $scope.audio
+        audio: $scope.audioUrl
       }).then(function(data) {
-        console.log(data);
         $route.reload();
       });
     };
@@ -207,7 +202,9 @@ dashboardApp
         id = $scope.assignment.questionList.length + 1;
       }
       var uploadUrl = apiHost + router.audio;
-      audioUpload.uploadAudioToUrl(file, $scope.assignmentId, id, uploadUrl);
+      audioUpload.uploadAudioToUrl(file, $scope.assignmentId, id, uploadUrl).then(function(data) {
+        $scope.audioUrl = data.data.link;
+      });
     };
 
   }])
