@@ -33,7 +33,8 @@ Return:
     answer = Answer.get({
         Answer.Field._id: answer_id
     }, [
-        Answer.Field.answerList
+        Answer.Field.answerList,
+        Answer.Field.assignmentId
     ]).data
     assignment = fetch_assignment(answer.get(Answer.Field.assignmentId))
     return jsonify(stat=0, assignment=assignment, answerList=answer.get(Answer.Field.answerList))
