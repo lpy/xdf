@@ -30,7 +30,6 @@ Return:
         * `optionList` (list of string) - 答案选项列表
 * `answerList` (list of int) - 学生回答的选项列表
     '''
-    answer_id = request.form.get('answerId')
     answer = Answer.get({
         Answer.Field._id: answer_id
     }, [

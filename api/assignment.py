@@ -108,9 +108,9 @@ Return:
     if student_id is None:
         return jsonify(stat=1, ), 401
     student = Student.get({
-        Student.Field.studentId: student_id
+        Student.Field._id: student_id
     }, [
-        Student.Field.answerList
+        Student.Field.assignmentList
     ])
     if assignment_id in student.data.get(Student.Field.assignmentList):
         pass
@@ -118,7 +118,7 @@ Return:
     score = check_answer(assignment_id, answer_list)
     answer_id = Answer.new_answer(assignment_id, student_id, answer_list, score)
     Student.collection.update({
-        Student.Field.studentId: student_id,
+        Student.Field._id: student_id,
     }, {
         '$push': {
             Student.Field.answerList: answer_id,
