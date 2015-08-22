@@ -47,6 +47,7 @@ var Quiz = React.createClass({
 				answerList: localStorage.getItem('answerSheet')
 			},
 			success:function(res) {
+				localStorage.setItem('score',res.score);
 				window.location.href = "#/result/" + res.score; //redirect to the result page
 			},
 			error:function(error) {

@@ -76,6 +76,7 @@ var routes = (
 // }); //用户答题
 // localStorage.setItem("assignment",JSON.stringify(assignment));
 // localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+// localStorage.setItem("score",'12');
 // // 将匹配的路由渲染到 DOM 中
 // Router.run(routes, Router.HashLocation, function(Root){  
 //   React.render(<Root />, document.body);
@@ -87,6 +88,8 @@ var studentId = query.s,
 
 localStorage.setItem("assignment","");
 localStorage.setItem("answerSheet","");
+localStorage.setItem("score",""); //清空本地存储
+
 function init(callback) {
     console.log('init');
     $.ajax({

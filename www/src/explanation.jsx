@@ -73,12 +73,21 @@ var Explanation = React.createClass({
 			assignment = this.state.assignment,
 			questionNum = this.state.assignment.questionList.length, //问题总数
 			question = assignment.questionList[index],
-			answerSheet = JSON.parse(localStorage.getItem('answerSheet'));
+			answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
+			correctness = "";
+		if(answerSheet[index] == question.answer) {
+			correctness = "恭喜你答对了";
+		}
+		else if(answerSheet[index] == -1) {
+			correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你没有作答";
+		}else {
+			correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你选择了" + ['A','B','C','D'][answerSheet[index]];
+		}
 		return (
 			<div>
 				<nav className="appBar">
 					<div className="appBarBtn">
-						<a href="#/result">
+						<a href={"#/result/" + localStorage.getItem('score') } >
 							<img src="images/return.png"></img>
 						</a>
 					</div>
@@ -128,7 +137,7 @@ var Explanation = React.createClass({
 
 					</div>
 					<div className="answerExplanation">
-						<p className="correctness">恭喜你答对啦</p>
+						<p className="correctness">{correctness}</p>
 						<p>答案解析</p>
 						<AnswerPlayer url={question.audio}/>
 						<p>{question.answerContent}</p>

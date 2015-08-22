@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6c698a7c2df60334d61e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "37154f7a942696efaf29"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -635,6 +635,7 @@
 	// }); //用户答题
 	// localStorage.setItem("assignment",JSON.stringify(assignment));
 	// localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+	// localStorage.setItem("score",'12');
 	// // 将匹配的路由渲染到 DOM 中
 	// Router.run(routes, Router.HashLocation, function(Root){  
 	//   React.render(<Root />, document.body);
@@ -646,6 +647,8 @@
 
 	localStorage.setItem("assignment","");
 	localStorage.setItem("answerSheet","");
+	localStorage.setItem("score",""); //清空本地存储
+
 	function init(callback) {
 	    console.log('init');
 	    $.ajax({
@@ -31219,6 +31222,7 @@
 					answerList: localStorage.getItem('answerSheet')
 				},
 				success:function(res) {
+					localStorage.setItem('score',res.score);
 					window.location.href = "#/result/" + res.score; //redirect to the result page
 				},
 				error:function(error) {
@@ -34641,12 +34645,21 @@
 				assignment = this.state.assignment,
 				questionNum = this.state.assignment.questionList.length, //问题总数
 				question = assignment.questionList[index],
-				answerSheet = JSON.parse(localStorage.getItem('answerSheet'));
+				answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
+				correctness = "";
+			if(answerSheet[index] == question.answer) {
+				correctness = "恭喜你答对了";
+			}
+			else if(answerSheet[index] == -1) {
+				correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你没有作答";
+			}else {
+				correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你选择了" + ['A','B','C','D'][answerSheet[index]];
+			}
 			return (
 				React.createElement("div", null, 
 					React.createElement("nav", {className: "appBar"}, 
 						React.createElement("div", {className: "appBarBtn"}, 
-							React.createElement("a", {href: "#/result"}, 
+							React.createElement("a", {href: "#/result/" + localStorage.getItem('score')}, 
 								React.createElement("img", {src: "images/return.png"})
 							)
 						), 
@@ -34696,7 +34709,7 @@
 
 						), 
 						React.createElement("div", {className: "answerExplanation"}, 
-							React.createElement("p", {className: "correctness"}, "恭喜你答对啦"), 
+							React.createElement("p", {className: "correctness"}, correctness), 
 							React.createElement("p", null, "答案解析"), 
 							React.createElement(AnswerPlayer, {url: question.audio}), 
 							React.createElement("p", null, question.answerContent)
