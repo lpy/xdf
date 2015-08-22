@@ -145,8 +145,18 @@ dashboardApp
       $http.post(host + router.assignment + '/' + $scope.release.assignmentId + '/release', {
         lessonId: $scope.release.lessonId
       }).then(function(data) {
-        $scope.release.links = data.data.links
+        $scope.release.links = data.data.links;
+        $scope.release.studentIds = data.data.studentIds;
+        $scope.release.studentNames = data.data.studentNames;
+        $scope.release.excel = 'http://127.0.0.1:5001/excel/' + data.data.excel;
       });
+    };
+
+    $scope.clear = function() {
+      $scope.release.links = [];
+      $scope.release.studentIds = [];
+      $scope.release.studentNames = [];
+      $scope.release.excel = "";
     };
   }])
   .controller("AssignmentDetailController", ["$scope", "$routeParams", "$http", "$route", "audioUpload", function($scope, $routeParams, $http, $route, audioUpload) {
