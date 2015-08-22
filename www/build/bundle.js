@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7bd0571ef8b44fd30cd4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0b0632813195c8e27b3b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8075,7 +8075,7 @@
 	localStorage.setItem("assignment","");
 	localStorage.setItem("answerSheet","");
 	function init(callback) {
-	    console.log(apiHost);
+	    console.log(123);
 	    $.get(
 	      apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
 	      function(data) {

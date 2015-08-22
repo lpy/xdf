@@ -88,7 +88,7 @@ var studentId = query.s,
 localStorage.setItem("assignment","");
 localStorage.setItem("answerSheet","");
 function init(callback) {
-    console.log(apiHost);
+    console.log(123);
     $.get(
       apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
       function(data) {
