@@ -1,3 +1,3 @@
 module.exports = {
-	apiHost: ':5001'
+	apiHost: 'http://59.157.4.42:5001'
 };

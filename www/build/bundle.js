@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "68b61c6ef680b97604e7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c73d9442cf702253d2dd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -7990,8 +7990,8 @@
 	__webpack_require__(226);
 	var Welcome = __webpack_require__(230);
 	var Quiz = __webpack_require__(234);
-	var Result = __webpack_require__(275);
-	var Explanation = __webpack_require__(276);
+	var Result = __webpack_require__(276);
+	var Explanation = __webpack_require__(277);
 	var Router = __webpack_require__(235);   
 	var getQuery = __webpack_require__(274);
 	var Route = Router.Route;  
@@ -7999,7 +7999,7 @@
 	var Link = Router.Link;  
 	var DefaultRoute = Router.DefaultRoute;
 	var StateMixin = Router.State;  
-
+	var apiHost = __webpack_require__(275).apiHost;
 
 	React.initializeTouchEvents(true);
 
@@ -8075,9 +8075,9 @@
 	localStorage.setItem("assignment","");
 	localStorage.setItem("answerSheet","");
 	function init(callback) {
-	    console.log(studentId,assignmentId);
+	    console.log(apiHost);
 	    $.get(
-	      ":5001/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+	      apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
 	      function(data) {
 	        var assignment = data.assigment;//作业数据
 	        var answerSheet = assignment.questionList.map(function(){
@@ -38588,6 +38588,7 @@
 	var StateMixin = ReactRouter.State;  
 	var $ = __webpack_require__(225);
 	var getQuery = __webpack_require__(274);
+	var apiHost = __webpack_require__(275).apiHost;
 
 	React.initializeTouchEvents(true);
 	var Selection = React.createClass({displayName: "Selection",
@@ -38623,7 +38624,7 @@
 			var studentId = query.s,
 			    assignmentId = query.a;
 			$.ajax({
-				url: ":5001/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+				url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
 				type: "post",
 				data: {
 					studentId: studentId,
@@ -41865,6 +41866,19 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(59), RootInstanceProvider = __webpack_require__(67), ReactMount = __webpack_require__(69), React = __webpack_require__(123); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } (function () {
 
+	module.exports = {
+		apiHost: 'http://59.157.4.42:5001'
+	};
+
+	/* REACT HOT LOADER */ }).call(this); if (true) { (function () { module.hot.dispose(function (data) { data.makeHot = module.makeHot; }); if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(231), foundReactClasses = false; if (makeExportsHot(module, __webpack_require__(123))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "config.js" + ": " + err.message); } }); } } })(); }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)(module)))
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(59), RootInstanceProvider = __webpack_require__(67), ReactMount = __webpack_require__(69), React = __webpack_require__(123); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } (function () {
+
 	var React = __webpack_require__(123);
 	var Router = __webpack_require__(235);   
 	var StateMixin = Router.State;  
@@ -41953,7 +41967,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)(module)))
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(59), RootInstanceProvider = __webpack_require__(67), ReactMount = __webpack_require__(69), React = __webpack_require__(123); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } (function () {

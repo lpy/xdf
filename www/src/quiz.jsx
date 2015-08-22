@@ -3,6 +3,7 @@ var ReactRouter = require('react-router');
 var StateMixin = ReactRouter.State;  
 var $ = require('jquery');
 var getQuery = require('./getQuery.js');
+var apiHost = require('./config.js').apiHost;
 
 React.initializeTouchEvents(true);
 var Selection = React.createClass({
@@ -38,7 +39,7 @@ var Quiz = React.createClass({
 		var studentId = query.s,
 		    assignmentId = query.a;
 		$.ajax({
-			url: ":5001/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+			url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
 			type: "post",
 			data: {
 				studentId: studentId,

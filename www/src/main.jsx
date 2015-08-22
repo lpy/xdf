@@ -12,7 +12,7 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;  
 var DefaultRoute = Router.DefaultRoute;
 var StateMixin = Router.State;  
-
+var apiHost = require('./config.js').apiHost;
 
 React.initializeTouchEvents(true);
 
@@ -88,9 +88,9 @@ var studentId = query.s,
 localStorage.setItem("assignment","");
 localStorage.setItem("answerSheet","");
 function init(callback) {
-    console.log(studentId,assignmentId);
+    console.log(apiHost);
     $.get(
-      ":5001/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+      apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
       function(data) {
         var assignment = data.assigment;//作业数据
         var answerSheet = assignment.questionList.map(function(){
