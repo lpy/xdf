@@ -88,10 +88,11 @@ var studentId = query.s,
 localStorage.setItem("assignment","");
 localStorage.setItem("answerSheet","");
 function init(callback) {
-    console.log(apiHost);
+    console.log('init');
     $.get(
       apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
       function(data) {
+        console.log(data);
         var assignment = data.assigment;//作业数据
         var answerSheet = assignment.questionList.map(function(){
           return -1;
