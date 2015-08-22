@@ -112,7 +112,8 @@ Return:
         Student.Field.answerList
     ])
     if assignment_id in student.data.get(Student.Field.assignmentList):
-        return jsonify(stat=1, ), 403
+        pass
+        # return jsonify(stat=1, ), 403
     score = check_answer(assignment_id, answer_list)
     answer_id = Answer.new_answer(assignment_id, student_id, answer_list, score)
     Student.collection.update({
