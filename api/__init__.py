@@ -38,6 +38,7 @@ def allowed_file(filename):
 
 @api.route('/v1/audio', methods=['POST'])
 def upload_file():
+    from config import AUDIO_URL
     import os
     assignment_id = request.form.get('assignmentId')
     id = request.form.get('id')
@@ -45,7 +46,8 @@ def upload_file():
     if file and allowed_file(file.filename):
         filename = assignment_id + '_' + id + '.' + file.filename.rsplit('.', 1)[1]
         file.save(os.path.join(UPLOAD_AUDIO_DIRECTORY, filename))
-        return jsonify(stat=1)
+        link = AUDIO_URL + filename
+        return jsonify(stat=0, link=link)
 
 
 # Define error code
