@@ -103,6 +103,7 @@ Return:
 * `answerId` (string) - 本次作答的答案ID
     '''
     student_id = request.args.get('studentId', None)
+    print request.form
     answer_list = json.loads(request.form.get('answerList'))
     if student_id is None:
         return jsonify(stat=1, ), 401
