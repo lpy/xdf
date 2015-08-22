@@ -46,10 +46,10 @@ var Quiz = React.createClass({
 				studentId: studentId,
 				answerList: localStorage.getItem('answerSheet')
 			},
-			function(res) {
+			success:function(res) {
 				window.location.href = "#/result/" + res.score; //redirect to the result page
 			},
-			function(error) {
+			error:function(error) {
 				alert('获取结果失败,请重试')
 			}
 		})
