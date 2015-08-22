@@ -75,6 +75,13 @@ def send_excel(file_name):
     return send_from_directory(os.path.abspath(EXCEL_DIRECTORY), file_name)
 
 
+@app.route('/audio/<file_name>', methods=['GET'])
+def send_audio(file_name):
+    from config import UPLOAD_AUDIO_DIRECTORY
+    import os
+    return send_from_directory(os.path.abspath(UPLOAD_AUDIO_DIRECTORY), file_name)
+
+
 if DEBUG:
     from werkzeug.serving import run_with_reloader
     from config import DEBUG_IP, DEBUG_PORT

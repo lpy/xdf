@@ -28,3 +28,4 @@ ALLOWED_EXTENSIONS = set(['m4a', 'mp3'])
 DEFAULT_EXPIRE = 4838400
 
 SHORT_URL_HOST = 'http://59.157.4.42/s/'
+AUDIO_URL = 'http://59.157.4.42/audio/'

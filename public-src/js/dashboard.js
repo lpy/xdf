@@ -49,10 +49,11 @@ dashboardApp
       transformRequest: angular.identity,
       headers: {'Content-Type': undefined}
     })
-      .success(function(){
-
+      .success(function(data) {
+        alert("上传成功！");
+        $scope.audio = data.data.link;
       })
-      .error(function(){
+      .error(function() {
       });
     }
 }]);
@@ -164,6 +165,7 @@ dashboardApp
 
     $scope.assignmentId = $routeParams.assignment_id;
     $scope.optionList = [];
+    $scope.audio = "";
 
     $http.get(apiHost + router.assignment + "/" + $scope.assignmentId + '?studentId=admin')
       .success(function(data) {
@@ -177,13 +179,14 @@ dashboardApp
     };
 
     $scope.addQuestion = function() {
+      console.log($scope.audio);
       $http.post(apiHost + router.question, {
         assignmentId: $scope.assignmentId,
         content: $scope.add.content,
         optionList: JSON.stringify($scope.optionList),
         answer: $scope.add.answer,
         answerContent: $scope.add.answerContent,
-        audio: ""
+        audio: $scope.audio
       }).then(function(data) {
         console.log(data);
         $route.reload();
