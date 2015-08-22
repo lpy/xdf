@@ -27,7 +27,17 @@ var Result = React.createClass({
 		
 	},
 	render: function() {
-
+		var emotionImg = "",
+			score = parseInt(this.getParams().score);
+		if(score == 100) {
+			emotionImg = "images/perfect.png";
+		}else if(score >= 80 && score < 100 ) {
+			emotionImg = "images/good.png";
+		}else if(score >= 60 && score < 80 ) {
+			emotionImg = "images/notbad.png";
+		}else {
+			emotionImg = "images/bad.png";
+		}
 		return (
 			<div className="resultPage">
 				<nav className="appBar">
@@ -47,7 +57,7 @@ var Result = React.createClass({
 							<span id="total">/100</span>
 						</div>
 						<div className="emotion">
-							<img  src="images/perfect.png"/>
+							<img src={emotionImg}/>
 						</div>
 						<div className="shareBtn">
 							<img  src="images/shareBtn.png"/>
