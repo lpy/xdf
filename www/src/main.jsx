@@ -93,7 +93,7 @@ function init(callback) {
       url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
       success: function(data) {
         console.log(data);
-        var assignment = data.assigment;//作业数据
+        var assignment = data.assignment;//作业数据
         var answerSheet = assignment.questionList.map(function(){
           return -1;
         }); //用户答题
