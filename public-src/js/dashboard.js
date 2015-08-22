@@ -1,7 +1,8 @@
 "use strict";
 
 var dashboardApp = angular.module('Dashboard', ['ngRoute']);
-var host = "http://127.0.0.1:5001/api";
+var host = "http://127.0.0.1:5001";
+var apiHost = "http://127.0.0.1:5001/api";
 var router = {
   audio: '/v1/audio',
   allAssignment: '/v1/assignments',
@@ -93,7 +94,7 @@ dashboardApp
       $scope.display.assignment = "none";
       $scope.display.analysis = "none";
       $scope.display.lesson = "none";
-        $http.get(host + router.allLesson)
+        $http.get(apiHost + router.allLesson)
             .success(function(data) {
                 $scope.lessons = {};
                 $scope.lessonIDs = [];
@@ -102,7 +103,7 @@ dashboardApp
                     $scope.lessonIDs.push(lesson['_id']);
                 });
             });
-        $http.get(host + router.allAssignment)
+        $http.get(apiHost + router.allAssignment)
           .success(function(data) {
             $scope.assignments = {};
             $scope.assignmentIDs = [];
@@ -122,7 +123,7 @@ dashboardApp
     };
 
     $scope.addLesson = function() {
-        $http.post(host + router.lesson, {
+        $http.post(apiHost + router.lesson, {
             name: $scope.add.lessonName
         }).then(function() {
           $window.location.href = "#";
@@ -132,7 +133,7 @@ dashboardApp
     };
 
     $scope.addAssignment = function() {
-        $http.post(host + router.assignment, {
+        $http.post(apiHost + router.assignment, {
             name: $scope.add.assignmentName
         }).then(function() {
           $window.location.href = "#";
@@ -142,13 +143,13 @@ dashboardApp
     };
 
     $scope.releaseAssignment = function() {
-      $http.post(host + router.assignment + '/' + $scope.release.assignmentId + '/release', {
+      $http.post(apiHost + router.assignment + '/' + $scope.release.assignmentId + '/release', {
         lessonId: $scope.release.lessonId
       }).then(function(data) {
         $scope.release.links = data.data.links;
         $scope.release.studentIds = data.data.studentIds;
         $scope.release.studentNames = data.data.studentNames;
-        $scope.release.excel = 'http://127.0.0.1:5001/excel/' + data.data.excel;
+        $scope.release.excel = host + '/excel/' + data.data.excel;
       });
     };
 
@@ -164,7 +165,7 @@ dashboardApp
     $scope.assignmentId = $routeParams.assignment_id;
     $scope.optionList = [];
 
-    $http.get(host + router.assignment + "/" + $scope.assignmentId + '?studentId=admin')
+    $http.get(apiHost + router.assignment + "/" + $scope.assignmentId + '?studentId=admin')
       .success(function(data) {
         console.log(data);
         $scope.assignment = data.assignment;
@@ -176,7 +177,7 @@ dashboardApp
     };
 
     $scope.addQuestion = function() {
-      $http.post(host + router.question, {
+      $http.post(apiHost + router.question, {
         assignmentId: $scope.assignmentId,
         content: $scope.add.content,
         optionList: JSON.stringify($scope.optionList),
@@ -190,7 +191,7 @@ dashboardApp
     };
 
     $scope.deleteQuestion = function(question_id) {
-      $http.delete(host + router.question + '/' + question_id)
+      $http.delete(apiHost + router.question + '/' + question_id)
         .success(function() {
           $route.reload();
         })
@@ -202,7 +203,7 @@ dashboardApp
       if ($scope.assignment.questionList) {
         id = $scope.assignment.questionList.length + 1;
       }
-      var uploadUrl = host + router.audio;
+      var uploadUrl = apiHost + router.audio;
       audioUpload.uploadAudioToUrl(file, $scope.assignmentId, id, uploadUrl);
     };
 
@@ -210,13 +211,13 @@ dashboardApp
   .controller("LessonDetailController", ["$scope", "$routeParams", "$http", '$route', '$window', function($scope, $routeParams, $http, $route, $window) {
 
     $scope.lessonId = $routeParams.lesson_id;
-    $http.get(host + router.lesson + "/" + $scope.lessonId)
+    $http.get(apiHost + router.lesson + "/" + $scope.lessonId)
       .success(function (data) {
         $scope.lesson = data.lesson;
       });
 
     $scope.addStudent = function() {
-      $http.post(host + router.student, {
+      $http.post(apiHost + router.student, {
         studentId: $scope.add.studentId,
         name: $scope.add.studentName,
         lessonId: $scope.lessonId
@@ -226,14 +227,14 @@ dashboardApp
     };
 
     $scope.deleteStudent = function(student_id) {
-      $http.delete(host + router.student + '/' + student_id)
+      $http.delete(apiHost + router.student + '/' + student_id)
         .success(function() {
           $route.reload();
         })
     };
 
     $scope.deleteLesson = function() {
-      $http.delete(host + router.lesson + '/' + $scope.lessonId)
+      $http.delete(apiHost + router.lesson + '/' + $scope.lessonId)
         .success(function() {
           $window.location.href = "#";
           $scope.refreshData();
