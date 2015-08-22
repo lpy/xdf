@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ef2118e2facd0f19d2da"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "84ab1633a14683ef8e1f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -648,9 +648,9 @@
 	localStorage.setItem("answerSheet","");
 	function init(callback) {
 	    console.log('init');
-	    $.get(
-	      apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
-	      function(data) {
+	    $.ajax({
+	      url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+	      success: function(data) {
 	        console.log(data);
 	        var assignment = data.assigment;//作业数据
 	        var answerSheet = assignment.questionList.map(function(){
@@ -659,11 +659,24 @@
 	        localStorage.setItem("assignment",JSON.stringify(assignment));
 	        localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
 	        callback();
-	      },
-	      function(error) {
-	        alert("获取数据失败");
 	      }
-	      );
+	    })
+	    // $.get(
+	    //   apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+	    //   function(data) {
+	    //     console.log(data);
+	    //     var assignment = data.assigment;//作业数据
+	    //     var answerSheet = assignment.questionList.map(function(){
+	    //       return -1;
+	    //     }); //用户答题
+	    //     localStorage.setItem("assignment",JSON.stringify(assignment));
+	    //     localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+	    //     callback();
+	    //   },
+	    //   function(error) {
+	    //     alert("获取数据失败");
+	    //   }
+	    //   );
 	}
 
 	init(function(){
