@@ -38,9 +38,10 @@ var Quiz = React.createClass({
 		var query = getQuery(window.location.href);
 		var studentId = query.s,
 		    assignmentId = query.a;
+		console.log(studentId);
 		$.ajax({
 			url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
-			type: "post",
+			type: "POST",
 			data: {
 				studentId: studentId,
 				answerList: JSON.parse(localStorage.getItem('answerSheet'))
