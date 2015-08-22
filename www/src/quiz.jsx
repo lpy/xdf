@@ -38,14 +38,13 @@ var Quiz = React.createClass({
 		var query = getQuery(window.location.href);
 		var studentId = query.s,
 		    assignmentId = query.a;
-		    console.log('assignmentId',assignmentId);
 		$.ajax({
 			url: apiHost + "/api/v1/assignment/<assignment_id>/answer?studentId=".replace(/\<\w+\>/,assignmentId) + studentId,
 			// url: apiHost + "/api/v1/assignment/answer",
 			type: "POST",
 			data: {
 				studentId: studentId,
-				answerList: JSON.parse(localStorage.getItem('answerSheet'))
+				answerList: localStorage.getItem('answerSheet')
 			},
 			function(res) {
 				window.location.href = "#/result/" + res.score; //redirect to the result page
