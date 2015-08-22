@@ -104,20 +104,23 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th>学生ID</th>
+                                <th>学生姓名</th>
                                 <th>作业链接</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="link in release.links track by $index" ng-init="counter = $index;">
-                                <td>{{counter + 1}}</td>
+                                <td>{{release.studentIds[$index]}}</td>
+                                <td>{{release.studentNames[$index]}}</td>
                                 <td>{{link}}</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+                        <a type="button" class="btn btn-success" href="{{release.excel}}">下载Excel</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">退出</button>
                         <button type="button" class="btn btn-primary" ng-click="releaseAssignment()">发布</button>
                     </div>
                 </div>

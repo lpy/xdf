@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from api import api
-from config import RELEASE_LINK
+from config import RELEASE_LINK, SHORT_URL_HOST
 from flask import jsonify, request
 from model.answer import Answer
 from model.assignment import Assignment
 from model.lesson import Lesson
 from model.question import Question
 from model.student import Student
+from model.url import URL
 from util.assignment import check_answer, fetch_assignment
+from util.xlsx import generate_xlsx
 import json
 
 
@@ -133,10 +135,29 @@ def release_assignment_to_lesson(assignment_id):
     lesson = Lesson.get({
         Lesson.Field._id: lesson_id
     }, [
-        Lesson.Field.studentList
+        Lesson.Field.studentList,
+        Lesson.Field.name
+    ])
+    assignment = Assignment.get({
+        Assignment.Field._id: assignment_id
+    }, [
+        Assignment.Field.name
     ])
     release_links = []
+    student_ids = []
+    student_names = []
     for student_id in lesson.data.get(Lesson.Field.studentList):
-        link = '%s?studentId=%s&assignmentId=%s' % (RELEASE_LINK, student_id, assignment_id)
+        link = '%s?s=%s&a=%s' % (RELEASE_LINK, student_id, assignment_id)
+        link = SHORT_URL_HOST + URL.generate_short_url(link, assignment_id, student_id)
         release_links.append(link)
-    return jsonify(stat=0, links=release_links)
+        student = Student.get({
+            Student.Field._id: student_id
+        }, [
+            Student.Field.studentId,
+            Student.Field.name
+        ])
+        student_names.append(student.data.get(Student.Field.name))
+        student_ids.append(student.data.get(Student.Field.studentId))
+    excel_name = generate_xlsx(student_ids, student_names, release_links,
+                               lesson.data.get(Lesson.Field.name), assignment.data.get(Assignment.Field.name))
+    return jsonify(stat=0, links=release_links, studentIds=student_ids, studentNames=student_names, excel=excel_name)

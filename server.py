@@ -5,7 +5,7 @@ from gevent import monkey
 from api import api
 from base64 import b64encode
 from config import DEBUG
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, send_from_directory
 from flask.ext.login import LoginManager, login_required
 from model.user import User
 from model.user_token import UserToken
@@ -65,6 +65,14 @@ def redirect_to_dashboard():
 @login_required
 def serve_dashboard(path):
     return render_template('/{}'.format(path))
+
+
+@app.route('/excel/<file_name>', methods=['GET'])
+@login_required
+def send_excel(file_name):
+    from config import EXCEL_DIRECTORY
+    import os
+    return send_from_directory(os.path.abspath(EXCEL_DIRECTORY), file_name)
 
 
 if DEBUG:
