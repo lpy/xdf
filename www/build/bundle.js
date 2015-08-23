@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "08163cc81fd957a70707"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "de24850a5386d50fc72e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34608,7 +34608,8 @@
 		
 		getInitialState: function() {
 			return {
-				duration: "0'0''" 
+				// duration: "0'0''" 
+				duration: "加载中" 
 			};
 		},
 		setDuration: function() {
@@ -34623,7 +34624,7 @@
 		},
 		componentDidMount: function() {
 			React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
-			// React.findDOMNode(this.refs.audio).load();
+			React.findDOMNode(this.refs.audio).load();
 		},
 		togglePlay: function() {
 

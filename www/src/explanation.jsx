@@ -8,7 +8,8 @@ var AnswerPlayer = React.createClass({
 	
 	getInitialState: function() {
 		return {
-			duration: "0'0''" 
+			// duration: "0'0''" 
+			duration: "加载中" 
 		};
 	},
 	setDuration: function() {
@@ -23,7 +24,7 @@ var AnswerPlayer = React.createClass({
 	},
 	componentDidMount: function() {
 		React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
-		// React.findDOMNode(this.refs.audio).load();
+		React.findDOMNode(this.refs.audio).load();
 	},
 	togglePlay: function() {
 
