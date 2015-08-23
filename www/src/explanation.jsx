@@ -22,7 +22,8 @@ var AnswerPlayer = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		React.findDOMNode(this.refs.audio).onload = this.setDuration.bind(this);
+		React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
+		// React.findDOMNode(this.refs.audio).load();
 	},
 	togglePlay: function() {
 
@@ -54,6 +55,7 @@ var AnswerPlayer = React.createClass({
 				<audio controls="controls" height="100" width="100" ref="audio" preload="auto">
 				  <source src={url} type="audio/mp3" />
 				  <source src={url} type="audio/ogg" />
+				  <source src={url} type="audio/wav" />
 				<embed height="100" width="100" src={url} />
 				</audio>
 			</div>
