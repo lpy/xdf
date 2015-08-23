@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9d4beffa154a1e4f7dd7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "906ef8e0ab6e4732bf50"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34622,7 +34622,7 @@
 			});
 		},
 		componentDidMount: function() {
-			React.findDOMNode(this.refs.audio).oncanplay = this.setDuration.bind(this);
+			React.findDOMNode(this.refs.audio).onload = this.setDuration.bind(this);
 		},
 		togglePlay: function() {
 
@@ -34639,7 +34639,7 @@
 			
 		},
 		componentDidUpdate: function(prevProps, prevState) {
-			console.log(prevProps.url,this.props.url)
+			// console.log(prevProps.url,this.props.url)
 			if(prevProps.url != this.props.url) {
 				React.findDOMNode(this.refs.audio).load();
 			}
@@ -34651,7 +34651,7 @@
 					React.createElement("img", {src: "images/answerPlayer.png", onClick: this.togglePlay}), 
 					React.createElement("span", null, this.state.duration), 
 					/*答案解析音频*/
-					React.createElement("audio", {controls: "controls", height: "100", width: "100", ref: "audio"}, 
+					React.createElement("audio", {controls: "controls", height: "100", width: "100", ref: "audio", preload: "auto"}, 
 					  React.createElement("source", {src: url, type: "audio/mp3"}), 
 					  React.createElement("source", {src: url, type: "audio/ogg"}), 
 					React.createElement("embed", {height: "100", width: "100", src: url})

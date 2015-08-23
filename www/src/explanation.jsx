@@ -22,7 +22,7 @@ var AnswerPlayer = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		React.findDOMNode(this.refs.audio).oncanplay = this.setDuration.bind(this);
+		React.findDOMNode(this.refs.audio).onload = this.setDuration.bind(this);
 	},
 	togglePlay: function() {
 
@@ -39,7 +39,7 @@ var AnswerPlayer = React.createClass({
 		
 	},
 	componentDidUpdate: function(prevProps, prevState) {
-		console.log(prevProps.url,this.props.url)
+		// console.log(prevProps.url,this.props.url)
 		if(prevProps.url != this.props.url) {
 			React.findDOMNode(this.refs.audio).load();
 		}
@@ -51,7 +51,7 @@ var AnswerPlayer = React.createClass({
 				<img src="images/answerPlayer.png" onClick = {this.togglePlay}/>
 				<span>{this.state.duration}</span>
 				{/*答案解析音频*/}
-				<audio controls="controls" height="100" width="100" ref="audio">
+				<audio controls="controls" height="100" width="100" ref="audio" preload="auto">
 				  <source src={url} type="audio/mp3" />
 				  <source src={url} type="audio/ogg" />
 				<embed height="100" width="100" src={url} />
