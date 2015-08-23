@@ -8,19 +8,23 @@ var AnswerPlayer = React.createClass({
 	
 	getInitialState: function() {
 		return {
-			duration: "0'0''" 
+			// duration: "0'0''" 
+			duration: "加载中" 
 		};
 	},
 	setDuration: function() {
+		
 		//显示音频长度
 		var secs = React.findDOMNode(this.refs.audio).duration,
-			duration = Math.floor(secs/60) + "'" + Math.round(secs % 60) + "''";
+			duration = Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
+			alert("音频长度是:"+secs);
 		this.setState({
 			duration: duration
 		});
 	},
 	componentDidMount: function() {
-		React.findDOMNode(this.refs.audio).oncanplay = this.setDuration.bind(this);
+		React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
+		React.findDOMNode(this.refs.audio).load();
 	},
 	togglePlay: function() {
 
@@ -37,7 +41,7 @@ var AnswerPlayer = React.createClass({
 		
 	},
 	componentDidUpdate: function(prevProps, prevState) {
-		console.log(prevProps.url,this.props.url)
+		// console.log(prevProps.url,this.props.url)
 		if(prevProps.url != this.props.url) {
 			React.findDOMNode(this.refs.audio).load();
 		}
@@ -49,9 +53,10 @@ var AnswerPlayer = React.createClass({
 				<img src="images/answerPlayer.png" onClick = {this.togglePlay}/>
 				<span>{this.state.duration}</span>
 				{/*答案解析音频*/}
-				<audio controls="controls" height="100" width="100" ref="audio">
+				<audio controls="controls" height="100" width="100" ref="audio" preload="auto">
 				  <source src={url} type="audio/mp3" />
 				  <source src={url} type="audio/ogg" />
+				  <source src={url} type="audio/wav" />
 				<embed height="100" width="100" src={url} />
 				</audio>
 			</div>
@@ -73,12 +78,21 @@ var Explanation = React.createClass({
 			assignment = this.state.assignment,
 			questionNum = this.state.assignment.questionList.length, //问题总数
 			question = assignment.questionList[index],
-			answerSheet = JSON.parse(localStorage.getItem('answerSheet'));
+			answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
+			correctness = "";
+		if(answerSheet[index] == question.answer) {
+			correctness = "恭喜你答对了";
+		}
+		else if(answerSheet[index] == -1) {
+			correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你没有作答";
+		}else {
+			correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你选择了" + ['A','B','C','D'][answerSheet[index]];
+		}
 		return (
 			<div>
 				<nav className="appBar">
 					<div className="appBarBtn">
-						<a href="#/result">
+						<a href={"#/result/" + localStorage.getItem('score') } >
 							<img src="images/return.png"></img>
 						</a>
 					</div>
@@ -128,7 +142,7 @@ var Explanation = React.createClass({
 
 					</div>
 					<div className="answerExplanation">
-						<p className="correctness">恭喜你答对啦</p>
+						<p className="correctness">{correctness}</p>
 						<p>答案解析</p>
 						<AnswerPlayer url={question.audio}/>
 						<p>{question.answerContent}</p>

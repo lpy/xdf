@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6c698a7c2df60334d61e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "de24850a5386d50fc72e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -598,79 +598,82 @@
 	  )
 	);
 
-	// var assignment = {
-	//   name:"日语第一课作业",
-	//   questionNum: 10,
-	//   questionList: [
-	//     {
-	//       answer: 1,
-	//       answerContent: "答案解析",
-	//       assignmentId: "123",
-	//       audio: "test.mp3",
-	//       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
-	//       optionList: [
-	//         "ツをおいしく食べ",
-	//         "ツをおいしく食べ",
-	//         "ツをおいしく食べ",
-	//         "ツをおいしく食べ"
-	//       ]
-	//     },
-	//     {
-	//       answer: 3,
-	//       answerContent: "答案解析",
-	//       assignmentId: "123",
-	//       audio: "come.mp3",
-	//       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
-	//       optionList: [
-	//         "ツをおいしく食べ",
-	//         "ツをおいしく食べ",
-	//         "ツをおいしく食べ",
-	//         "ツをおいしく食べ"
-	//       ]
-	//     }
-	//   ]
-	// }; //作业数据
-	// var answerSheet = assignment.questionList.map(function(){
-	//   return -1;
-	// }); //用户答题
-	// localStorage.setItem("assignment",JSON.stringify(assignment));
-	// localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
-	// // 将匹配的路由渲染到 DOM 中
-	// Router.run(routes, Router.HashLocation, function(Root){  
-	//   React.render(<Root />, document.body);
-	// });
-
-	var query = getQuery(window.location.href);
-	var studentId = query.s,
-	    assignmentId = query.a;
-
-	localStorage.setItem("assignment","");
-	localStorage.setItem("answerSheet","");
-	function init(callback) {
-	    console.log('init');
-	    $.ajax({
-	      url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
-	      success: function(data) {
-	        console.log(data);
-	        var assignment = data.assignment;//作业数据
-	        var answerSheet = assignment.questionList.map(function(){
-	          return -1;
-	        }); //用户答题
-	        localStorage.setItem("assignment",JSON.stringify(assignment));
-	        localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
-	        callback();
-	      }
-	    })
-
-	}
-
-	init(function(){
-
-	  // 将匹配的路由渲染到 DOM 中
-	  Router.run(routes, Router.HashLocation, function(Root){  
-	    React.render(React.createElement(Root, null), document.body);
-	  });
+	var assignment = {
+	  name:"日语第一课作业",
+	  questionNum: 10,
+	  questionList: [
+	    {
+	      answer: 1,
+	      answerContent: "答案解析",
+	      assignmentId: "123",
+	      audio: "shinian.mp3",
+	      content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
+	      optionList: [
+	        "ツをおいしく食べ",
+	        "ツをおいしく食べ",
+	        "ツをおいしく食べ",
+	        "ツをおいしく食べ"
+	      ]
+	    },
+	    {
+	      answer: 3,
+	      answerContent: "答案解析",
+	      assignmentId: "123",
+	      audio: "test.mp3",
+	      content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
+	      optionList: [
+	        "ツをおいしく食べ",
+	        "ツをおいしく食べ",
+	        "ツをおいしく食べ",
+	        "ツをおいしく食べ"
+	      ]
+	    }
+	  ]
+	}; //作业数据
+	var answerSheet = assignment.questionList.map(function(){
+	  return -1;
+	}); //用户答题
+	localStorage.setItem("assignment",JSON.stringify(assignment));
+	localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+	localStorage.setItem("score",'12');
+	// 将匹配的路由渲染到 DOM 中
+	Router.run(routes, Router.HashLocation, function(Root){  
+	  React.render(React.createElement(Root, null), document.body);
 	});
+
+	// var query = getQuery(window.location.href);
+	// var studentId = query.s,
+	//     assignmentId = query.a;
+
+	// localStorage.setItem("assignment","");
+	// localStorage.setItem("answerSheet","");
+	// localStorage.setItem("score",""); //清空本地存储
+
+	// function init(callback) {
+	//     console.log('init');
+	//     $.ajax({
+	//       url: apiHost + "/api/v1/assignment/<assignment_id>?studentId=".replace(/\<\w+\>/,assignmentId) + studentId ,
+	//       success: function(data) {
+	//         console.log(data);
+	//         var assignment = data.assignment;//作业数据
+	//         var answerSheet = assignment.questionList.map(function(){
+	//           return -1;
+	//         }); //用户答题
+	//         localStorage.setItem("assignment",JSON.stringify(assignment));
+	//         localStorage.setItem("answerSheet",JSON.stringify(answerSheet));
+	//         callback();
+	//       }
+	//     })
+
+	// }
+
+	// init(function(){
+
+	//   // 将匹配的路由渲染到 DOM 中
+	//   Router.run(routes, Router.HashLocation, function(Root){  
+	//     React.render(<Root />, document.body);
+	//   });
+	// });
 
 	module.exports = App;
 
@@ -30727,7 +30730,7 @@
 
 
 	// module
-	exports.push([module.id, "html {\n  width: 100%;\n  height: 100%;\n}\nbody {\n  padding: 0;\n  margin: 0;\n  width: 100%;\n  height: 100%;\n  background: white;\n}\n.emerald {\n  color: #00a99d;\n}\n.welcomePage {\n  background: #00a99d;\n}\n.welcome {\n  width: 187px;\n  /*margin:200px auto 10px auto;*/\n  margin: 0 auto 10px auto;\n  padding-top: 200px;\n}\n.welcome img {\n  width: 100%;\n}\n.welcome h2 {\n  text-align: center;\n  color: white;\n}\n.quizBtn {\n  width: 169px;\n  display: block;\n  margin: 200px auto 0 auto;\n  padding-bottom: 200px;\n}\n.logo {\n  width: 115px;\n  display: block;\n  position: absolute;\n  bottom: 47px;\n  left: 50%;\n  margin-left: -57px;\n}\n/*quiz*/\n.appBar {\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  /*height: 6.6%;*/\n  height: 44px;\n  line-height: 44px;\n  background: #00a99d;\n}\n.appBar .appBarBtn {\n  float: left;\n  width: 44px;\n  height: 44px;\n  text-align: center;\n}\n.appBar .appBarBtn img {\n  height: 30px;\n  vertical-align: middle;\n}\n.appBar .appBarTitle {\n  height: 44px;\n  width: 100%;\n}\n.appBar .appBarTitle h3 {\n  margin: 0;\n  text-align: center;\n  color: white;\n}\n.appBar .appBarIndicator {\n  float: right;\n  width: 44px;\n  height: 44px;\n  color: white;\n  text-align: center;\n  font-size: 13px;\n  line-height: 44px;\n}\n.content {\n  width: 100%;\n  top: 44px;\n  left: 0px;\n  bottom: 49px;\n  position: absolute;\n  overflow: auto;\n}\n.content .questionBox {\n  padding-top: 20px;\n}\n.content .questionBox p {\n  margin: 0 20px;\n}\n.content .questionBox .serial {\n  color: #00a99d;\n}\n.content .questionBox .selections {\n  list-style: none;\n  padding: 0;\n}\n.content .questionBox .selections li {\n  cursor: pointer;\n  padding: 5px 20px;\n  height: 53px;\n  line-height: 53px;\n  overflow: hidden;\n  margin: 10px 0;\n}\n.content .questionBox .selections li .letter {\n  border-radius: 50%;\n  background: #b3b3b3;\n  height: 53px;\n  width: 53px;\n  float: left;\n  text-align: center;\n  line-height: 53px;\n  color: white;\n  font-size: 20px;\n  font-weight: bold;\n  margin-right: 15px;\n}\n.content .questionBox .selections li .letter.wrong {\n  background: #f15a24;\n}\n.content .questionBox .selections li .letter.correct {\n  background: #00a99d;\n}\n.content .questionBox .selections li.active {\n  background: #e5e5e5;\n}\n.content .questionBox .selections li.active .letter {\n  background: #00a99d;\n}\n.content .answerExplanation {\n  padding: 20px;\n  background: #f8f8f8;\n  overflow: hidden;\n  word-wrap: break-word;\n  color: #4d4d4d;\n}\n.content .answerExplanation .answerPlayer {\n  width: 100%;\n  overflow: hidden;\n  line-height: 40px;\n}\n.content .answerExplanation .answerPlayer audio {\n  display: none;\n}\n.content .answerExplanation .answerPlayer img {\n  height: 40px;\n  /*width: 90%;*/\n  float: left;\n}\n.content .answerExplanation .answerPlayer span {\n  float: left;\n}\n.actionBar {\n  width: 100%;\n  height: 49px;\n  position: absolute;\n  bottom: 0px;\n  background: #00a99d;\n}\n.actionBar .pre {\n  float: left;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .next {\n  float: right;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .tryAgain {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n.actionBar .handInBtn {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n/*result*/\n.resultPage {\n  width: 100%;\n  height: 100%;\n  position: relative;\n}\n.scoreBox {\n  width: 100%;\n  background: #f98ca6;\n  overflow: hidden;\n  padding-bottom: 10px;\n}\n.scoreBox .scoreCircle {\n  position: relative;\n  width: 157px;\n  height: 157px;\n  border-radius: 50%;\n  text-align: center;\n  line-height: 157px;\n  margin: 36px auto 15px auto;\n  background: rgba(255, 255, 255, 0.3);\n  color: white;\n}\n.scoreBox .scoreCircle #total {\n  font-size: 15px;\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  line-height: 15px;\n}\n.scoreBox .scoreCircle #score {\n  font-size: 70px;\n}\n.scoreBox .emotion {\n  width: 145px;\n  height: 54px;\n  margin: 0 auto;\n}\n.scoreBox .emotion img {\n  width: 100%;\n}\n.scoreBox .shareBtn {\n  width: 128px;\n  height: 39px;\n  margin: 0 auto;\n}\n.scoreBox .shareBtn img {\n  width: 100%;\n}\n.answerSheet p {\n  margin-left: 3%;\n}\n.answerSheet .questionNum {\n  width: 14%;\n  padding-bottom: 14%;\n  margin: 3%;\n  float: left;\n  text-align: center;\n  position: relative;\n}\n.answerSheet .questionNum div {\n  /*\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\tmargin-left: -50%;\n\t\t\tmargin-top: -50%;*/\n  width: 44px;\n  height: 44px;\n  top: 50%;\n  left: 50%;\n  margin-left: -22px;\n  margin-top: -22px;\n  background: #00a99d;\n  position: absolute;\n  text-align: center;\n  line-height: 44px;\n  border-radius: 50%;\n  color: white;\n}\n.answerSheet .questionNum.wrong div {\n  background: #f15a24;\n}\n", ""]);
+	exports.push([module.id, "html {\n  width: 100%;\n  height: 100%;\n}\nbody {\n  padding: 0;\n  margin: 0;\n  width: 100%;\n  height: 100%;\n  background: white;\n}\n.emerald {\n  color: #00a99d;\n}\n.welcomePage {\n  width: 100%;\n  height: 100%;\n  background: #00a99d;\n  overflow: hidden;\n}\n.welcome {\n  width: 187px;\n  margin: 35% auto 10px auto;\n  /*margin: 0 auto 10px auto;*/\n  /*padding-top: 200px;*/\n}\n.welcome img {\n  width: 100%;\n}\n.welcome h2 {\n  text-align: center;\n  color: white;\n}\n.quizBtn {\n  width: 169px;\n  display: block;\n  /*margin: 40% auto 0 auto;*/\n  position: absolute;\n  bottom: 150px;\n  left: 50%;\n  margin-left: -84px;\n  /*\tpadding-bottom: 200px;*/\n}\n.logo {\n  width: 115px;\n  display: block;\n  position: absolute;\n  bottom: 23px;\n  left: 50%;\n  margin-left: -57px;\n}\n/*quiz*/\n.appBar {\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  /*height: 6.6%;*/\n  height: 44px;\n  line-height: 44px;\n  background: #00a99d;\n}\n.appBar .appBarBtn {\n  float: left;\n  width: 44px;\n  height: 44px;\n  text-align: center;\n}\n.appBar .appBarBtn img {\n  height: 30px;\n  vertical-align: middle;\n}\n.appBar .appBarTitle {\n  height: 44px;\n  width: 100%;\n}\n.appBar .appBarTitle h3 {\n  margin: 0;\n  text-align: center;\n  color: white;\n}\n.appBar .appBarIndicator {\n  float: right;\n  width: 44px;\n  height: 44px;\n  color: white;\n  text-align: center;\n  font-size: 13px;\n  line-height: 44px;\n}\n.content {\n  width: 100%;\n  top: 44px;\n  left: 0px;\n  bottom: 49px;\n  position: absolute;\n  overflow: auto;\n}\n.content .questionBox {\n  padding-top: 20px;\n}\n.content .questionBox p {\n  margin: 0 20px;\n}\n.content .questionBox .serial {\n  color: #00a99d;\n}\n.content .questionBox .selections {\n  list-style: none;\n  padding: 0;\n}\n.content .questionBox .selections li {\n  cursor: pointer;\n  padding: 5px 20px;\n  height: 53px;\n  line-height: 53px;\n  overflow: hidden;\n  margin: 10px 0;\n}\n.content .questionBox .selections li .letter {\n  border-radius: 50%;\n  background: #b3b3b3;\n  height: 53px;\n  width: 53px;\n  float: left;\n  text-align: center;\n  line-height: 53px;\n  color: white;\n  font-size: 20px;\n  font-weight: bold;\n  margin-right: 15px;\n}\n.content .questionBox .selections li .letter.wrong {\n  background: #f15a24;\n}\n.content .questionBox .selections li .letter.correct {\n  background: #00a99d;\n}\n.content .questionBox .selections li.active {\n  background: #e5e5e5;\n}\n.content .questionBox .selections li.active .letter {\n  background: #00a99d;\n}\n.content .answerExplanation {\n  padding: 20px;\n  background: #f8f8f8;\n  overflow: hidden;\n  word-wrap: break-word;\n  color: #4d4d4d;\n}\n.content .answerExplanation .answerPlayer {\n  width: 100%;\n  overflow: hidden;\n  line-height: 40px;\n}\n.content .answerExplanation .answerPlayer audio {\n  display: none;\n}\n.content .answerExplanation .answerPlayer img {\n  height: 40px;\n  /*width: 90%;*/\n  float: left;\n}\n.content .answerExplanation .answerPlayer span {\n  float: left;\n}\n.actionBar {\n  width: 100%;\n  height: 49px;\n  position: absolute;\n  bottom: 0px;\n  background: #00a99d;\n}\n.actionBar .pre {\n  float: left;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .next {\n  float: right;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .tryAgain {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n.actionBar .handInBtn {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n/*result*/\n.resultPage {\n  width: 100%;\n  height: 100%;\n  position: relative;\n}\n.scoreBox {\n  width: 100%;\n  background: #f98ca6;\n  overflow: hidden;\n  padding-bottom: 10px;\n}\n.scoreBox .scoreCircle {\n  position: relative;\n  width: 157px;\n  height: 157px;\n  border-radius: 50%;\n  text-align: center;\n  line-height: 157px;\n  margin: 36px auto 15px auto;\n  background: rgba(255, 255, 255, 0.3);\n  color: white;\n}\n.scoreBox .scoreCircle #total {\n  font-size: 15px;\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  line-height: 15px;\n}\n.scoreBox .scoreCircle #score {\n  font-size: 70px;\n}\n.scoreBox .emotion {\n  width: 145px;\n  height: 54px;\n  margin: 0 auto;\n}\n.scoreBox .emotion img {\n  width: 100%;\n}\n.scoreBox .shareBtn {\n  width: 128px;\n  height: 39px;\n  margin: 0 auto;\n}\n.scoreBox .shareBtn img {\n  width: 100%;\n}\n.answerSheet p {\n  margin-left: 3%;\n}\n.answerSheet .questionNum {\n  width: 14%;\n  padding-bottom: 14%;\n  margin: 3%;\n  float: left;\n  text-align: center;\n  position: relative;\n}\n.answerSheet .questionNum div {\n  /*\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\tmargin-left: -50%;\n\t\t\tmargin-top: -50%;*/\n  width: 44px;\n  height: 44px;\n  top: 50%;\n  left: 50%;\n  margin-left: -22px;\n  margin-top: -22px;\n  background: #00a99d;\n  position: absolute;\n  text-align: center;\n  line-height: 44px;\n  border-radius: 50%;\n  color: white;\n}\n.answerSheet .questionNum.wrong div {\n  background: #f15a24;\n}\n", ""]);
 
 	// exports
 
@@ -31219,6 +31222,7 @@
 					answerList: localStorage.getItem('answerSheet')
 				},
 				success:function(res) {
+					localStorage.setItem('score',res.score);
 					window.location.href = "#/result/" + res.score; //redirect to the result page
 				},
 				error:function(error) {
@@ -34501,8 +34505,36 @@
 		componentDidMount: function() {
 			
 		},
-		render: function() {
+		tryAgain: function() {
 
+			var resetAnswerSheet = this.state.answers.map(function(ans) {
+				return -1;
+			});
+			localStorage.setItem("answerSheet",JSON.stringify(resetAnswerSheet));
+
+			var end,
+				url = window.location.href;
+			if(url.indexOf('#') != -1) {
+				end = url.indexOf('#');
+			}else {
+				end = url.length;
+			} //without hash
+			var queryStr = url.substring(url.lastIndexOf('?') + 1, end);
+			//redirect
+			window.location.href = '#/quiz/0' + queryStr;
+		},
+		render: function() {
+			var emotionImg = "",
+				score = parseInt(this.getParams().score);
+			if(score == 100) {
+				emotionImg = "images/perfect.png";
+			}else if(score >= 80 && score < 100 ) {
+				emotionImg = "images/good.png";
+			}else if(score >= 60 && score < 80 ) {
+				emotionImg = "images/notbad.png";
+			}else {
+				emotionImg = "images/bad.png";
+			}
 			return (
 				React.createElement("div", {className: "resultPage"}, 
 					React.createElement("nav", {className: "appBar"}, 
@@ -34522,7 +34554,7 @@
 								React.createElement("span", {id: "total"}, "/100")
 							), 
 							React.createElement("div", {className: "emotion"}, 
-								React.createElement("img", {src: "images/perfect.png"})
+								React.createElement("img", {src: emotionImg})
 							), 
 							React.createElement("div", {className: "shareBtn"}, 
 								React.createElement("img", {src: "images/shareBtn.png"})
@@ -34546,7 +34578,7 @@
 					), 
 					React.createElement("div", {className: "actionBar"}, 
 
-						React.createElement("img", {src: "images/tryAgain.png", className: "tryAgain"})
+						React.createElement("img", {src: "images/tryAgain.png", className: "tryAgain", onClick: this.tryAgain})
 
 					)
 				)
@@ -34576,19 +34608,23 @@
 		
 		getInitialState: function() {
 			return {
-				duration: "0'0''" 
+				// duration: "0'0''" 
+				duration: "加载中" 
 			};
 		},
 		setDuration: function() {
+			
 			//显示音频长度
 			var secs = React.findDOMNode(this.refs.audio).duration,
-				duration = Math.floor(secs/60) + "'" + Math.round(secs % 60) + "''";
+				duration = Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
+				alert("音频长度是:"+secs);
 			this.setState({
 				duration: duration
 			});
 		},
 		componentDidMount: function() {
-			React.findDOMNode(this.refs.audio).oncanplay = this.setDuration.bind(this);
+			React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
+			React.findDOMNode(this.refs.audio).load();
 		},
 		togglePlay: function() {
 
@@ -34605,7 +34641,7 @@
 			
 		},
 		componentDidUpdate: function(prevProps, prevState) {
-			console.log(prevProps.url,this.props.url)
+			// console.log(prevProps.url,this.props.url)
 			if(prevProps.url != this.props.url) {
 				React.findDOMNode(this.refs.audio).load();
 			}
@@ -34617,9 +34653,10 @@
 					React.createElement("img", {src: "images/answerPlayer.png", onClick: this.togglePlay}), 
 					React.createElement("span", null, this.state.duration), 
 					/*答案解析音频*/
-					React.createElement("audio", {controls: "controls", height: "100", width: "100", ref: "audio"}, 
+					React.createElement("audio", {controls: "controls", height: "100", width: "100", ref: "audio", preload: "auto"}, 
 					  React.createElement("source", {src: url, type: "audio/mp3"}), 
 					  React.createElement("source", {src: url, type: "audio/ogg"}), 
+					  React.createElement("source", {src: url, type: "audio/wav"}), 
 					React.createElement("embed", {height: "100", width: "100", src: url})
 					)
 				)
@@ -34641,12 +34678,21 @@
 				assignment = this.state.assignment,
 				questionNum = this.state.assignment.questionList.length, //问题总数
 				question = assignment.questionList[index],
-				answerSheet = JSON.parse(localStorage.getItem('answerSheet'));
+				answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
+				correctness = "";
+			if(answerSheet[index] == question.answer) {
+				correctness = "恭喜你答对了";
+			}
+			else if(answerSheet[index] == -1) {
+				correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你没有作答";
+			}else {
+				correctness = "正确答案是" + ['A','B','C','D'][question.answer] + "你选择了" + ['A','B','C','D'][answerSheet[index]];
+			}
 			return (
 				React.createElement("div", null, 
 					React.createElement("nav", {className: "appBar"}, 
 						React.createElement("div", {className: "appBarBtn"}, 
-							React.createElement("a", {href: "#/result"}, 
+							React.createElement("a", {href: "#/result/" + localStorage.getItem('score')}, 
 								React.createElement("img", {src: "images/return.png"})
 							)
 						), 
@@ -34696,7 +34742,7 @@
 
 						), 
 						React.createElement("div", {className: "answerExplanation"}, 
-							React.createElement("p", {className: "correctness"}, "恭喜你答对啦"), 
+							React.createElement("p", {className: "correctness"}, correctness), 
 							React.createElement("p", null, "答案解析"), 
 							React.createElement(AnswerPlayer, {url: question.audio}), 
 							React.createElement("p", null, question.answerContent)

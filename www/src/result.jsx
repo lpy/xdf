@@ -26,8 +26,36 @@ var Result = React.createClass({
 	componentDidMount: function() {
 		
 	},
-	render: function() {
+	tryAgain: function() {
 
+		var resetAnswerSheet = this.state.answers.map(function(ans) {
+			return -1;
+		});
+		localStorage.setItem("answerSheet",JSON.stringify(resetAnswerSheet));
+
+		var end,
+			url = window.location.href;
+		if(url.indexOf('#') != -1) {
+			end = url.indexOf('#');
+		}else {
+			end = url.length;
+		} //without hash
+		var queryStr = url.substring(url.lastIndexOf('?') + 1, end);
+		//redirect
+		window.location.href = '#/quiz/0' + queryStr;
+	},
+	render: function() {
+		var emotionImg = "",
+			score = parseInt(this.getParams().score);
+		if(score == 100) {
+			emotionImg = "images/perfect.png";
+		}else if(score >= 80 && score < 100 ) {
+			emotionImg = "images/good.png";
+		}else if(score >= 60 && score < 80 ) {
+			emotionImg = "images/notbad.png";
+		}else {
+			emotionImg = "images/bad.png";
+		}
 		return (
 			<div className="resultPage">
 				<nav className="appBar">
@@ -47,7 +75,7 @@ var Result = React.createClass({
 							<span id="total">/100</span>
 						</div>
 						<div className="emotion">
-							<img  src="images/perfect.png"/>
+							<img src={emotionImg}/>
 						</div>
 						<div className="shareBtn">
 							<img  src="images/shareBtn.png"/>
@@ -71,7 +99,7 @@ var Result = React.createClass({
 				</div>
 				<div className="actionBar">
 
-					<img src="images/tryAgain.png" className="tryAgain" />
+					<img src="images/tryAgain.png" className="tryAgain" onClick={this.tryAgain}/>
 
 				</div>
 			</div>
