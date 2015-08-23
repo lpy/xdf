@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "93d616dbb74da4350cb2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ccac0e25b278fd1af647"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34612,9 +34612,11 @@
 			};
 		},
 		setDuration: function() {
+			
 			//显示音频长度
 			var secs = React.findDOMNode(this.refs.audio).duration,
-				duration = Math.floor(secs/60) + "'" + Math.round(secs % 60) + "''";
+				duration = Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
+				alert("音频长度是:"+duration);
 			this.setState({
 				duration: duration
 			});
