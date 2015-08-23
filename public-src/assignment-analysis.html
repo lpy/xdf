@@ -1,0 +1,21 @@
+<div>
+    <h1>{{assignment.name}} 统计数据</h1>
+    <h4>平均分 {{analysis.average}}</h4>
+    <h4>作业被完成次数：{{analysis.totalCompletion}}</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>题目编号</th>
+            <th>正确率</th>
+            <th>音频点击次数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="clickNum in analysis.audioClick" ng-init="counter = $index;">
+            <td>{{counter + 1}}</td>
+            <td>{{analysis.accuracy[$index] * 100.0}}%</td>
+            <td>{{clickNum}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

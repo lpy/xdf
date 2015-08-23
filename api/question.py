@@ -73,3 +73,15 @@ def update_question(question_id):
         '$set': update_info
     })
     return jsonify(stat=0,)
+
+
+@api.route('/v1/question/<question_id>/audio', methods=['PUT'])
+def click_question_audio(question_id):
+    Question.collection.udpate({
+        Question.Field._id: question_id
+    }, {
+        '$inc': {
+            Question.Field.audioClick: 1
+        }
+    })
+    return jsonify(stat=0)

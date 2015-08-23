@@ -23,6 +23,7 @@ class Question(Collection):
         answerContent = 'answerContent'
         assignmentId = 'assignmentId'
         audio = 'audio'
+        audioClick = 'audioClick'
         content = 'content'
         optionList = 'optionList'
         createTime = 'createTime'
@@ -40,5 +41,6 @@ class Question(Collection):
             Question.Field.answer: answer,
             Question.Field.answerContent: answer_content,
             Question.Field.audio: audio,
+            Question.Field.audioClick: 0,
             Question.Field.createTime: datetime.now()
         })

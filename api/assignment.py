@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from api import api
 from config import RELEASE_LINK, SHORT_URL_HOST
 from flask import jsonify, request
@@ -103,7 +104,6 @@ Return:
 * `answerId` (string) - 本次作答的答案ID
     '''
     student_id = request.args.get('studentId', None)
-    print request.form
     answer_list = json.loads(request.form.get('answerList'))
     if student_id is None:
         return jsonify(stat=1, ), 401
@@ -112,9 +112,26 @@ Return:
     }, [
         Student.Field.assignmentList
     ])
+
+    # 删除旧答案
     if assignment_id in student.data.get(Student.Field.assignmentList):
-        pass
-        # return jsonify(stat=1, ), 403
+        old_answer = Answer.get({
+            Answer.Field.assignmentId: assignment_id,
+            Answer.Field.studentId: student_id
+        })
+        Answer.remove({
+            Answer.Field.assignmentId: assignment_id,
+            Answer.Field.studentId: student_id
+        })
+        Student.collection.update({
+            Student.Field._id: student_id
+        }, {
+            '$pull': {
+                Student.Field.assignmentList: assignment_id,
+                Student.Field.answerList: old_answer.data.get(Answer.Field._id)
+            }
+        })
+
     score = check_answer(assignment_id, answer_list)
     answer_id = Answer.new_answer(assignment_id, student_id, answer_list, score)
     Student.collection.update({
@@ -123,6 +140,15 @@ Return:
         '$push': {
             Student.Field.answerList: answer_id,
             Student.Field.assignmentList: assignment_id
+        }
+    })
+
+    # 统计作业被回答次数
+    Assignment.collection.update({
+        Assignment.Field._id: assignment_id
+    }, {
+        '$inc': {
+            Assignment.Field.totalCompletion: 1
         }
     })
     return jsonify(stat=0, score=score, answerId=answer_id)
@@ -163,3 +189,52 @@ def release_assignment_to_lesson(assignment_id):
     excel_name = generate_xlsx(student_ids, student_names, release_links,
                                lesson.data.get(Lesson.Field.name), assignment.data.get(Assignment.Field.name))
     return jsonify(stat=0, links=release_links, studentIds=student_ids, studentNames=student_names, excel=excel_name)
+
+
+@api.route('/v1/assignment/<assignment_id>/analysis', methods=['GET'])
+def fetch_assignment_analysis(assignment_id):
+    assignment = Assignment.get({
+        Assignment.Field._id: assignment_id
+    })
+    stu_answer_list = Answer.find({
+        Answer.Field.assignmentId: assignment_id
+    })
+    correct_answer_list = []
+    answer_sum = []
+    answer_correct_sum = []
+    audio_click = []
+    all_score = 0.0
+    for question_id in assignment.data.get(Assignment.Field.questionList):
+        question = Question.get({
+            Question.Field._id: question_id
+        }, [
+            Question.Field.answer,
+            Question.Field.audioClick
+        ])
+        correct_answer_list.append(question.data.get(Question.Field.answer))
+        answer_sum.append(0)
+        answer_correct_sum.append(0)
+        audio_click.append(question.data.get(Question.Field.audioClick))
+
+    length = len(correct_answer_list)
+    for stu_answer in stu_answer_list:
+        stu_answers = stu_answer.get(Answer.Field.answerList)
+        for i in xrange(0, length):
+            if stu_answers[i] == -1:
+                continue
+            answer_sum[i] += 1
+            if stu_answers[i] == correct_answer_list[i]:
+                answer_correct_sum[i] += 1
+        all_score += stu_answer.get(Answer.Field.score)
+
+    accuracy = []
+    for i in xrange(0, length):
+        if answer_correct_sum[i] != 0:
+            accuracy.append(answer_correct_sum[i] / answer_sum[i])
+        else:
+            accuracy.append(0.0)
+    average = all_score / len(stu_answer_list)
+
+    return jsonify(stat=0, average=average, accuracy=accuracy,
+                   audioClick=audio_click,
+                   totalCompletion=assignment.data.get(Assignment.Field.totalCompletion))
