@@ -77,7 +77,7 @@ def update_question(question_id):
 
 @api.route('/v1/question/<question_id>/audio', methods=['PUT'])
 def click_question_audio(question_id):
-    Question.collection.udpate({
+    Question.collection.update({
         Question.Field._id: question_id
     }, {
         '$inc': {
