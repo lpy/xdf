@@ -16,7 +16,7 @@ var AnswerPlayer = React.createClass({
 		//显示音频长度
 		var secs = React.findDOMNode(this.refs.audio).duration,
 			duration = Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
-			alert("音频长度是:"+duration);
+			alert("音频长度是:"+secs);
 		this.setState({
 			duration: duration
 		});
