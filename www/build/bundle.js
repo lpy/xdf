@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6fc5a5446828baa30c3a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8d5b6fa39af8be36923e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34578,7 +34578,7 @@
 					), 
 					React.createElement("div", {className: "actionBar"}, 
 
-						React.createElement("img", {src: "images/tryAgain.png", className: "tryAgain", onClick: tryAgain})
+						React.createElement("img", {src: "images/tryAgain.png", className: "tryAgain", onClick: this.tryAgain})
 
 					)
 				)

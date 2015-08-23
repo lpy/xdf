@@ -99,7 +99,7 @@ var Result = React.createClass({
 				</div>
 				<div className="actionBar">
 
-					<img src="images/tryAgain.png" className="tryAgain" onClick={tryAgain}/>
+					<img src="images/tryAgain.png" className="tryAgain" onClick={this.tryAgain}/>
 
 				</div>
 			</div>
