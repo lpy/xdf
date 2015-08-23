@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ba5f9627847279164566"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b9bb565c869ab2ae66d6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34609,24 +34609,17 @@
 		sound: null,
 		getInitialState: function() {
 			return {
-				// duration: "0'0''" 
-				duration: "加载中" 
+				duration: "0'0''" 
+				// duration: "加载中" 
 			};
 		},
-		setDuration: function(ms) {
+		parseDuration: function(secs) {
 			
-			//显示音频长度
-			var secs = ms / 1000,
-				duration = Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
-			this.setState({
-				duration: duration
-			});
-		},
-		componentDidMount: function() {
-			// React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
-			// React.findDOMNode(this.refs.audio).load();
+			//音频长度
+			return  Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
 
-			// soundManager.destroySound('sound');
+		},
+		loadSound: function() {
 			soundManager.setup({
 			 
 			  url: './soundmanager/swf',
@@ -34635,11 +34628,7 @@
 			  	soundManager.createSound({
 			  	  id: 'mySound',
 			  	  url: this.props.url,
-			  	  autoLoad: true,
-			  	  onload: function() {
-			  	  	var duration = soundManager.getSoundById('mySound').duration;
-			  	  	this.setDuration(duration);
-			  	  }.bind(this)
+			  	  autoLoad: true
 			  	});
 			  	
 			  }.bind(this),
@@ -34650,10 +34639,11 @@
 			  }.bind(this)
 			});
 		},
+		componentDidMount: function() {
+			
+			this.loadSound();
+		},
 		togglePlay: function() {
-			// var audio = React.findDOMNode(this.refs.audio);
-			// console.log(audio.paused);
-			// audio.paused? audio.play():audio.pause();
 			
 			var questionId = this.props.questionId;
 			$.ajax({
@@ -34666,84 +34656,23 @@
 			soundManager.togglePause('mySound')
 		},
 		componentWillReceiveProps: function(nextProps) {
-			var audio = React.findDOMNode(this.refs.audio).pause();
-			this.setState({
-				duration: "加载中"
-			});
+
 			if(nextProps.url != this.props.url) {
 				// React.findDOMNode(this.refs.audio).load();
 				if(soundManager.getSoundById('mySound') != null) {
 					soundManager.destroySound('mySound');
 				}
-				soundManager.setup({
-				 
-				  url: './soundmanager/swf',
-				  onready: function() {
-
-				  	soundManager.createSound({
-				  	  id: 'mySound',
-				  	  url: nextProps.url,
-				  	  autoLoad: true,
-				  	  onload: function() {
-				  	  	var duration = soundManager.getSoundById('mySound').duration;
-				  	  	this.setDuration(duration);
-				  	  }.bind(this)
-				  	});
-				  	
-				  }.bind(this),
-				  ontimeout: function() {
-				    this.setState({
-				    	duration: '加载失败'
-				    });
-				  }.bind(this)
-				});
+				this.loadSound();
 			}
 		},
-		componentDidUpdate: function(prevProps, prevState) {
-			// console.log(prevProps.url,this.props.url)
 
-			// if(prevProps.url != this.props.url) {
-			// 	// React.findDOMNode(this.refs.audio).load();
-			// 	if(soundManager.getSoundById('mySound') != null) {
-			// 		soundManager.destroySound('mySound');
-			// 	}
-			// 	soundManager.setup({
-				 
-			// 	  url: './soundmanager/swf',
-			// 	  onready: function() {
-
-			// 	  	this.sound = soundManager.createSound({
-			// 	  	  id: 'mySound',
-			// 	  	  url: this.props.url,
-			// 	  	  autoLoad: true,
-			// 	  	  onload: function() {
-			// 	  	  	var duration = soundManager.getSoundById('mySound').duration;
-			// 	  	  	this.setDuration(duration);
-			// 	  	  }.bind(this)
-			// 	  	});
-				  	
-			// 	  }.bind(this),
-			// 	  ontimeout: function() {
-			// 	    this.setState({
-			// 	    	duration: '加载失败'
-			// 	    });
-			// 	  }.bind(this)
-			// 	});
-			// }
-		},
 		render: function() {
 			var url = this.props.url;
 			return (
 				React.createElement("div", {className: "answerPlayer"}, 
 					React.createElement("img", {src: "images/answerPlayer.png", onClick: this.togglePlay}), 
-					React.createElement("span", null, this.state.duration), 
+					React.createElement("span", null, this.parseDuration(this.props.duration))
 					/*答案解析音频*/
-					React.createElement("audio", {controls: "controls", height: "100", width: "100", ref: "audio", preload: "auto"}, 
-					  React.createElement("source", {src: url, type: "audio/mp3"}), 
-					  React.createElement("source", {src: url, type: "audio/ogg"}), 
-					  React.createElement("source", {src: url, type: "audio/wav"}), 
-					React.createElement("embed", {height: "100", width: "100", src: url})
-					)
 				)
 			);
 		}
@@ -34765,7 +34694,8 @@
 				question = assignment.questionList[index],
 				answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
 				correctness = "",
-				questionId = question._id;
+				questionId = question._id,
+				duration = question.audioLength;
 			if(answerSheet[index] == question.answer) {
 				correctness = "恭喜你答对了";
 			}
@@ -34830,7 +34760,7 @@
 						React.createElement("div", {className: "answerExplanation"}, 
 							React.createElement("p", {className: "correctness"}, correctness), 
 							React.createElement("p", null, "答案解析"), 
-							React.createElement(AnswerPlayer, {url: question.audio, questionId: questionId}), 
+							React.createElement(AnswerPlayer, {url: question.audio, questionId: questionId, duration: duration}), 
 							React.createElement("p", null, question.answerContent)
 						)
 					), 
