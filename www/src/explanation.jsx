@@ -19,7 +19,7 @@ var AnswerPlayer = React.createClass({
 		return  Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
 
 	},
-	loadSound: function() {
+	loadSound: function(url) {
 		soundManager.setup({
 		 
 		  url: './soundmanager/swf',
@@ -27,7 +27,7 @@ var AnswerPlayer = React.createClass({
 
 		  	soundManager.createSound({
 		  	  id: 'mySound',
-		  	  url: this.props.url,
+		  	  url: url,
 		  	  autoLoad: true
 		  	});
 		  	
@@ -40,8 +40,8 @@ var AnswerPlayer = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		
-		this.loadSound();
+
+		this.loadSound(this.props.url);
 	},
 	togglePlay: function() {
 		
@@ -62,7 +62,7 @@ var AnswerPlayer = React.createClass({
 			if(soundManager.getSoundById('mySound') != null) {
 				soundManager.destroySound('mySound');
 			}
-			this.loadSound();
+			this.loadSound(nextProps.url);
 		}
 	},
 

@@ -40,7 +40,7 @@ var routes = (
 );
 
 // var assignment = {
-//   name:"日语第一课作业",
+//   name:"日语第一课作业很长很长很长长很",
 //   questionNum: 10,
 //   questionList: [
 //     {
