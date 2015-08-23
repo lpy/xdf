@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e811eb2b3a9bb454d8b7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f6272171340d8846f841"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34655,6 +34655,14 @@
 			// console.log(audio.paused);
 			// audio.paused? audio.play():audio.pause();
 			
+			var questionId = this.props.questionId;
+			$.ajax({
+				url: '/api/v1/question/<question_id>/audio'.replace(/\<\w+\>/,questionId),
+				type: 'PUT',
+				success:function() {
+					console.log('audio count')
+				}
+			})
 			soundManager.togglePause('mySound')
 		},
 		componentWillReceiveProps: function(nextProps) {
@@ -34756,7 +34764,8 @@
 				questionNum = this.state.assignment.questionList.length, //问题总数
 				question = assignment.questionList[index],
 				answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
-				correctness = "";
+				correctness = "",
+				questionId = question._id;
 			if(answerSheet[index] == question.answer) {
 				correctness = "恭喜你答对了";
 			}
@@ -34821,7 +34830,7 @@
 						React.createElement("div", {className: "answerExplanation"}, 
 							React.createElement("p", {className: "correctness"}, correctness), 
 							React.createElement("p", null, "答案解析"), 
-							React.createElement(AnswerPlayer, {url: question.audio}), 
+							React.createElement(AnswerPlayer, {url: question.audio, questionId: questionId}), 
 							React.createElement("p", null, question.answerContent)
 						)
 					), 

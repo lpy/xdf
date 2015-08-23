@@ -55,6 +55,14 @@ var AnswerPlayer = React.createClass({
 		// console.log(audio.paused);
 		// audio.paused? audio.play():audio.pause();
 		
+		var questionId = this.props.questionId;
+		$.ajax({
+			url: '/api/v1/question/<question_id>/audio'.replace(/\<\w+\>/,questionId),
+			type: 'PUT',
+			success:function() {
+				console.log('audio count')
+			}
+		})
 		soundManager.togglePause('mySound')
 	},
 	componentWillReceiveProps: function(nextProps) {
@@ -156,7 +164,8 @@ var Explanation = React.createClass({
 			questionNum = this.state.assignment.questionList.length, //问题总数
 			question = assignment.questionList[index],
 			answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
-			correctness = "";
+			correctness = "",
+			questionId = question._id;
 		if(answerSheet[index] == question.answer) {
 			correctness = "恭喜你答对了";
 		}
@@ -221,7 +230,7 @@ var Explanation = React.createClass({
 					<div className="answerExplanation">
 						<p className="correctness">{correctness}</p>
 						<p>答案解析</p>
-						<AnswerPlayer url={question.audio}/>
+						<AnswerPlayer url={question.audio} questionId={questionId}/>
 						<p>{question.answerContent}</p>
 					</div>
 				</div>
