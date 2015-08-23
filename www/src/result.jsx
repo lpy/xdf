@@ -46,7 +46,8 @@ var Result = React.createClass({
 	},
 	render: function() {
 		var emotionImg = "",
-			score = parseInt(this.getParams().score);
+			score = parseInt(this.getParams().score),
+			assignment = JSON.parse(localStorage.getItem('assignment'));
 		if(score == 100) {
 			emotionImg = "images/perfect.png";
 		}else if(score >= 80 && score < 100 ) {
@@ -65,7 +66,7 @@ var Result = React.createClass({
 						
 					</div>
 					<div className="appBarTitle">
-						<h3>日语第一课作业</h3>
+						<h3>{assignment.name}</h3>
 					</div>
 				</nav>
 				<div className="content">
@@ -76,9 +77,6 @@ var Result = React.createClass({
 						</div>
 						<div className="emotion">
 							<img src={emotionImg}/>
-						</div>
-						<div className="shareBtn">
-							<img  src="images/shareBtn.png"/>
 						</div>
 					</div>
 					<div className="answerSheet">

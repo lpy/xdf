@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b9bb565c869ab2ae66d6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "74d3a41d64bba8833288"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31027,11 +31027,12 @@
 	var Welcome = React.createClass({displayName: "Welcome",
 
 		render: function() {
+			var assignment = JSON.parse(localStorage.getItem('assignment'));
 			return (
 				React.createElement("div", {className: "welcomePage"}, 
 					React.createElement("div", {className: "welcome"}, 
 						React.createElement("img", {src: "images/title.png"}), 
-						React.createElement("h2", null, "(第一课作业)")
+						React.createElement("h2", null, "(assignment.name)")
 					), 
 					
 					React.createElement("a", {href: "#/quiz/0"}, React.createElement("img", {className: "quizBtn", src: "images/quizBtn.png"})), 
@@ -34525,7 +34526,8 @@
 		},
 		render: function() {
 			var emotionImg = "",
-				score = parseInt(this.getParams().score);
+				score = parseInt(this.getParams().score),
+				assignment = JSON.parse(localStorage.getItem('assignment'));
 			if(score == 100) {
 				emotionImg = "images/perfect.png";
 			}else if(score >= 80 && score < 100 ) {
@@ -34544,7 +34546,7 @@
 							
 						), 
 						React.createElement("div", {className: "appBarTitle"}, 
-							React.createElement("h3", null, "日语第一课作业")
+							React.createElement("h3", null, assignment.name)
 						)
 					), 
 					React.createElement("div", {className: "content"}, 
@@ -34555,9 +34557,6 @@
 							), 
 							React.createElement("div", {className: "emotion"}, 
 								React.createElement("img", {src: emotionImg})
-							), 
-							React.createElement("div", {className: "shareBtn"}, 
-								React.createElement("img", {src: "images/shareBtn.png"})
 							)
 						), 
 						React.createElement("div", {className: "answerSheet"}, 
