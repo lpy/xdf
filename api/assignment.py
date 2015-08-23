@@ -233,7 +233,10 @@ def fetch_assignment_analysis(assignment_id):
             accuracy.append(answer_correct_sum[i] / answer_sum[i])
         else:
             accuracy.append(0.0)
-    average = all_score / len(stu_answer_list)
+    if len(stu_answer_list) == 0:
+        average = 0
+    else:
+        average = all_score / len(stu_answer_list)
 
     return jsonify(stat=0, average=average, accuracy=accuracy,
                    audioClick=audio_click,
