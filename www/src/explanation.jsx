@@ -3,7 +3,7 @@ var ReactRouter = require('react-router');
 var StateMixin = ReactRouter.State;  
 var soundManager = require('./soundmanager/script/soundmanager2-jsmin.js').soundManager;
 var React = require('react');
-
+var $ = require('jquery');
 
 var AnswerPlayer = React.createClass({
 	sound: null,

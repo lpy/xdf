@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f6272171340d8846f841"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ba5f9627847279164566"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34603,7 +34603,7 @@
 	var StateMixin = ReactRouter.State;  
 	var soundManager = __webpack_require__(222).soundManager;
 	var React = __webpack_require__(67);
-
+	var $ = __webpack_require__(169);
 
 	var AnswerPlayer = React.createClass({displayName: "AnswerPlayer",
 		sound: null,
