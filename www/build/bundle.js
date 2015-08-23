@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "02f2e366dd6bd4f6c84d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e811eb2b3a9bb454d8b7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34632,7 +34632,7 @@
 			  url: './soundmanager/swf',
 			  onready: function() {
 
-			  	this.sound = soundManager.createSound({
+			  	soundManager.createSound({
 			  	  id: 'mySound',
 			  	  url: this.props.url,
 			  	  autoLoad: true,
@@ -34672,7 +34672,7 @@
 				  url: './soundmanager/swf',
 				  onready: function() {
 
-				  	this.sound = soundManager.createSound({
+				  	soundManager.createSound({
 				  	  id: 'mySound',
 				  	  url: nextProps.url,
 				  	  autoLoad: true,

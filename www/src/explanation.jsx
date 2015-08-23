@@ -32,7 +32,7 @@ var AnswerPlayer = React.createClass({
 		  url: './soundmanager/swf',
 		  onready: function() {
 
-		  	this.sound = soundManager.createSound({
+		  	soundManager.createSound({
 		  	  id: 'mySound',
 		  	  url: this.props.url,
 		  	  autoLoad: true,
@@ -72,7 +72,7 @@ var AnswerPlayer = React.createClass({
 			  url: './soundmanager/swf',
 			  onready: function() {
 
-			  	this.sound = soundManager.createSound({
+			  	soundManager.createSound({
 			  	  id: 'mySound',
 			  	  url: nextProps.url,
 			  	  autoLoad: true,
