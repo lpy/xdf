@@ -28,7 +28,7 @@ var Result = React.createClass({
 	},
 	tryAgain: function() {
 
-		var resetAnswerSheet = answers.map(function(ans) {
+		var resetAnswerSheet = this.state.answers.map(function(ans) {
 			return -1;
 		});
 		localStorage.setItem("answerSheet",JSON.stringify(resetAnswerSheet));

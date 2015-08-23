@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8d5b6fa39af8be36923e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "962110006af35564b9d6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34507,7 +34507,7 @@
 		},
 		tryAgain: function() {
 
-			var resetAnswerSheet = answers.map(function(ans) {
+			var resetAnswerSheet = this.state.answers.map(function(ans) {
 				return -1;
 			});
 			localStorage.setItem("answerSheet",JSON.stringify(resetAnswerSheet));
