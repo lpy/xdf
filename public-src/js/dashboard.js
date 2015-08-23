@@ -3,6 +3,8 @@
 var dashboardApp = angular.module('Dashboard', ['ngRoute']);
 var host = "http://59.157.4.42:5001";
 var apiHost = "http://59.157.4.42:5001/api";
+//var host = "http://127.0.0.1:5001";
+//var apiHost = "http://127.0.0.1:5001/api";
 var router = {
   audio: '/v1/audio',
   allAssignment: '/v1/assignments',
@@ -83,6 +85,12 @@ dashboardApp
       $scope.display.assignment = "none";
       $scope.display.analysis = "none";
       $scope.display.lesson = "block";
+    };
+
+    $scope.showAnalysis = function() {
+      $scope.display.assignment = "none";
+      $scope.display.analysis = "block";
+      $scope.display.lesson = "none";
     };
     
     $scope.generateAssignment = function() {
@@ -208,6 +216,26 @@ dashboardApp
     };
 
   }])
+  .controller("AssignmentAnalysisController", ["$scope", "$routeParams", "$http", function($scope, $routeParams, $http) {
+    $scope.assignmentId = $routeParams.assignment_id;
+    $scope.analysis = {};
+
+    $http.get(apiHost + router.assignment + "/" + $scope.assignmentId + '?studentId=admin')
+      .success(function(data) {
+        console.log(data);
+        $scope.assignment = data.assignment;
+      });
+
+    $http.get(apiHost + router.assignment + "/" + $scope.assignmentId + "/analysis")
+      .success(function(data) {
+        console.log(data.average);
+        $scope.analysis.average = data.average;
+        $scope.analysis.accuracy = data.accuracy;
+        $scope.analysis.audioClick = data.audioClick;
+        $scope.analysis.totalCompletion = data.totalCompletion;
+      });
+
+  }])
   .controller("LessonDetailController", ["$scope", "$routeParams", "$http", '$route', '$window', function($scope, $routeParams, $http, $route, $window) {
 
     $scope.lessonId = $routeParams.lesson_id;
@@ -256,6 +284,10 @@ dashboardApp
       .when('/lesson/:lesson_id', {
         templateUrl: '/static/lesson-detail.html',
         controller: 'LessonDetailController'
+      })
+      .when('/analysis/:assignment_id', {
+        templateUrl: '/static/assignment-analysis.html',
+        controller: 'AssignmentAnalysisController'
       });
   }]);
 

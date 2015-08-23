@@ -16,6 +16,7 @@ class Assignment(Collection):
         _id = '_id'
         name = 'name'
         questionList = 'questionList'
+        totalCompletion = 'totalCompletion'
         createTime = 'createTime'
 
     class Analysis(object):
@@ -27,6 +28,7 @@ class Assignment(Collection):
     def new_assignment(name):
         return Assignment.insert({
             Assignment.Field.name: name,
+            Assignment.Field.totalCompletion: 0,
             Assignment.Field.questionList: [],
             Assignment.Field.createTime: datetime.now()
         })
