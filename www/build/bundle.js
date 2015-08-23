@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "74d3a41d64bba8833288"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d3232e3eed81d2a722b9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31032,7 +31032,7 @@
 				React.createElement("div", {className: "welcomePage"}, 
 					React.createElement("div", {className: "welcome"}, 
 						React.createElement("img", {src: "images/title.png"}), 
-						React.createElement("h2", null, "(assignment.name)")
+						React.createElement("h2", null, "(", assignment.name, ")")
 					), 
 					
 					React.createElement("a", {href: "#/quiz/0"}, React.createElement("img", {className: "quizBtn", src: "images/quizBtn.png"})), 
