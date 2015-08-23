@@ -33,7 +33,7 @@ var Quiz = React.createClass({
 		};
 	},
 	handIn: function() {
-		window.location.href = "#/result/" + 78; //redirect to the result page
+		// window.location.href = "#/result/" + 78; //redirect to the result page
 		//handin the answersheet and show the score
 		var query = getQuery(window.location.href);
 		var studentId = query.s,

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "21d9139e23f92f561510"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "02f2e366dd6bd4f6c84d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31208,7 +31208,7 @@
 			};
 		},
 		handIn: function() {
-			window.location.href = "#/result/" + 78; //redirect to the result page
+			// window.location.href = "#/result/" + 78; //redirect to the result page
 			//handin the answersheet and show the score
 			var query = getQuery(window.location.href);
 			var studentId = query.s,
