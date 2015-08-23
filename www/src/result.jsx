@@ -26,6 +26,24 @@ var Result = React.createClass({
 	componentDidMount: function() {
 		
 	},
+	tryAgain: function() {
+
+		var resetAnswerSheet = answers.map(function(ans) {
+			return -1;
+		});
+		localStorage.setItem("answerSheet",JSON.stringify(resetAnswerSheet));
+
+		var end,
+			url = window.location.href;
+		if(url.indexOf('#') != -1) {
+			end = url.indexOf('#');
+		}else {
+			end = url.length;
+		} //without hash
+		var queryStr = url.substring(url.lastIndexOf('?') + 1, end);
+		//redirect
+		window.location.href = '#/quiz/0' + queryStr;
+	},
 	render: function() {
 		var emotionImg = "",
 			score = parseInt(this.getParams().score);
@@ -81,7 +99,7 @@ var Result = React.createClass({
 				</div>
 				<div className="actionBar">
 
-					<img src="images/tryAgain.png" className="tryAgain" />
+					<img src="images/tryAgain.png" className="tryAgain" onClick={tryAgain}/>
 
 				</div>
 			</div>

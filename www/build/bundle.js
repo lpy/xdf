@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "af33c0cdfae75a721f74"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6fc5a5446828baa30c3a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34505,6 +34505,24 @@
 		componentDidMount: function() {
 			
 		},
+		tryAgain: function() {
+
+			var resetAnswerSheet = answers.map(function(ans) {
+				return -1;
+			});
+			localStorage.setItem("answerSheet",JSON.stringify(resetAnswerSheet));
+
+			var end,
+				url = window.location.href;
+			if(url.indexOf('#') != -1) {
+				end = url.indexOf('#');
+			}else {
+				end = url.length;
+			} //without hash
+			var queryStr = url.substring(url.lastIndexOf('?') + 1, end);
+			//redirect
+			window.location.href = '#/quiz/0' + queryStr;
+		},
 		render: function() {
 			var emotionImg = "",
 				score = parseInt(this.getParams().score);
@@ -34560,7 +34578,7 @@
 					), 
 					React.createElement("div", {className: "actionBar"}, 
 
-						React.createElement("img", {src: "images/tryAgain.png", className: "tryAgain"})
+						React.createElement("img", {src: "images/tryAgain.png", className: "tryAgain", onClick: tryAgain})
 
 					)
 				)
