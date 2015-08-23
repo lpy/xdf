@@ -1,50 +1,135 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var StateMixin = ReactRouter.State;  
-
+var soundManager = require('./soundmanager/script/soundmanager2-jsmin.js').soundManager;
 var React = require('react');
+var $ = require('jquery');
 
 var AnswerPlayer = React.createClass({
-	
+	sound: null,
 	getInitialState: function() {
 		return {
 			// duration: "0'0''" 
 			duration: "加载中" 
 		};
 	},
-	setDuration: function() {
+	setDuration: function(ms) {
 		
 		//显示音频长度
-		var secs = React.findDOMNode(this.refs.audio).duration,
+		var secs = ms / 1000,
 			duration = Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
-			alert("音频长度是:"+secs);
 		this.setState({
 			duration: duration
 		});
 	},
 	componentDidMount: function() {
-		React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
-		React.findDOMNode(this.refs.audio).load();
+		// React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
+		// React.findDOMNode(this.refs.audio).load();
+
+		// soundManager.destroySound('sound');
+		soundManager.setup({
+		 
+		  url: './soundmanager/swf',
+		  onready: function() {
+
+		  	soundManager.createSound({
+		  	  id: 'mySound',
+		  	  url: this.props.url,
+		  	  autoLoad: true,
+		  	  onload: function() {
+		  	  	var duration = soundManager.getSoundById('mySound').duration;
+		  	  	this.setDuration(duration);
+		  	  }.bind(this)
+		  	});
+		  	
+		  }.bind(this),
+		  ontimeout: function() {
+		    this.setState({
+		    	duration: '加载失败'
+		    });
+		  }.bind(this)
+		});
 	},
 	togglePlay: function() {
-
-		var audio = React.findDOMNode(this.refs.audio);
-		console.log(audio.paused);
-		audio.paused? audio.play():audio.pause();
+		// var audio = React.findDOMNode(this.refs.audio);
+		// console.log(audio.paused);
+		// audio.paused? audio.play():audio.pause();
+		
+		var questionId = this.props.questionId;
+		$.ajax({
+			url: '/api/v1/question/<question_id>/audio'.replace(/\<\w+\>/,questionId),
+			type: 'PUT',
+			success:function() {
+				console.log('audio count')
+			}
+		})
+		soundManager.togglePause('mySound')
 	},
 	componentWillReceiveProps: function(nextProps) {
-		// console.log('pause')
-		// this.forceUpdate();
-		// React.findDOMNode(this.refs.audio).oncanplay = this.setDuration.bind(this);
 		var audio = React.findDOMNode(this.refs.audio).pause();
+		this.setState({
+			duration: "加载中"
+		});
+		if(nextProps.url != this.props.url) {
+			// React.findDOMNode(this.refs.audio).load();
+			if(soundManager.getSoundById('mySound') != null) {
+				soundManager.destroySound('mySound');
+			}
+			soundManager.setup({
+			 
+			  url: './soundmanager/swf',
+			  onready: function() {
 
-		
+			  	soundManager.createSound({
+			  	  id: 'mySound',
+			  	  url: nextProps.url,
+			  	  autoLoad: true,
+			  	  onload: function() {
+			  	  	var duration = soundManager.getSoundById('mySound').duration;
+			  	  	this.setDuration(duration);
+			  	  }.bind(this)
+			  	});
+			  	
+			  }.bind(this),
+			  ontimeout: function() {
+			    this.setState({
+			    	duration: '加载失败'
+			    });
+			  }.bind(this)
+			});
+		}
 	},
 	componentDidUpdate: function(prevProps, prevState) {
 		// console.log(prevProps.url,this.props.url)
-		if(prevProps.url != this.props.url) {
-			React.findDOMNode(this.refs.audio).load();
-		}
+
+		// if(prevProps.url != this.props.url) {
+		// 	// React.findDOMNode(this.refs.audio).load();
+		// 	if(soundManager.getSoundById('mySound') != null) {
+		// 		soundManager.destroySound('mySound');
+		// 	}
+		// 	soundManager.setup({
+			 
+		// 	  url: './soundmanager/swf',
+		// 	  onready: function() {
+
+		// 	  	this.sound = soundManager.createSound({
+		// 	  	  id: 'mySound',
+		// 	  	  url: this.props.url,
+		// 	  	  autoLoad: true,
+		// 	  	  onload: function() {
+		// 	  	  	var duration = soundManager.getSoundById('mySound').duration;
+		// 	  	  	this.setDuration(duration);
+		// 	  	  }.bind(this)
+		// 	  	});
+			  	
+		// 	  }.bind(this),
+		// 	  ontimeout: function() {
+		// 	    this.setState({
+		// 	    	duration: '加载失败'
+		// 	    });
+		// 	  }.bind(this)
+		// 	});
+		// }
 	},
 	render: function() {
 		var url = this.props.url;
@@ -79,7 +164,8 @@ var Explanation = React.createClass({
 			questionNum = this.state.assignment.questionList.length, //问题总数
 			question = assignment.questionList[index],
 			answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
-			correctness = "";
+			correctness = "",
+			questionId = question._id;
 		if(answerSheet[index] == question.answer) {
 			correctness = "恭喜你答对了";
 		}
@@ -144,7 +230,7 @@ var Explanation = React.createClass({
 					<div className="answerExplanation">
 						<p className="correctness">{correctness}</p>
 						<p>答案解析</p>
-						<AnswerPlayer url={question.audio}/>
+						<AnswerPlayer url={question.audio} questionId={questionId}/>
 						<p>{question.answerContent}</p>
 					</div>
 				</div>
