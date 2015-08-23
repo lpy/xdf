@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "967be561a0834eb4bc9b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "08163cc81fd957a70707"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -619,7 +619,7 @@
 	      answer: 3,
 	      answerContent: "答案解析",
 	      assignmentId: "123",
-	      audio: "shinian.mp3",
+	      audio: "test.mp3",
 	      content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
 	      optionList: [
 	        "ツをおいしく食べ",
