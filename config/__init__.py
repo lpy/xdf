@@ -23,7 +23,7 @@ RELEASE_LINK = 'http://59.157.4.42'
 
 UPLOAD_AUDIO_DIRECTORY = '/root/audios'
 EXCEL_DIRECTORY = 'temp/'
-ALLOWED_EXTENSIONS = set(['m4a', 'mp3'])
+ALLOWED_EXTENSIONS = set(['m4a', 'mp3', 'ogg'])
 
 DEFAULT_EXPIRE = 4838400
 
