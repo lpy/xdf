@@ -69,7 +69,7 @@ var routes = (
 //       answer: 1,
 //       answerContent: "答案解析",
 //       assignmentId: "123",
-//       audio: "shinian.mp3",
+//       audio: "440hz.mp3",
 //       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
 //       optionList: [
 //         "ツをおいしく食べ",
@@ -82,7 +82,7 @@ var routes = (
 //       answer: 3,
 //       answerContent: "答案解析",
 //       assignmentId: "123",
-//       audio: "test.mp3",
+//       audio: "rain.mp3",
 //       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
 //       optionList: [
 //         "ツをおいしく食べ",

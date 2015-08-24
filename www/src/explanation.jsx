@@ -78,6 +78,7 @@ var AnswerPlayer = React.createClass({
 		  url: './src/soundmanager/swf/',
 		  flashVersion: 9
 		});
+
 		soundManager.onready(function() {
 			  // soundManager.createSound() etc. may now be called
 			this.sound = soundManager.createSound({
@@ -85,7 +86,8 @@ var AnswerPlayer = React.createClass({
 			   url: this.props.url,
 			   type:('audio/mp3'||null)
 			  });
-		}).bind(this);
+			// console.log(this.sound);
+		}.bind(this));
 		// this.loadSound(this.props.url);
 	},
 	togglePlay: function(e) {
@@ -100,15 +102,17 @@ var AnswerPlayer = React.createClass({
 		});
 		// soundManager.getSoundById('mySound').play();
 		// soundManager.togglePause('mySound');
-		this.sound.play();
+		this.sound.togglePause();
 	},
 	componentWillReceiveProps: function(nextProps) {
 
 		if(nextProps.url != this.props.url) {
 			// React.findDOMNode(this.refs.audio).load();
-			if(soundManager.getSoundById('mySound') != null) {
-				soundManager.destroySound('mySound');
-			}
+			// if(soundManager.getSoundById('mySound') != null) {
+			// 	soundManager.destroySound('mySound');
+			// }
+			this.sound.pause();
+			this.sound.unload();
 			this.loadSound(nextProps.url);
 		}
 	},

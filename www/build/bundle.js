@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d950d21854eae307d2d7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4c0d404e062d23ad3c2c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -628,7 +628,7 @@
 	//       answer: 1,
 	//       answerContent: "答案解析",
 	//       assignmentId: "123",
-	//       audio: "shinian.mp3",
+	//       audio: "440hz.mp3",
 	//       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
 	//       optionList: [
 	//         "ツをおいしく食べ",
@@ -641,7 +641,7 @@
 	//       answer: 3,
 	//       answerContent: "答案解析",
 	//       assignmentId: "123",
-	//       audio: "test.mp3",
+	//       audio: "rain.mp3",
 	//       content: "问题内容丸ごとキャベツをおいしく食べられる炊飯器クッキング。材料も少ないので、手軽",
 	//       optionList: [
 	//         "ツをおいしく食べ",
@@ -34700,6 +34700,7 @@
 			  url: './src/soundmanager/swf/',
 			  flashVersion: 9
 			});
+
 			soundManager.onready(function() {
 				  // soundManager.createSound() etc. may now be called
 				this.sound = soundManager.createSound({
@@ -34707,7 +34708,8 @@
 				   url: this.props.url,
 				   type:('audio/mp3'||null)
 				  });
-			}).bind(this);
+				// console.log(this.sound);
+			}.bind(this));
 			// this.loadSound(this.props.url);
 		},
 		togglePlay: function(e) {
@@ -34722,15 +34724,17 @@
 			});
 			// soundManager.getSoundById('mySound').play();
 			// soundManager.togglePause('mySound');
-			this.sound.play();
+			this.sound.togglePause();
 		},
 		componentWillReceiveProps: function(nextProps) {
 
 			if(nextProps.url != this.props.url) {
 				// React.findDOMNode(this.refs.audio).load();
-				if(soundManager.getSoundById('mySound') != null) {
-					soundManager.destroySound('mySound');
-				}
+				// if(soundManager.getSoundById('mySound') != null) {
+				// 	soundManager.destroySound('mySound');
+				// }
+				this.sound.pause();
+				this.sound.unload();
 				this.loadSound(nextProps.url);
 			}
 		},
