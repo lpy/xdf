@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4bce1f78b25cb69a083e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5bf95f253a10f89434c9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34699,7 +34699,7 @@
 			var url = this.props.url;
 			return (
 				React.createElement("div", {className: "answerPlayer"}, 
-					React.createElement("img", {src: "images/answerPlayer.png", onClick: this.togglePlay}), 
+					React.createElement("a", {href: url, type: "audio/mp3"}, React.createElement("img", {src: "images/answerPlayer.png", onClick: this.togglePlay})), 
 					React.createElement("span", null, this.parseDuration(this.props.duration))
 					/*答案解析音频*/
 				)

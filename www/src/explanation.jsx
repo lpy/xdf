@@ -77,7 +77,7 @@ var AnswerPlayer = React.createClass({
 		var url = this.props.url;
 		return (
 			<div className="answerPlayer">
-				<img src="images/answerPlayer.png" onClick = {this.togglePlay}/>
+				<a href={url} type="audio/mp3"><img src="images/answerPlayer.png" onClick = {this.togglePlay}/></a>
 				<span>{this.parseDuration(this.props.duration)}</span>
 				{/*答案解析音频*/}
 			</div>
