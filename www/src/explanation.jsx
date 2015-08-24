@@ -22,16 +22,16 @@ var AnswerPlayer = React.createClass({
 	loadSound: function(url) {
 		soundManager.setup({
 		 
-		  url: './soundmanager/swf',
+		  url: './src/soundmanager/swf',
 		  onready: function() {
 
 		  	soundManager.createSound({
 		  	  id: 'mySound',
 		  	  url: url,
-		  	  autoLoad: true,
-		  	  onplay: function() {
-		  	  	alert("play")
-		  	  }
+		  	  // autoLoad: true,
+		  	  // onplay: function() {
+		  	  // 	alert("play")
+		  	  // }
 
 		  	});
 		  	
@@ -42,6 +42,7 @@ var AnswerPlayer = React.createClass({
 		    });
 		  }.bind(this),
 		  preferFlash: true,
+		  useHTML5Audio: false,
 		  useFlashBlock: true
 		});
 	},

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c3d67dbb38c305446239"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4bce1f78b25cb69a083e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34644,16 +34644,16 @@
 		loadSound: function(url) {
 			soundManager.setup({
 			 
-			  url: './soundmanager/swf',
+			  url: './src/soundmanager/swf',
 			  onready: function() {
 
 			  	soundManager.createSound({
 			  	  id: 'mySound',
 			  	  url: url,
-			  	  autoLoad: true,
-			  	  onplay: function() {
-			  	  	alert("play")
-			  	  }
+			  	  // autoLoad: true,
+			  	  // onplay: function() {
+			  	  // 	alert("play")
+			  	  // }
 
 			  	});
 			  	
@@ -34664,6 +34664,7 @@
 			    });
 			  }.bind(this),
 			  preferFlash: true,
+			  useHTML5Audio: false,
 			  useFlashBlock: true
 			});
 		},
