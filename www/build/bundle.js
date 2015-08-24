@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5bf95f253a10f89434c9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "563ac1ce60531e2a7d90"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34672,8 +34672,8 @@
 
 			this.loadSound(this.props.url);
 		},
-		togglePlay: function() {
-			
+		togglePlay: function(e) {
+			e.preventDefault();
 			var questionId = this.props.questionId;
 			$.ajax({
 				url: '/api/v1/question/<question_id>/audio'.replace(/\<\w+\>/,questionId),
@@ -34699,7 +34699,9 @@
 			var url = this.props.url;
 			return (
 				React.createElement("div", {className: "answerPlayer"}, 
-					React.createElement("a", {href: url, type: "audio/mp3"}, React.createElement("img", {src: "images/answerPlayer.png", onClick: this.togglePlay})), 
+					React.createElement("a", {href: url, type: "audio/mp3", onClick: this.togglePlay}, 
+						React.createElement("img", {src: "images/answerPlayer.png"})
+					), 
 					React.createElement("span", null, this.parseDuration(this.props.duration))
 					/*答案解析音频*/
 				)

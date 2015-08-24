@@ -50,8 +50,8 @@ var AnswerPlayer = React.createClass({
 
 		this.loadSound(this.props.url);
 	},
-	togglePlay: function() {
-		
+	togglePlay: function(e) {
+		e.preventDefault();
 		var questionId = this.props.questionId;
 		$.ajax({
 			url: '/api/v1/question/<question_id>/audio'.replace(/\<\w+\>/,questionId),
@@ -77,7 +77,9 @@ var AnswerPlayer = React.createClass({
 		var url = this.props.url;
 		return (
 			<div className="answerPlayer">
-				<a href={url} type="audio/mp3"><img src="images/answerPlayer.png" onClick = {this.togglePlay}/></a>
+				<a href={url} type="audio/mp3" onClick = {this.togglePlay}>
+					<img src="images/answerPlayer.png" />
+				</a>
 				<span>{this.parseDuration(this.props.duration)}</span>
 				{/*答案解析音频*/}
 			</div>
