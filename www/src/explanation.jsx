@@ -28,7 +28,11 @@ var AnswerPlayer = React.createClass({
 		  	soundManager.createSound({
 		  	  id: 'mySound',
 		  	  url: url,
-		  	  autoLoad: true
+		  	  autoLoad: true,
+		  	  onplay: function() {
+		  	  	alert("play")
+		  	  }
+
 		  	});
 		  	
 		  }.bind(this),
@@ -37,7 +41,8 @@ var AnswerPlayer = React.createClass({
 		    	duration: '加载失败'
 		    });
 		  }.bind(this),
-		  preferFlash: true
+		  preferFlash: true,
+		  useFlashBlock: true
 		});
 	},
 	componentDidMount: function() {

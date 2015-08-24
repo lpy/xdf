@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "953f0c52ab3bd27109a8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c3d67dbb38c305446239"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -576,28 +576,28 @@
 
 	React.initializeTouchEvents(true);
 
-	var canplay = [];
-	var cannotplay = [];
-	var testList = ["audio/mp3","audio/m4a","audio/acc","audio/wav","audio/ogg"];
+	// var canplay = [];
+	// var cannotplay = [];
+	// var testList = ["audio/mp3","audio/m4a","audio/acc","audio/wav","audio/ogg"];
 
 
-	soundManager.setup({
+	// soundManager.setup({
 	 
-	  url: './soundmanager/swf',
-	  onready: function() {
-	    testList.forEach(function(type){
-	      if(soundManager.canPlayMIME(type)) {
-	        canplay.push(type);
-	      }else {
-	        cannotplay.push(type);
-	      }
+	//   url: './soundmanager/swf',
+	//   onready: function() {
+	//     testList.forEach(function(type){
+	//       if(soundManager.canPlayMIME(type)) {
+	//         canplay.push(type);
+	//       }else {
+	//         cannotplay.push(type);
+	//       }
 
-	    });
-	    alert('能播放'+canplay.join(',')+";不能播放"+cannotplay.join(",")) ;
+	//     });
+	//     alert('能播放'+canplay.join(',')+";不能播放"+cannotplay.join(",")) ;
 
 	    
-	  }
-	});
+	//   }
+	// });
 
 
 	var App = React.createClass({displayName: "App",
@@ -34650,7 +34650,11 @@
 			  	soundManager.createSound({
 			  	  id: 'mySound',
 			  	  url: url,
-			  	  autoLoad: true
+			  	  autoLoad: true,
+			  	  onplay: function() {
+			  	  	alert("play")
+			  	  }
+
 			  	});
 			  	
 			  }.bind(this),
@@ -34659,7 +34663,8 @@
 			    	duration: '加载失败'
 			    });
 			  }.bind(this),
-			  preferFlash: true
+			  preferFlash: true,
+			  useFlashBlock: true
 			});
 		},
 		componentDidMount: function() {
