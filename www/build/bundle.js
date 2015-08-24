@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "563ac1ce60531e2a7d90"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f4742f060d16b66012aa"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34681,8 +34681,9 @@
 				success:function() {
 					console.log('audio count')
 				}
-			})
-			soundManager.togglePause('mySound')
+			});
+			soundManager.getSoundById('mySound').play();
+			// soundManager.togglePause('mySound');
 		},
 		componentWillReceiveProps: function(nextProps) {
 

@@ -59,8 +59,9 @@ var AnswerPlayer = React.createClass({
 			success:function() {
 				console.log('audio count')
 			}
-		})
-		soundManager.togglePause('mySound')
+		});
+		soundManager.getSoundById('mySound').play();
+		// soundManager.togglePause('mySound');
 	},
 	componentWillReceiveProps: function(nextProps) {
 
