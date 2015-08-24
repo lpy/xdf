@@ -13,10 +13,32 @@ var Link = Router.Link;
 var DefaultRoute = Router.DefaultRoute;
 var StateMixin = Router.State;  
 var apiHost = require('./config.js').apiHost;
+var soundManager = require('./soundmanager/script/soundmanager2-jsmin.js').soundManager;//test
 
 React.initializeTouchEvents(true);
 
+var canplay = [];
+var cannotplay = [];
+var testList = ["audio/mp3","audio/m4a","audio/acc","audio/wav","audio/ogg"];
 
+
+soundManager.setup({
+ 
+  url: './soundmanager/swf',
+  onready: function() {
+    testList.forEach(function(type){
+      if(soundManager.canPlayMIME(type)) {
+        canplay.push(type);
+      }else {
+        cannotplay.push(type);
+      }
+
+    });
+    alert('能播放'+canplay.join(',')+";不能播放"+cannotplay.join(",")) ;
+
+    
+  }
+});
 
 
 var App = React.createClass({

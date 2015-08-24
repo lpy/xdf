@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "effa17d76960b5a20122"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "953f0c52ab3bd27109a8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -572,10 +572,32 @@
 	var DefaultRoute = Router.DefaultRoute;
 	var StateMixin = Router.State;  
 	var apiHost = __webpack_require__(219).apiHost;
+	var soundManager = __webpack_require__(222).soundManager;//test
 
 	React.initializeTouchEvents(true);
 
+	var canplay = [];
+	var cannotplay = [];
+	var testList = ["audio/mp3","audio/m4a","audio/acc","audio/wav","audio/ogg"];
 
+
+	soundManager.setup({
+	 
+	  url: './soundmanager/swf',
+	  onready: function() {
+	    testList.forEach(function(type){
+	      if(soundManager.canPlayMIME(type)) {
+	        canplay.push(type);
+	      }else {
+	        cannotplay.push(type);
+	      }
+
+	    });
+	    alert('能播放'+canplay.join(',')+";不能播放"+cannotplay.join(",")) ;
+
+	    
+	  }
+	});
 
 
 	var App = React.createClass({displayName: "App",
