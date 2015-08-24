@@ -61,9 +61,10 @@ var Quiz = React.createClass({
 			qIndex = parseInt(this.getParams().index);
 		answerSheet[qIndex] = selection;
 		localStorage.setItem('answerSheet',JSON.stringify(answerSheet));
-		// this.setState({
-		// 	chosen: selection
-		// });
+		
+		if(qIndex < answerSheet.length - 1) {
+			window.location.href = window.location.href.replace(/#\/quiz\/\d/,'#/quiz/' + (qIndex + 1));
+		}
 		this.forceUpdate();
 	},
 	render: function() {
