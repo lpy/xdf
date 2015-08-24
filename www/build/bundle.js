@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "50893a7ec3bdb7a64f48"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "effa17d76960b5a20122"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34636,7 +34636,8 @@
 			    this.setState({
 			    	duration: '加载失败'
 			    });
-			  }.bind(this)
+			  }.bind(this),
+			  preferFlash: true
 			});
 		},
 		componentDidMount: function() {

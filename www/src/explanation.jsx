@@ -36,7 +36,8 @@ var AnswerPlayer = React.createClass({
 		    this.setState({
 		    	duration: '加载失败'
 		    });
-		  }.bind(this)
+		  }.bind(this),
+		  preferFlash: true
 		});
 	},
 	componentDidMount: function() {
