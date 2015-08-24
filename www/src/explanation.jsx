@@ -20,31 +20,48 @@ var AnswerPlayer = React.createClass({
 
 	},
 	loadSound: function(url) {
-		soundManager.setup({
+		// soundManager.setup({
 		 
-		  url: './src/soundmanager/swf',
-		  onready: function() {
+		//   url: './src/soundmanager/swf',
+		//   onready: function() {
 
-		  	soundManager.createSound({
-		  	  id: 'mySound',
-		  	  url: url,
-		  	  // autoLoad: true,
-		  	  // onplay: function() {
-		  	  // 	alert("play")
-		  	  // }
+		//   	soundManager.createSound({
+		//   	  id: 'mySound',
+		//   	  url: url,
+		//   	  // autoLoad: true,
+		//   	  // onplay: function() {
+		//   	  // 	alert("play")
+		//   	  // }
 
-		  	});
+		//   	});
 		  	
-		  }.bind(this),
-		  ontimeout: function() {
-		    this.setState({
-		    	duration: '加载失败'
-		    });
-		  }.bind(this),
-		  preferFlash: true,
-		  useHTML5Audio: false,
-		  useFlashBlock: true
+		//   }.bind(this),
+		//   ontimeout: function() {
+		//     this.setState({
+		//     	duration: '加载失败'
+		//     });
+		//   }.bind(this),
+		//   preferFlash: true,
+		//   useHTML5Audio: false,
+		//   useFlashBlock: true
+		// });
+		soundManager.setup({
+		  debugMode: true,
+		  preferFlash: false,
+		  useFlashBlock: true,
+		  url: './src/soundmanager/swf/',
+		  flashVersion: 9
 		});
+		soundManager.onready(function() {
+				  // soundManager.createSound() etc. may now be called
+				  var s = soundManager.createSound({
+				   id: 'mysound',
+				   url: url,
+				   type:('audio/mp3'||null)
+				  });
+				  s.play();
+				});
+
 	},
 	componentDidMount: function() {
 
