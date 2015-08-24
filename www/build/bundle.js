@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ba5f9627847279164566"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d80a32a6d780a2ff7e67"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -599,7 +599,7 @@
 	);
 
 	// var assignment = {
-	//   name:"日语第一课作业",
+	//   name:"日语第一课作业很长很长很长长很",
 	//   questionNum: 10,
 	//   questionList: [
 	//     {
@@ -30730,7 +30730,7 @@
 
 
 	// module
-	exports.push([module.id, "html {\n  width: 100%;\n  height: 100%;\n}\nbody {\n  padding: 0;\n  margin: 0;\n  width: 100%;\n  height: 100%;\n  background: white;\n}\n.emerald {\n  color: #00a99d;\n}\n.welcomePage {\n  width: 100%;\n  height: 100%;\n  background: #00a99d;\n  overflow: hidden;\n}\n.welcome {\n  width: 187px;\n  margin: 35% auto 10px auto;\n  /*margin: 0 auto 10px auto;*/\n  /*padding-top: 200px;*/\n}\n.welcome img {\n  width: 100%;\n}\n.welcome h2 {\n  text-align: center;\n  color: white;\n}\n.quizBtn {\n  width: 169px;\n  display: block;\n  /*margin: 40% auto 0 auto;*/\n  position: absolute;\n  bottom: 150px;\n  left: 50%;\n  margin-left: -84px;\n  /*\tpadding-bottom: 200px;*/\n}\n.logo {\n  width: 115px;\n  display: block;\n  position: absolute;\n  bottom: 23px;\n  left: 50%;\n  margin-left: -57px;\n}\n/*quiz*/\n.appBar {\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  /*height: 6.6%;*/\n  height: 44px;\n  line-height: 44px;\n  background: #00a99d;\n}\n.appBar .appBarBtn {\n  float: left;\n  width: 44px;\n  height: 44px;\n  text-align: center;\n}\n.appBar .appBarBtn img {\n  height: 30px;\n  vertical-align: middle;\n}\n.appBar .appBarTitle {\n  height: 44px;\n  width: 100%;\n}\n.appBar .appBarTitle h3 {\n  margin: 0;\n  text-align: center;\n  color: white;\n}\n.appBar .appBarIndicator {\n  float: right;\n  width: 44px;\n  height: 44px;\n  color: white;\n  text-align: center;\n  font-size: 13px;\n  line-height: 44px;\n}\n.content {\n  width: 100%;\n  top: 44px;\n  left: 0px;\n  bottom: 49px;\n  position: absolute;\n  overflow: auto;\n}\n.content .questionBox {\n  padding-top: 20px;\n}\n.content .questionBox p {\n  margin: 0 20px;\n}\n.content .questionBox .serial {\n  color: #00a99d;\n}\n.content .questionBox .selections {\n  list-style: none;\n  padding: 0;\n}\n.content .questionBox .selections li {\n  cursor: pointer;\n  padding: 5px 20px;\n  height: 53px;\n  line-height: 53px;\n  overflow: hidden;\n  margin: 10px 0;\n}\n.content .questionBox .selections li .letter {\n  border-radius: 50%;\n  background: #b3b3b3;\n  height: 53px;\n  width: 53px;\n  float: left;\n  text-align: center;\n  line-height: 53px;\n  color: white;\n  font-size: 20px;\n  font-weight: bold;\n  margin-right: 15px;\n}\n.content .questionBox .selections li .letter.wrong {\n  background: #f15a24;\n}\n.content .questionBox .selections li .letter.correct {\n  background: #00a99d;\n}\n.content .questionBox .selections li.active {\n  background: #e5e5e5;\n}\n.content .questionBox .selections li.active .letter {\n  background: #00a99d;\n}\n.content .answerExplanation {\n  padding: 20px;\n  background: #f8f8f8;\n  overflow: hidden;\n  word-wrap: break-word;\n  color: #4d4d4d;\n}\n.content .answerExplanation .answerPlayer {\n  width: 100%;\n  overflow: hidden;\n  line-height: 40px;\n}\n.content .answerExplanation .answerPlayer audio {\n  display: none;\n}\n.content .answerExplanation .answerPlayer img {\n  height: 40px;\n  /*width: 90%;*/\n  float: left;\n}\n.content .answerExplanation .answerPlayer span {\n  float: left;\n}\n.actionBar {\n  width: 100%;\n  height: 49px;\n  position: absolute;\n  bottom: 0px;\n  background: #00a99d;\n}\n.actionBar .pre {\n  float: left;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .next {\n  float: right;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .tryAgain {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n.actionBar .handInBtn {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n/*result*/\n.resultPage {\n  width: 100%;\n  height: 100%;\n  position: relative;\n}\n.scoreBox {\n  width: 100%;\n  background: #f98ca6;\n  overflow: hidden;\n  padding-bottom: 10px;\n}\n.scoreBox .scoreCircle {\n  position: relative;\n  width: 157px;\n  height: 157px;\n  border-radius: 50%;\n  text-align: center;\n  line-height: 157px;\n  margin: 36px auto 15px auto;\n  background: rgba(255, 255, 255, 0.3);\n  color: white;\n}\n.scoreBox .scoreCircle #total {\n  font-size: 15px;\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  line-height: 15px;\n}\n.scoreBox .scoreCircle #score {\n  font-size: 70px;\n}\n.scoreBox .emotion {\n  width: 145px;\n  height: 54px;\n  margin: 0 auto;\n}\n.scoreBox .emotion img {\n  width: 100%;\n}\n.scoreBox .shareBtn {\n  width: 128px;\n  height: 39px;\n  margin: 0 auto;\n}\n.scoreBox .shareBtn img {\n  width: 100%;\n}\n.answerSheet p {\n  margin-left: 3%;\n}\n.answerSheet .questionNum {\n  width: 14%;\n  padding-bottom: 14%;\n  margin: 3%;\n  float: left;\n  text-align: center;\n  position: relative;\n}\n.answerSheet .questionNum div {\n  /*\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\tmargin-left: -50%;\n\t\t\tmargin-top: -50%;*/\n  width: 44px;\n  height: 44px;\n  top: 50%;\n  left: 50%;\n  margin-left: -22px;\n  margin-top: -22px;\n  background: #00a99d;\n  position: absolute;\n  text-align: center;\n  line-height: 44px;\n  border-radius: 50%;\n  color: white;\n}\n.answerSheet .questionNum.wrong div {\n  background: #f15a24;\n}\n", ""]);
+	exports.push([module.id, "html {\n  width: 100%;\n  height: 100%;\n}\nbody {\n  padding: 0;\n  margin: 0;\n  width: 100%;\n  height: 100%;\n  background: white;\n}\n.emerald {\n  color: #00a99d;\n}\n.welcomePage {\n  width: 100%;\n  height: 100%;\n  background: #00a99d;\n  overflow: hidden;\n}\n.welcomePage .welcome {\n  width: 187px;\n  margin: 35% auto 10px auto;\n  /*margin: 0 auto 10px auto;*/\n  /*padding-top: 200px;*/\n}\n.welcomePage .welcome img {\n  width: 100%;\n}\n.welcomePage h2 {\n  text-align: center;\n  color: white;\n}\n.welcomePage .quizBtn {\n  width: 169px;\n  display: block;\n  /*margin: 40% auto 0 auto;*/\n  position: absolute;\n  bottom: 20%;\n  left: 50%;\n  margin-left: -84px;\n  /*\tpadding-bottom: 200px;*/\n}\n.welcomePage .logo {\n  width: 115px;\n  display: block;\n  position: absolute;\n  bottom: 23px;\n  left: 50%;\n  margin-left: -57px;\n}\n/*quiz*/\n.appBar {\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  /*height: 6.6%;*/\n  height: 44px;\n  line-height: 44px;\n  background: #00a99d;\n}\n.appBar .appBarBtn {\n  float: left;\n  width: 44px;\n  height: 44px;\n  text-align: center;\n}\n.appBar .appBarBtn img {\n  height: 30px;\n  vertical-align: middle;\n}\n.appBar .appBarTitle {\n  height: 44px;\n  width: 100%;\n}\n.appBar .appBarTitle h3 {\n  margin: 0;\n  text-align: center;\n  color: white;\n}\n.appBar .appBarIndicator {\n  float: right;\n  width: 44px;\n  height: 44px;\n  color: white;\n  text-align: center;\n  font-size: 13px;\n  line-height: 44px;\n}\n.content {\n  width: 100%;\n  top: 44px;\n  left: 0px;\n  bottom: 49px;\n  position: absolute;\n  overflow: auto;\n}\n.content .questionBox {\n  padding-top: 20px;\n}\n.content .questionBox p {\n  margin: 0 20px;\n}\n.content .questionBox .serial {\n  color: #00a99d;\n}\n.content .questionBox .selections {\n  list-style: none;\n  padding: 0;\n}\n.content .questionBox .selections li {\n  cursor: pointer;\n  padding: 5px 20px;\n  height: 53px;\n  line-height: 53px;\n  overflow: hidden;\n  margin: 10px 0;\n}\n.content .questionBox .selections li .letter {\n  border-radius: 50%;\n  background: #b3b3b3;\n  height: 53px;\n  width: 53px;\n  float: left;\n  text-align: center;\n  line-height: 53px;\n  color: white;\n  font-size: 20px;\n  font-weight: bold;\n  margin-right: 15px;\n}\n.content .questionBox .selections li .letter.wrong {\n  background: #f15a24;\n}\n.content .questionBox .selections li .letter.correct {\n  background: #00a99d;\n}\n.content .questionBox .selections li.active {\n  background: #e5e5e5;\n}\n.content .questionBox .selections li.active .letter {\n  background: #00a99d;\n}\n.content .answerExplanation {\n  padding: 20px;\n  background: #f8f8f8;\n  overflow: hidden;\n  word-wrap: break-word;\n  color: #4d4d4d;\n}\n.content .answerExplanation .answerPlayer {\n  width: 100%;\n  overflow: hidden;\n  line-height: 40px;\n}\n.content .answerExplanation .answerPlayer audio {\n  display: none;\n}\n.content .answerExplanation .answerPlayer img {\n  height: 40px;\n  /*width: 90%;*/\n  float: left;\n}\n.content .answerExplanation .answerPlayer span {\n  float: left;\n}\n.actionBar {\n  width: 100%;\n  height: 49px;\n  position: absolute;\n  bottom: 0px;\n  background: #00a99d;\n}\n.actionBar .pre {\n  float: left;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .next {\n  float: right;\n  height: 29px;\n  margin: 10px;\n}\n.actionBar .tryAgain {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n.actionBar .handInBtn {\n  height: 39px;\n  display: block;\n  margin: 5px auto;\n}\n/*result*/\n.resultPage {\n  width: 100%;\n  height: 100%;\n  position: relative;\n}\n.scoreBox {\n  width: 100%;\n  background: #f98ca6;\n  overflow: hidden;\n  padding-bottom: 10px;\n}\n.scoreBox .scoreCircle {\n  position: relative;\n  width: 157px;\n  height: 157px;\n  border-radius: 50%;\n  text-align: center;\n  line-height: 157px;\n  margin: 36px auto 15px auto;\n  background: rgba(255, 255, 255, 0.3);\n  color: white;\n}\n.scoreBox .scoreCircle #total {\n  font-size: 15px;\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  line-height: 15px;\n}\n.scoreBox .scoreCircle #score {\n  font-size: 70px;\n}\n.scoreBox .emotion {\n  width: 145px;\n  height: 54px;\n  margin: 0 auto;\n}\n.scoreBox .emotion img {\n  width: 100%;\n}\n.scoreBox .shareBtn {\n  width: 128px;\n  height: 39px;\n  margin: 0 auto;\n}\n.scoreBox .shareBtn img {\n  width: 100%;\n}\n.answerSheet p {\n  margin-left: 3%;\n}\n.answerSheet .questionNum {\n  width: 14%;\n  padding-bottom: 14%;\n  margin: 3%;\n  float: left;\n  text-align: center;\n  position: relative;\n}\n.answerSheet .questionNum div {\n  /*\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\tmargin-left: -50%;\n\t\t\tmargin-top: -50%;*/\n  width: 44px;\n  height: 44px;\n  top: 50%;\n  left: 50%;\n  margin-left: -22px;\n  margin-top: -22px;\n  background: #00a99d;\n  position: absolute;\n  text-align: center;\n  line-height: 44px;\n  border-radius: 50%;\n  color: white;\n}\n.answerSheet .questionNum.wrong div {\n  background: #f15a24;\n}\n", ""]);
 
 	// exports
 
@@ -31027,13 +31027,14 @@
 	var Welcome = React.createClass({displayName: "Welcome",
 
 		render: function() {
+			var assignment = JSON.parse(localStorage.getItem('assignment'));
 			return (
 				React.createElement("div", {className: "welcomePage"}, 
 					React.createElement("div", {className: "welcome"}, 
-						React.createElement("img", {src: "images/title.png"}), 
-						React.createElement("h2", null, "(第一课作业)")
+						React.createElement("img", {src: "images/title.png"})
+						
 					), 
-					
+					React.createElement("h2", null, "(", assignment.name, ")"), 
 					React.createElement("a", {href: "#/quiz/0"}, React.createElement("img", {className: "quizBtn", src: "images/quizBtn.png"})), 
 					React.createElement("img", {src: "images/logo.png", className: "logo"})
 				)
@@ -34525,7 +34526,8 @@
 		},
 		render: function() {
 			var emotionImg = "",
-				score = parseInt(this.getParams().score);
+				score = parseInt(this.getParams().score),
+				assignment = JSON.parse(localStorage.getItem('assignment'));
 			if(score == 100) {
 				emotionImg = "images/perfect.png";
 			}else if(score >= 80 && score < 100 ) {
@@ -34544,7 +34546,7 @@
 							
 						), 
 						React.createElement("div", {className: "appBarTitle"}, 
-							React.createElement("h3", null, "日语第一课作业")
+							React.createElement("h3", null, assignment.name)
 						)
 					), 
 					React.createElement("div", {className: "content"}, 
@@ -34555,9 +34557,6 @@
 							), 
 							React.createElement("div", {className: "emotion"}, 
 								React.createElement("img", {src: emotionImg})
-							), 
-							React.createElement("div", {className: "shareBtn"}, 
-								React.createElement("img", {src: "images/shareBtn.png"})
 							)
 						), 
 						React.createElement("div", {className: "answerSheet"}, 
@@ -34609,24 +34608,17 @@
 		sound: null,
 		getInitialState: function() {
 			return {
-				// duration: "0'0''" 
-				duration: "加载中" 
+				duration: "0'0''" 
+				// duration: "加载中" 
 			};
 		},
-		setDuration: function(ms) {
+		parseDuration: function(secs) {
 			
-			//显示音频长度
-			var secs = ms / 1000,
-				duration = Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
-			this.setState({
-				duration: duration
-			});
-		},
-		componentDidMount: function() {
-			// React.findDOMNode(this.refs.audio).oncanplaythrough = this.setDuration.bind(this);
-			// React.findDOMNode(this.refs.audio).load();
+			//音频长度
+			return  Math.floor(secs / 60) + "'" + Math.round(secs % 60) + "''";
 
-			// soundManager.destroySound('sound');
+		},
+		loadSound: function(url) {
 			soundManager.setup({
 			 
 			  url: './soundmanager/swf',
@@ -34634,12 +34626,8 @@
 
 			  	soundManager.createSound({
 			  	  id: 'mySound',
-			  	  url: this.props.url,
-			  	  autoLoad: true,
-			  	  onload: function() {
-			  	  	var duration = soundManager.getSoundById('mySound').duration;
-			  	  	this.setDuration(duration);
-			  	  }.bind(this)
+			  	  url: url,
+			  	  autoLoad: true
 			  	});
 			  	
 			  }.bind(this),
@@ -34650,10 +34638,11 @@
 			  }.bind(this)
 			});
 		},
+		componentDidMount: function() {
+
+			this.loadSound(this.props.url);
+		},
 		togglePlay: function() {
-			// var audio = React.findDOMNode(this.refs.audio);
-			// console.log(audio.paused);
-			// audio.paused? audio.play():audio.pause();
 			
 			var questionId = this.props.questionId;
 			$.ajax({
@@ -34666,84 +34655,23 @@
 			soundManager.togglePause('mySound')
 		},
 		componentWillReceiveProps: function(nextProps) {
-			var audio = React.findDOMNode(this.refs.audio).pause();
-			this.setState({
-				duration: "加载中"
-			});
+
 			if(nextProps.url != this.props.url) {
 				// React.findDOMNode(this.refs.audio).load();
 				if(soundManager.getSoundById('mySound') != null) {
 					soundManager.destroySound('mySound');
 				}
-				soundManager.setup({
-				 
-				  url: './soundmanager/swf',
-				  onready: function() {
-
-				  	soundManager.createSound({
-				  	  id: 'mySound',
-				  	  url: nextProps.url,
-				  	  autoLoad: true,
-				  	  onload: function() {
-				  	  	var duration = soundManager.getSoundById('mySound').duration;
-				  	  	this.setDuration(duration);
-				  	  }.bind(this)
-				  	});
-				  	
-				  }.bind(this),
-				  ontimeout: function() {
-				    this.setState({
-				    	duration: '加载失败'
-				    });
-				  }.bind(this)
-				});
+				this.loadSound(nextProps.url);
 			}
 		},
-		componentDidUpdate: function(prevProps, prevState) {
-			// console.log(prevProps.url,this.props.url)
 
-			// if(prevProps.url != this.props.url) {
-			// 	// React.findDOMNode(this.refs.audio).load();
-			// 	if(soundManager.getSoundById('mySound') != null) {
-			// 		soundManager.destroySound('mySound');
-			// 	}
-			// 	soundManager.setup({
-				 
-			// 	  url: './soundmanager/swf',
-			// 	  onready: function() {
-
-			// 	  	this.sound = soundManager.createSound({
-			// 	  	  id: 'mySound',
-			// 	  	  url: this.props.url,
-			// 	  	  autoLoad: true,
-			// 	  	  onload: function() {
-			// 	  	  	var duration = soundManager.getSoundById('mySound').duration;
-			// 	  	  	this.setDuration(duration);
-			// 	  	  }.bind(this)
-			// 	  	});
-				  	
-			// 	  }.bind(this),
-			// 	  ontimeout: function() {
-			// 	    this.setState({
-			// 	    	duration: '加载失败'
-			// 	    });
-			// 	  }.bind(this)
-			// 	});
-			// }
-		},
 		render: function() {
 			var url = this.props.url;
 			return (
 				React.createElement("div", {className: "answerPlayer"}, 
 					React.createElement("img", {src: "images/answerPlayer.png", onClick: this.togglePlay}), 
-					React.createElement("span", null, this.state.duration), 
+					React.createElement("span", null, this.parseDuration(this.props.duration))
 					/*答案解析音频*/
-					React.createElement("audio", {controls: "controls", height: "100", width: "100", ref: "audio", preload: "auto"}, 
-					  React.createElement("source", {src: url, type: "audio/mp3"}), 
-					  React.createElement("source", {src: url, type: "audio/ogg"}), 
-					  React.createElement("source", {src: url, type: "audio/wav"}), 
-					React.createElement("embed", {height: "100", width: "100", src: url})
-					)
 				)
 			);
 		}
@@ -34765,7 +34693,8 @@
 				question = assignment.questionList[index],
 				answerSheet = JSON.parse(localStorage.getItem('answerSheet')),
 				correctness = "",
-				questionId = question._id;
+				questionId = question._id,
+				duration = question.audioLength;
 			if(answerSheet[index] == question.answer) {
 				correctness = "恭喜你答对了";
 			}
@@ -34830,8 +34759,8 @@
 						React.createElement("div", {className: "answerExplanation"}, 
 							React.createElement("p", {className: "correctness"}, correctness), 
 							React.createElement("p", null, "答案解析"), 
-							React.createElement(AnswerPlayer, {url: question.audio, questionId: questionId}), 
-							React.createElement("p", null, question.answerContent)
+							React.createElement(AnswerPlayer, {url: question.audio, questionId: questionId, duration: duration}), 
+							React.createElement("pre", null, question.answerContent)
 						)
 					), 
 					React.createElement("div", {className: "actionBar"}, 
