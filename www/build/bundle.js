@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4db82680932744443e02"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "71795bce89d5cf527a63"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34760,7 +34760,7 @@
 							React.createElement("p", {className: "correctness"}, correctness), 
 							React.createElement("p", null, "答案解析"), 
 							React.createElement(AnswerPlayer, {url: question.audio, questionId: questionId, duration: duration}), 
-							React.createElement("p", null, question.answerContent)
+							React.createElement("pre", null, question.answerContent)
 						)
 					), 
 					React.createElement("div", {className: "actionBar"}, 

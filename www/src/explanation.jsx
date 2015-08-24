@@ -161,7 +161,7 @@ var Explanation = React.createClass({
 						<p className="correctness">{correctness}</p>
 						<p>答案解析</p>
 						<AnswerPlayer url={question.audio} questionId={questionId} duration={duration}/>
-						<p>{question.answerContent}</p>
+						<pre>{question.answerContent}</pre>
 					</div>
 				</div>
 				<div className="actionBar">
