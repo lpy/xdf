@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d80a32a6d780a2ff7e67"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "effa17d76960b5a20122"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31237,9 +31237,10 @@
 				qIndex = parseInt(this.getParams().index);
 			answerSheet[qIndex] = selection;
 			localStorage.setItem('answerSheet',JSON.stringify(answerSheet));
-			// this.setState({
-			// 	chosen: selection
-			// });
+			
+			if(qIndex < answerSheet.length - 1) {
+				window.location.href = window.location.href.replace(/#\/quiz\/\d/,'#/quiz/' + (qIndex + 1));
+			}
 			this.forceUpdate();
 		},
 		render: function() {
@@ -34635,7 +34636,8 @@
 			    this.setState({
 			    	duration: '加载失败'
 			    });
-			  }.bind(this)
+			  }.bind(this),
+			  preferFlash: true
 			});
 		},
 		componentDidMount: function() {
