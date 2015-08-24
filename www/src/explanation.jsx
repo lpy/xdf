@@ -45,6 +45,32 @@ var AnswerPlayer = React.createClass({
 		//   useHTML5Audio: false,
 		//   useFlashBlock: true
 		// });
+
+		// soundManager.setup({
+		//   debugMode: true,
+		//   preferFlash: false,
+		//   useFlashBlock: true,
+		//   url: './src/soundmanager/swf/',
+		//   flashVersion: 9
+		// });
+		// soundManager.onready(function() {
+		// 	  // soundManager.createSound() etc. may now be called
+		// 	  var s = soundManager.createSound({
+		// 	   id: 'mysound',
+		// 	   url: url,
+		// 	   type:('audio/mp3'||null)
+		// 	  });
+		// 	s.play();
+		// });
+		
+		this.sound = soundManager.createSound({
+			   // id: 'mysound',
+			   url: url,
+			   type:('audio/mp3'||null)
+			  });
+
+	},
+	componentDidMount: function() {
 		soundManager.setup({
 		  debugMode: true,
 		  preferFlash: false,
@@ -53,19 +79,14 @@ var AnswerPlayer = React.createClass({
 		  flashVersion: 9
 		});
 		soundManager.onready(function() {
-				  // soundManager.createSound() etc. may now be called
-				  var s = soundManager.createSound({
-				   id: 'mysound',
-				   url: url,
-				   type:('audio/mp3'||null)
-				  });
-				  s.play();
-				});
-
-	},
-	componentDidMount: function() {
-
-		this.loadSound(this.props.url);
+			  // soundManager.createSound() etc. may now be called
+			this.sound = soundManager.createSound({
+			   // id: 'mysound',
+			   url: this.props.url,
+			   type:('audio/mp3'||null)
+			  });
+		}).bind(this);
+		// this.loadSound(this.props.url);
 	},
 	togglePlay: function(e) {
 		e.preventDefault();
@@ -77,8 +98,9 @@ var AnswerPlayer = React.createClass({
 				console.log('audio count')
 			}
 		});
-		soundManager.getSoundById('mySound').play();
+		// soundManager.getSoundById('mySound').play();
 		// soundManager.togglePause('mySound');
+		this.sound.play();
 	},
 	componentWillReceiveProps: function(nextProps) {
 
