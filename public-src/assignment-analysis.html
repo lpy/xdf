@@ -11,7 +11,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="clickNum in analysis.audioClick" ng-init="counter = $index;">
+        <tr ng-repeat="clickNum in analysis.audioClick track by $index" ng-init="counter = $index;">
             <td>{{counter + 1}}</td>
             <td>{{analysis.accuracy[$index] * 100.0}}%</td>
             <td>{{clickNum}}</td>
